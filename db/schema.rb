@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119183546) do
+ActiveRecord::Schema.define(version: 20131119192159) do
 
   create_table "ks_project_backers", force: true do |t|
     t.integer "ks_user_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20131119183546) do
     t.integer "updates_count"
     t.integer "comments_count"
     t.boolean "scraped"
+    t.string  "description"
   end
 
   create_table "ks_users", force: true do |t|
