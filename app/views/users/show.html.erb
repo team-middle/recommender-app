@@ -1,4 +1,63 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  <strong>Art:</strong>
+  <%= @user.c1 %>
+</p>
+<p>
+  <strong>Comics:</strong>
+  <%= @user.c2 %>
+</p>
+<p>
+  <strong>Dance:</strong>
+  <%= @user.c3 %>
+</p>
+<p>
+  <strong>Design:</strong>
+  <%= @user.c4 %>
+</p>
+<p>
+  <strong>Fashion:</strong>
+  <%= @user.c5 %>
+</p>
+<p>
+  <strong>Film/Video:</strong>
+  <%= @user.c6 %>
+</p>
+<p>
+  <strong>Food:</strong>
+  <%= @user.c7 %>
+</p>
+<p>
+  <strong>Games:</strong>
+  <%= @user.c8 %>
+</p>
+<p>
+  <strong>Music:</strong>
+  <%= @user.c9 %>
+</p>
+<p>
+  <strong>Photography:</strong>
+  <%= @user.c10 %>
+</p>
+<p>
+  <strong>Publishing:</strong>
+  <%= @user.c11 %>
+</p>
+<p>
+  <strong>Technology:</strong>
+  <%= @user.c12 %>
+</p>
+<p>
+  <strong>Theater:</strong>
+  <%= @user.c13 %>
+</p>
+<h1>You may like:</h1>
+<% @recommend.each do |rec| %>
+  <p> <%= rec %><br>Recommendation Engine is still in progress. Coming soon!</p>
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
