@@ -11,7 +11,7 @@ class AddCategoryScoreColumnsToKsUsers < ActiveRecord::Migration
     add_column :ks_users, :music_score, :integer, default: 0
     add_column :ks_users, :photography_score, :integer, default: 0
     add_column :ks_users, :publishing_score, :integer, default: 0
-    add_column :ks_users, :tech_score, :integer, default: 0
+    add_column :ks_users, :technology_score, :integer, default: 0
     add_column :ks_users, :theater_score, :integer, default: 0
 
   end

@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20131119232841) do
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
+    t.integer "tech_score",        default: 0
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
     t.integer "dance_score",       default: 0
@@ -53,7 +54,7 @@ ActiveRecord::Schema.define(version: 20131119232841) do
     t.integer "music_score",       default: 0
     t.integer "photography_score", default: 0
     t.integer "publishing_score",  default: 0
-    t.integer "tech_score",        default: 0
+    t.integer "technology_score",  default: 0
     t.integer "theater_score",     default: 0
   end
 

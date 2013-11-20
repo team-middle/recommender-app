@@ -2,10 +2,14 @@ class KsUser < ActiveRecord::Base
   has_many :ks_project_backers
   has_many :ks_projects, :through => :ks_project_backers
 
-  CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "tech", "theater"]
+  CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
   attr_reader :max_category
-  attr_accessor :categories_count
+  attr_accessor :category_counts
+
+  def score_sum # for validating the data
+    art_score + comics_score + dance_score + design_score + fashion_score + film_score + food_score + games_score + music_score + photography_score + publishing_score + technology_score + theater_score
+  end
 
   def mode(array)
     count = Hash.new(0)
@@ -13,20 +17,23 @@ class KsUser < ActiveRecord::Base
     count.sort_by{|k,v| v}.last[0]
   end
 
-  def set_categories_count
+  def set_category_counts
     projects = Hash.new(0)
     self.ks_projects.each do |project|
-      projects[project.parent_category.downcase] += 1
+      begin
+        projects[project.parent_category.downcase.split.first] += 1
+      rescue
+      end
     end
-    @categories_count = projects
+    @category_counts = projects
   end
 
   def max_category
-    self.categories_count.sort_by {|k,v| v}.last[0]
+    self.category_counts.sort_by {|k,v| v}.last[0]
   end
 
   def max_count
-    categories_count[max_category]
+    category_counts[max_category]
   end
 
   def set_category_scores
@@ -34,16 +41,17 @@ class KsUser < ActiveRecord::Base
       if max_category == category 
         self.send("#{category}_score=",100)
       else
-        self.send("#{category}_score=",100*categories_count[category]/max_count)
+        self.send("#{category}_score=",100*category_counts[category]/max_count)
       end
     end
+    self.save
   end
 
   def set_art_score
     if max_category == "art"
       art_score = 100
     else
-      art_score = 100*categories_count["art"]/max_count
+      art_score = 100*category_counts["art"]/max_count
     end
   end
 

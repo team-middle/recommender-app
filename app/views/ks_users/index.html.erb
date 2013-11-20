@@ -1,5 +1,5 @@
 <ul>
-  <% @ks_users10.each do |user| %>
+  <% @ks_users100.each do |user| %>
   <li><strong><%= user.url %></strong>
     <ol>
       <li><%= user.max_category %></li>
@@ -15,7 +15,6 @@
       <li><%= user.publishing_score %></li>
       <li><%= user.tech_score %></li>
       <li><%= user.theater_score %></li>
-
     </ol>
   </li>
   <% end %>
