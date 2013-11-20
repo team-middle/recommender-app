@@ -67,4 +67,11 @@ class Kmeans
     clean_hash.each_pair() { |key, value| inverse[value].push(key); }
     inverse
   end # end of cluster method
+
+  # def centers_to_database
+  #   self.centers.each_with_index do |center, i|
+  #     Center.add_center(center[i])
+  # end
+
+
 end # end of class

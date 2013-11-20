@@ -1,9 +1,5 @@
 RecommenderApp::Application.routes.draw do
 
-  resources :users
-
-  resources :sessions
-
   root 'ks_users#index'
 
   get '/test' => 'users#test'
@@ -13,6 +9,12 @@ RecommenderApp::Application.routes.draw do
   get '/sessions' => 'sessions#index'
 
   get '/sessions/page' => 'sessions#page'
+  get '/sessions' => 'sessions#index'
+  get '/sessions/show' => 'sessions#show'
+
+  get '/sessions/logout' => 'sessions#logout', :as => :logout
+
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,6 +1,8 @@
 class KsUser < ActiveRecord::Base
   has_many :ks_project_backers
   has_many :ks_projects, :through => :ks_project_backers
+  belongs_to :center
+  
 
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
