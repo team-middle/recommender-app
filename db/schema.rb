@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119192159) do
+ActiveRecord::Schema.define(version: 20131119232841) do
 
   create_table "ks_project_backers", force: true do |t|
     t.integer "ks_user_id"
@@ -36,11 +36,25 @@ ActiveRecord::Schema.define(version: 20131119192159) do
     t.integer "comments_count"
     t.boolean "scraped"
     t.string  "description"
+    t.string  "end_date"
   end
 
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
+    t.integer "art_score",         default: 0
+    t.integer "comics_score",      default: 0
+    t.integer "dance_score",       default: 0
+    t.integer "design_score",      default: 0
+    t.integer "fashion_score",     default: 0
+    t.integer "film_score",        default: 0
+    t.integer "food_score",        default: 0
+    t.integer "games_score",       default: 0
+    t.integer "music_score",       default: 0
+    t.integer "photography_score", default: 0
+    t.integer "publishing_score",  default: 0
+    t.integer "tech_score",        default: 0
+    t.integer "theater_score",     default: 0
   end
 
 end
