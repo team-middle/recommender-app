@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def recommend
+
+    render :recommend
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -42,8 +47,8 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => "Joe")
     @point = @user.user_data_as_coordinate
     @clusters = Kmeans.new
-    ks_points = KsUser.aggregate_points_from_table_data(500)
-    @clusters_hash = @clusters.cluster(10,ks_points,10)
+    ks_points = KsUser.aggregate_points_from_table_data(1000)
+    @clusters_hash = @clusters.cluster(10,ks_points,16)
     @centers = @clusters_hash.keys
     @distances = @centers.collect do |center|
       @clusters.distance(center,@point)
@@ -83,16 +88,19 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    session[:access_token] = session[:oauth].get_access_token(params[:code])
+    api = Koala::Facebook::API.new(session[:access_token])
+    user_profile = api.get_object('me')
+    username = user_profile["username"]
+    likes = api.get_connections("me","likes")
+    
+    @user = User.find_or_create_by(:username => username)
+    @user.create_scores(likes) # will populate the 13 dimensions
+    raise
+    if @user.save
+      redirect_to recommedations_path
+    else
+      render :index, notice: "error"
     end
   end
 
@@ -122,6 +130,10 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def logged_in?
+      session[:oauth]
+    end
+
     def set_user
       @user = User.find(params[:id])
     end

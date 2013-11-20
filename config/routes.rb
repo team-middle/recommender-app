@@ -1,18 +1,20 @@
 RecommenderApp::Application.routes.draw do
 
-  root 'ks_users#index'
+  resources :recommendations
+
+  root 'sessions#index'
 
   get '/test' => 'users#test'
 
   get '/login' => 'sessions#login'
-
   get '/sessions' => 'sessions#index'
-
   get '/sessions/page' => 'sessions#page'
   get '/sessions' => 'sessions#index'
   get '/sessions/show' => 'sessions#show'
-
   get '/sessions/logout' => 'sessions#logout', :as => :logout
+
+  get '/users/create' => 'users#create', :as => :create_user
+
   get '/admin' => 'admin#index', :as => :admin 
   get '/admin/results' => 'admin#results', :as => :results
   post '/admin' => 'admin#reset'

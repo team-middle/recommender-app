@@ -108,7 +108,7 @@
 :"Small Business" => "design",
 :"Pet Supplies" => "design",
 :"Baby Goods/Kids Goods" => "design",
-:"Pet Service"s => "design",
+:"Pet Services" => "design",
 # FASHION
 :"Spas/Beauty/Personal Care" => "fashion",
 :"Shopping/Retail" => "fashion",

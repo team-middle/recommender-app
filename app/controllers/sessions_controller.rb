@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def login
-    session[:oauth] = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', 'http://localhost:3000/sessions/show')
+    session[:oauth] = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', 'http://localhost:3000/users/create')
     @auth_url = session[:oauth].url_for_oauth_code(:permissions => "read_stream publish_stream")
     redirect_to @auth_url
 
