@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   def reset
    #@user = User.find_by(:username => "Joe")
    #@point = @user.user_data_as_coordinate
+    Center.destroy_all
     @clusters = Kmeans.new
     ks_points = KsUser.aggregate_points_from_table_data(params[:user_count].to_i)
     @clusters_hash = @clusters.cluster(params[:k].to_i,ks_points,params[:max_iterations].to_i)
