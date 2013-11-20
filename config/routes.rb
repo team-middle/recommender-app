@@ -13,6 +13,9 @@ RecommenderApp::Application.routes.draw do
   get '/sessions/show' => 'sessions#show'
 
   get '/sessions/logout' => 'sessions#logout', :as => :logout
+  get '/admin' => 'admin#index', :as => :admin 
+  get '/admin/results' => 'admin#results', :as => :results
+  post '/admin' => 'admin#reset'
 
   resources :users
 

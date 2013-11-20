@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120183943) do
+ActiveRecord::Schema.define(version: 20131120185618) do
 
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
@@ -77,21 +77,22 @@ ActiveRecord::Schema.define(version: 20131120183943) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.integer  "c1"
-    t.integer  "c2"
-    t.integer  "c3"
-    t.integer  "c4"
-    t.integer  "c5"
-    t.integer  "c6"
-    t.integer  "c7"
-    t.integer  "c8"
-    t.integer  "c9"
-    t.integer  "c10"
-    t.integer  "c11"
-    t.integer  "c12"
-    t.integer  "c13"
+    t.integer  "art_score"
+    t.integer  "comics_score"
+    t.integer  "dance_score"
+    t.integer  "design_score"
+    t.integer  "fashion_score"
+    t.integer  "film_score"
+    t.integer  "food_score"
+    t.integer  "games_score"
+    t.integer  "music_score"
+    t.integer  "photography_score"
+    t.integer  "publishing_score"
+    t.integer  "technology_score"
+    t.integer  "theater_score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "center_id"
   end
 
 end

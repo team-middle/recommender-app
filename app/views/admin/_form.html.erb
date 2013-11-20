@@ -1,0 +1,10 @@
+<%= form_tag("admin", method: "post") do %>
+  <%= label_tag(:k, "Number of Clusters") %>
+  <%= text_field_tag(:k) %>
+  <%= label_tag(:max_iterations, "Number of Iterations") %>
+  <%= text_field_tag(:max_iterations) %>
+  <%= label_tag(:user_count, "Number of Users") %>
+  <%= text_field_tag(:user_count) %>
+  <%= submit_tag %>
+<% end %>
+
