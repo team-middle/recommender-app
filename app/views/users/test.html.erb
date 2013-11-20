@@ -1,0 +1,6 @@
+User: <%= @user %><br>
+User's point: <%= @point %><br>
+<% @distances.each_with_index do |distance,i| %>
+distance: <%= distance %><br>
+---a rec from this group: <%= @recs[i] %><br>
+<% end %>

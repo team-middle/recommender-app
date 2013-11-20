@@ -4,6 +4,8 @@ RecommenderApp::Application.routes.draw do
 
   root 'ks_users#index'
 
+  get '/test' => 'users#test'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

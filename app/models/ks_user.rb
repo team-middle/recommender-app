@@ -55,49 +55,17 @@ class KsUser < ActiveRecord::Base
     end
   end
 
-  # def set_comics_score
+  def self.aggregate_points_from_table_data(number)
+    users = self.where("id < #{number}")
+    user_point_arrays = users.collect do |user|
+      user.points_from_table_data
+    end
+  end
 
-  # end
-
-  # def set_dance_score
-
-  # end
-
-  # def set_fashion_score
-
-  # end
-
-  # def set_film_score
-
-  # end
-
-  # def set_food_score
-
-  # end
-
-  # def set_games_score 
-
-  # end
-
-  # def set_music_score
-
-  # end
-
-  # def set_photography_score
-
-  # end
-
-  # def set_publishing_score
-
-  # end
-
-  # def set_tech_score
-
-  # end
-
-
-
-
-
+  def points_from_table_data
+    points = CATEGORIES.collect do |category|
+      self.send("#{category}_score")
+    end
+  end
 
 end
