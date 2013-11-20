@@ -46,6 +46,8 @@ gem 'pg'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'nokogiri'
+
 group :test, :development do
   gem "rspec-rails"
   gem "capybara"
@@ -58,4 +60,5 @@ group :test, :development do
   gem "database_cleaner"
   gem "guard", ">=2.1.0"
   gem "guard-rspec"
+  gem "pry"
 end

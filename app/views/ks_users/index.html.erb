@@ -1,0 +1,21 @@
+<ul>
+  <% @ks_users100.each do |user| %>
+  <li><strong><%= user.url %></strong>
+    <ol>
+      <li><%= user.max_category %></li>
+      <li><%= user.art_score %></li>
+      <li><%= user.comics_score %></li>
+      <li><%= user.dance_score %></li>
+      <li><%= user.fashion_score %></li>
+      <li><%= user.film_score %></li>
+      <li><%= user.food_score %></li>
+      <li><%= user.games_score %></li>
+      <li><%= user.music_score %></li>
+      <li><%= user.photography_score %></li>
+      <li><%= user.publishing_score %></li>
+      <li><%= user.tech_score %></li>
+      <li><%= user.theater_score %></li>
+    </ol>
+  </li>
+  <% end %>
+</ul>
