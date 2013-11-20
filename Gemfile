@@ -33,6 +33,8 @@ group :doc do
 end
 
 gem 'pg'
+gem 'omniauth'
+gem 'koala', '~> 1.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
