@@ -1,0 +1,74 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <h3>Please say from 0 to 10 how much you like the following:</h3>
+  <div class="field">
+    <%= f.label "Art" %><br>
+    <%= f.number_field :c1 %>
+  </div>
+  <div class="field">
+    <%= f.label "Comics" %><br>
+    <%= f.number_field :c2 %>
+  </div>
+  <div class="field">
+    <%= f.label "Dance" %><br>
+    <%= f.number_field :c3 %>
+  </div>
+  <div class="field">
+    <%= f.label "Design" %><br>
+    <%= f.number_field :c4 %>
+  </div>
+  <div class="field">
+    <%= f.label "Fashion" %><br>
+    <%= f.number_field :c5 %>
+  </div>
+  <div class="field">
+    <%= f.label "Film/Video" %><br>
+    <%= f.number_field :c6 %>
+  </div>
+  <div class="field">
+    <%= f.label "Food" %><br>
+    <%= f.number_field :c7 %>
+  </div>
+  <div class="field">
+    <%= f.label "Games" %><br>
+    <%= f.number_field :c8 %>
+  </div>
+  <div class="field">
+    <%= f.label "Music" %><br>
+    <%= f.number_field :c9 %>
+  </div>
+  <div class="field">
+    <%= f.label "Photography" %><br>
+    <%= f.number_field :c10 %>
+  </div>
+  <div class="field">
+    <%= f.label "Publishing" %><br>
+    <%= f.number_field :c11 %>
+  </div>
+  <div class="field">
+    <%= f.label "Technology" %><br>
+    <%= f.number_field :c12 %>
+  </div>
+  <div class="field">
+    <%= f.label "Theater" %><br>
+    <%= f.number_field :c13 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
