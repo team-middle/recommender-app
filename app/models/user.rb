@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
+  attr_reader :counts
+
     def user_data_as_coordinate
       array = (1..13).collect do |i|
         category = CATEGORIES[i-1]
@@ -13,8 +15,8 @@ class User < ActiveRecord::Base
     def create_scores(likes)
       fb_categories = extract_category(likes)
       ks_categories = convert_categories(fb_categories)
-      counts = count_categories(ks_categories)
-      # scores = set_category_scores
+      @counts = count_categories(ks_categories)
+      scores = set_category_scores
       raise
     end
 
@@ -31,9 +33,11 @@ class User < ActiveRecord::Base
     end
 
     def count_categories(array)
-      CATEGORIES.collect do |category|
-        array.count(category)
+      @counts = Hash.new(0)
+      CATEGORIES.each do |category|
+        @counts[category] = array.count(category)
       end
+      @counts
     end
 
     def set_category_scores
@@ -41,34 +45,25 @@ class User < ActiveRecord::Base
         if max_category == category 
           self.send("#{category}_score=",100)
         else
-          self.send("#{category}_score=",100*category_counts[category]/max_count)
+          self.send("#{category}_score=",100*counts[category]/max_count)
         end
       end
       self.save
     end
 
-    def set_category_counts
-      projects = Hash.new(0)
-      self.ks_projects.each do |project|
-        begin
-          projects[project.parent_category.downcase.split.first] += 1
-        rescue
-        end
-      end
-      @category_counts = projects
-    end
 
     def max_category
-      self.category_counts.sort_by {|k,v| v}.last[0]
+      counts.sort_by {|k,v| v}.last[0]
     end
 
     def max_count
-      category_counts[max_category]
+      counts[max_category]
     end
 
-    def convert_to_score(counts)
-
+    def scores
+      CATEGORIES.collect do |category|
+        self.send("#{category}_score")
+      end
     end
-
 
 end
