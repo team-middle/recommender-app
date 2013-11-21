@@ -80,7 +80,7 @@ class KsUser < ActiveRecord::Base
     end
   end
 
-  def self.select_proflific_backers(sample_size, project_min)
+  def self.select_prolific_backers(sample_size, project_min)
     ks_users = KsUser.where("id < #{sample_size}")
     # TODO: is this the best way to do this? can we do it in SQL?
     ks_users.select do |user|
