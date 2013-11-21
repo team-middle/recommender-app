@@ -57,6 +57,7 @@ ks5000.each do |project|
     project.updates_count = project_backers_page.xpath("//span['@id=updates_count']/@data-updates-count").text.to_i
     project.comments_count = project_backers_page.xpath("//span['@id=comments_count']/@data-comments-count").text.to_i
     project.backer_count = project_backers_page.xpath("//data['@itemprop=Project[backers_count]']/@data-value").first.value.to_i
+    project.image_url = project_backers_page.xpath("//meta[@property='og:image']/@content").text
 
   end
 
