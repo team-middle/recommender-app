@@ -13,7 +13,6 @@ class Kmeans
         end
       end
       dimension.times do |d|
-        binding.pry
         mean[d] = sum[d]/cluster.count
       end
       mean
@@ -67,7 +66,6 @@ class Kmeans
       iter += 1
     end  while iter <= max_iters
     self.assignments
-    binding.pry
   end # end of cluster method
 
 
