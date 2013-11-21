@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20131120215455) do
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
-    t.integer "tech_score",        default: 0
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
     t.integer "dance_score",       default: 0
