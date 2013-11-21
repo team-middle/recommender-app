@@ -15,5 +15,11 @@ class Center < ActiveRecord::Base
     self.find_by(:art_score => array[0], :comics_score => array[1], :dance_score => array[2], :design_score => array[3], :fashion_score => array[4], :film_score => array[5], :food_score => array[6], :games_score => array[7], :music_score => array[8], :photography_score => array[9], :publishing_score => array[10], :technology_score => array[11], :theater_score => array[12])
   end
 
+  def scores
+    CATEGORIES.collect do |category|
+      self.send("#{category}_score")
+    end
+  end
+
 
 end

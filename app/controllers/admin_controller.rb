@@ -13,7 +13,10 @@ class AdminController < ApplicationController
 
     #!!!!!!!add centers to database !!!!!!!!!
     Center.add_centers(@centers)
-    KsUser.add_centers(@clusters_hash)
+    # add centers to ks_users
+    # KsUser.add_centers(@clusters_hash)
+
+
   # @distances = @centers.collect do |center|
   #   @clusters.distance(center,@point)
   # end
@@ -36,6 +39,10 @@ class AdminController < ApplicationController
 
   #  @recs = @recs_users.zip(@distances, @ks_urls, @rec_projects)
     redirect_to :results, :notice => "Centers were calculated"
+  end
+
+  def set_centers
+
   end
 
   def results

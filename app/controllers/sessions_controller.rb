@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
     @auth_url = session[:oauth].url_for_oauth_code(:permissions => "read_stream publish_stream")
 
     @api = Koala::Facebook::API.new(session[:access_token])
-    session[:username] = @api.get_object('me')["username"]
     
     redirect_to @auth_url
   end

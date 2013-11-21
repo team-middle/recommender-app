@@ -91,10 +91,10 @@ class UsersController < ApplicationController
     session[:access_token] = session[:oauth].get_access_token(params[:code])
     api = Koala::Facebook::API.new(session[:access_token])
     user_profile = api.get_object('me')
-    username = user_profile["username"]
+    session[:username] = user_profile["username"]
     likes = api.get_connections("me","likes")
     
-    @user = User.find_or_create_by(:username => username)
+    @user = User.find_or_create_by(:username => session[:username])
     @user.create_scores(likes) # will populate the 13 dimensions
 
     if @user.save

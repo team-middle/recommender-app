@@ -65,4 +65,14 @@ class User < ActiveRecord::Base
       end
     end
 
+    def assign_center
+      centers = Center.all
+      distances = Hash.new 
+      centers.each do |center|
+        distances[center] = Kmeans.distance(center.scores, self.scores)
+      end
+      self.center = distances.sort_by {|center, distance| distance}.first[0]
+      self.save
+    end
+
 end
