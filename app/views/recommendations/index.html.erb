@@ -5,4 +5,7 @@ Your scores:
 <%= button_to "Generate a recommendation!", recommendations_path %>
 <br><br>
 <%= @rec %><br>
-<%= @rec.ks_project.title if @rec %>
+<% if @rec %>
+<%= link_to @rec.ks_project.title, "http://www.kickstarter.com"+@rec.ks_project.url %>
+<% raise %>
+<% end %>

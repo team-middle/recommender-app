@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120215455) do
+ActiveRecord::Schema.define(version: 20131121212447) do
 
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20131120215455) do
     t.boolean "scraped"
     t.string  "description"
     t.string  "end_date"
+    t.string  "image_url"
   end
 
   create_table "ks_users", force: true do |t|
