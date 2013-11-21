@@ -25,6 +25,15 @@ class Kmeans
     end
   end
 
+  def self.distance(center, point)
+    # (center[0] - point[0])**2 + (center[1] - point[1])**2
+    sum = 0
+    (0..center.count-1).each do |d|
+      sum += (center[d] - point[d])**2
+    end
+    sum
+  end
+
   def distance(center, point)
     # (center[0] - point[0])**2 + (center[1] - point[1])**2
     sum = 0

@@ -3,3 +3,6 @@ Your scores:
 
 <br><br>
 <%= button_to "Generate a recommendation!", recommendations_path %>
+<br><br>
+<%= @rec %><br>
+<%= @rec.ks_project.title if @rec %>
