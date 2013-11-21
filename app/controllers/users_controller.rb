@@ -96,9 +96,9 @@ class UsersController < ApplicationController
     
     @user = User.find_or_create_by(:username => username)
     @user.create_scores(likes) # will populate the 13 dimensions
-    raise
+
     if @user.save
-      redirect_to recommedations_path
+      redirect_to recommendations_path
     else
       render :index, notice: "error"
     end

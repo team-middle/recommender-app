@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :recommendations
+  belongs_to :center
   
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
@@ -17,7 +18,6 @@ class User < ActiveRecord::Base
       ks_categories = convert_categories(fb_categories)
       @counts = count_categories(ks_categories)
       scores = set_category_scores
-      raise
     end
 
     def extract_category(likes)
@@ -50,7 +50,6 @@ class User < ActiveRecord::Base
       end
       self.save
     end
-
 
     def max_category
       counts.sort_by {|k,v| v}.last[0]

@@ -40,7 +40,8 @@ ks5000.each do |project|
     project_backers_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{project.url}/backers"))
     project_backers_page.css(".NS_backers__backing_row").each do |row|
       user_url = row.css("a").attr("href").value
-      project.ks_users.find_or_create_by(:url => user_url)
+      user = KsUser.find_or_create_by(:url => user_url)
+      project.add_user
       puts "scraped #{user_url}"
     end
     project.title = project_backers_page.xpath("//meta[@property='og:title']/@content").text
@@ -69,28 +70,28 @@ puts "   finished scraping #{project.title}, #{project.id}"
 end
 
 # users = KsUser.where("id<1000")
-# users.each do |user|
-#   if user.scraped
-#     puts "already scraped #{user.url}, #{user.id}"
-#     next
-#   else
-#     url = user.url
-#     user_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{url}"))
+users.each do |user|
+  if user.scraped
+    puts "already scraped #{user.url}, #{user.id}"
+    next
+  else
+    url = user.url
+    user_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{url}"))
 
-#     # coffee.css(".NS_backers__backing_row").last.css("a").attr("href").value
-#     user = KsUser.find_or_create_by(:url => url)
+    # coffee.css(".NS_backers__backing_row").last.css("a").attr("href").value
+    user = KsUser.find_or_create_by(:url => url)
 
-#     urls_for_backed_projects = user_page.css("a.project_item").collect do |project|
-#       project_url = project.attr('href')
-#       ks_project = KsProject.find_or_create_by(:url => project_url)
-#       user.ks_project_backers.find_or_create_by(:ks_project => ks_project)
-#       puts "scraped #{ks_project.url}"
-#     end
-#     user.update(:scraped => true)
-#     user.save
-#     puts "    finished scraping #{user.url}, #{user.id}"
-#   end
-# end
+    urls_for_backed_projects = user_page.css("a.project_item").collect do |project|
+      project_url = project.attr('href')
+      ks_project = KsProject.find_or_create_by(:url => project_url)
+      user.ks_project_backers.find_or_create_by(:ks_project => ks_project)
+      puts "scraped #{ks_project.url}"
+    end
+    user.update(:scraped => true)
+    user.save
+    puts "    finished scraping #{user.url}, #{user.id}"
+  end
+end
 
 
 10.times do 

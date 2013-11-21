@@ -1,7 +1,10 @@
-Login with Facebook
-<%= link_to "Dead link" %><br>
+<% if !logged_in? %>
+  Login with Facebook
+  <%= link_to "Dead link" %><br>
 
-User Survey
- 
-<%= render 'form' %>
-
+  <%= link_to "User Survey", new_path %>
+<% else %>
+  <% form_for(@recommendation) do |f| %>
+  
+  <%= f.submit "Recommend!" %>
+<% end %>

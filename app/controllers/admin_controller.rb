@@ -13,6 +13,7 @@ class AdminController < ApplicationController
 
     #!!!!!!!add centers to database !!!!!!!!!
     Center.add_centers(@centers)
+    KsUser.add_centers(@clusters_hash)
   # @distances = @centers.collect do |center|
   #   @clusters.distance(center,@point)
   # end

@@ -2,12 +2,28 @@ class KsUser < ActiveRecord::Base
   has_many :ks_project_backers
   has_many :ks_projects, :through => :ks_project_backers
   belongs_to :center
-  
+
 
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
   attr_reader :max_category
   attr_accessor :category_counts
+
+  def self.add_centers(clusters_hash)
+    clusters_hash.each do |center_point, users_points|
+      center = Center.find_by_scores(center_point)
+      users_points.each do |user_point|
+        user = KsUser.find_by_scores(user_point)
+        user.center = center
+        user.save
+        raise
+      end
+    end
+  end
+
+  def self.find_by_scores(array)
+    self.find_by(:art_score => array[0], :comics_score => array[1], :dance_score => array[2], :design_score => array[3], :fashion_score => array[4], :film_score => array[5], :food_score => array[6], :games_score => array[7], :music_score => array[8], :photography_score => array[9], :publishing_score => array[10], :technology_score => array[11], :theater_score => array[12])
+  end
 
   def score_sum # for validating the data
     art_score + comics_score + dance_score + design_score + fashion_score + film_score + food_score + games_score + music_score + photography_score + publishing_score + technology_score + theater_score
