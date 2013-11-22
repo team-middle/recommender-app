@@ -36,6 +36,15 @@ describe Kmeans do
     end
   end
 
+  context "#kmplusplus(k,poins_for_sampling)" do
+    it "implements the k means plus plus intialization, gives k seeds that are spaced far apart" do
+      points = [[4,2],[4,3],[4,4],[1,2],[1,3],[1,1],[3,2]]
+      new_cluster.kmplusplus(3,points).should == []
+      pending
+
+    end
+  end
+
   context "#cluster(k, points,max_iterations)" do
     it "implements the k-means clustering algorithm, takes the data points and allocates them into k groups of similar elements" do
      #points = [[4,2],[4,3],[4,4],[1,2],[1,3],[1,1],[3,2]]
