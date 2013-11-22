@@ -20,6 +20,7 @@ RecommenderApp::Application.routes.draw do
   get '/admin' => 'admin#index', :as => :admin 
   get '/admin/results' => 'admin#results', :as => :results
   post '/admin' => 'admin#reset'
+  post '/users/adjust_score' => 'users#adjust_score'
 
   resources :users
 
