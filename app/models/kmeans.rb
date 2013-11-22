@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-debugger'
 class Kmeans
   attr_accessor :map, :points, :assignments, :centers
 
