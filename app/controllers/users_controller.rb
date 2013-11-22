@@ -98,7 +98,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    session[:access_token] = session[:oauth].get_access_token(params[:code])
+    session[:access_token] = FacebookOAuth.get_access_token(params[:code])
 
     api = Koala::Facebook::API.new(session[:access_token])
     user_profile = api.get_object('me')
@@ -111,6 +111,7 @@ class UsersController < ApplicationController
     else   
       @user.create_scores(likes) # will populate the 13 dimensions
     end
+
 
     if @user.save
       render :"recommendations/index"
@@ -147,7 +148,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def logged_in?
-      session[:oauth]
+      session[:access_token]
     end
 
     def set_user_from_session
