@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
       new_score = 0 if new_score < 0
       self.update("#{category}_score" => new_score)
     end
-  end
 
 
     def create_scores(likes)
