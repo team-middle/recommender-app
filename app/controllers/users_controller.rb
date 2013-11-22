@@ -96,6 +96,7 @@ class UsersController < ApplicationController
     likes = api.get_connections("me","likes")
     
     @user = User.find_or_create_by(:username => session[:username])
+    raise
     @user.create_scores(likes) # will populate the 13 dimensions
 
     if @user.save

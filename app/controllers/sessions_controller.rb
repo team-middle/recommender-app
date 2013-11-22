@@ -24,10 +24,10 @@ class SessionsController < ApplicationController
     end
   
     @friends = @api.get_connection(@user_profile["id"], "friends")
-    @facebook_cookies = session[:oauth].get_user_info_from_cookies(cookies)
+    @facebook_cookies = FacebookOAuth.get_user_info_from_cookies(cookies)
     # @graph = Koala::Facebook::GraphAPI.new(@facebook_cookies["access_token"])
     @likes = @api.get_connections("me","likes")
-
+    raise
     render :page
   end
 
