@@ -89,6 +89,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     session[:access_token] = session[:oauth].get_access_token(params[:code])
+
     api = Koala::Facebook::API.new(session[:access_token])
     user_profile = api.get_object('me')
     session[:username] = user_profile["username"]

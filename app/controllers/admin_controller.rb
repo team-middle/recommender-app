@@ -14,7 +14,7 @@ class AdminController < ApplicationController
     #!!!!!!!add centers to database !!!!!!!!!
     Center.add_centers(@centers)
     # add centers to ks_users
-    # KsUser.add_centers(@clusters_hash)
+    KsUser.add_centers(@clusters_hash)
 
 
   # @distances = @centers.collect do |center|
@@ -47,6 +47,8 @@ class AdminController < ApplicationController
 
   def results
     @centers = Center.all
+    @sample_user = KsUser.find(20)
+    
   end
 
 

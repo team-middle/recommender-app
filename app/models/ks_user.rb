@@ -16,7 +16,6 @@ class KsUser < ActiveRecord::Base
         user = KsUser.find_by_scores(user_point)
         user.center = center
         user.save
-        raise
       end
     end
   end
@@ -85,6 +84,12 @@ class KsUser < ActiveRecord::Base
     # TODO: is this the best way to do this? can we do it in SQL?
     ks_users.select do |user|
       user.ks_projects.count >= project_min
+    end
+  end
+
+  def scores
+    CATEGORIES.collect do |category|
+      self.send("#{category}_score")
     end
   end
 

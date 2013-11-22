@@ -4,7 +4,9 @@ Your scores:
 <br><br>
 <%= button_to "Generate a recommendation!", recommendations_path %>
 <br><br>
-<%= @rec %><br>
 <% if @rec %>
-<%= link_to @rec.ks_project.title, "http://www.kickstarter.com"+@rec.ks_project.url %>
-<% end %>
+<a href="http://www.kickstarter.com<%= @rec.ks_project.url %>" target="blank"><img src="<%=@rec.ks_project.image_url %>"></a>
+<%= link_to @rec.ks_project.title, "http://www.kickstarter.com"+@rec.ks_project.url %><br>
+This project was backed by <%= @neighbor.name %><br>
+<img src="<%= @neighbor.image_url %>">
+<% end %><br>

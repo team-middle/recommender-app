@@ -1,3 +1,4 @@
+<% notice %>
 <% @centers.each do |center| %>
   <%= center.art_score %> |
   <%= center.comics_score %> |
@@ -14,7 +15,12 @@
   <%= center.theater_score %> | 
   <br>
 <% end %>
-
+<%= @sample_user %>
+<% if @sample_user %>
+<%= @sample_user.id %> | <%= @sample_user.center %>
+<br>
+<%= @sample_user.url %>
+<% end %>
 
 
 

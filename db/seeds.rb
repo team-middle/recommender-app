@@ -93,6 +93,16 @@ users.each do |user|
     puts "    finished scraping #{user.url}, #{user.id}"
   end
 end
+## extra user scrape
+# url = user.url
+# user_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{url}"))
+# user.image_url = user_page.xpath("//meta[@property='og:image']/@content").text
+# user.name = user_page.xpath("//meta[@property='kickstarter:name']/@content").text
+# user.joined = user_page.xpath("//meta[@property='kickstarter:joined']/@content").text
+# user.description = user_page.xpath("//meta[@property='og:description']/@content").text
+# user.location = user_page.css("span.location").text
+# user.save
+
 
 
 10.times do 

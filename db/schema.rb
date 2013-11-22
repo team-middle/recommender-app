@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121212447) do
+ActiveRecord::Schema.define(version: 20131121235639) do
 
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(version: 20131121212447) do
     t.integer "technology_score",  default: 0
     t.integer "theater_score",     default: 0
     t.integer "center_id"
+    t.string  "image_url"
+    t.string  "name"
+    t.string  "joined"
+    t.string  "description"
+    t.string  "location"
   end
 
   create_table "recommendations", force: true do |t|

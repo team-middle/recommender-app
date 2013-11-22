@@ -8,8 +8,6 @@ class SessionsController < ApplicationController
     session[:oauth] = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', 'http://localhost:3000/users/create')
     @auth_url = session[:oauth].url_for_oauth_code(:permissions => "read_stream publish_stream")
 
-    @api = Koala::Facebook::API.new(session[:access_token])
-    
     redirect_to @auth_url
   end
 
@@ -35,6 +33,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
+    raise
     session.clear
     params.clear
     redirect_to sessions_path, notice: "logged out"
