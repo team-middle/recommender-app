@@ -85,24 +85,18 @@ class Kmeans
       end
       self.assignments[closest_seed] << point
     end
-    binding.pry
     self.centers = assignments.keys
     iter = 0
     begin 
       old_centers = self.centers.dup
       self.centers = calculate_new_centers(k)
-
       self.centers != old_centers ? changed = true : changed = false
       reassign_groups(centers)
       iter += 1
-      binding.pry
     end  while iter <= max_iters && changed
     self.assignments
   end # end of cluster method
 
 
 end # end of class
-points = [[4.0,2.0],[4.0,3.0],[4.0,4.0],[1.0,2.0],[1.0,3.0],[1.0,1.0],[3.0,2.0]]
-#p Kmeans.new.kmplusplus(3,points)
-p Kmeans.new.cluster(5, points, 4)
 
