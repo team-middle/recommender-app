@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121235639) do
+ActiveRecord::Schema.define(version: 20131122154932) do
 
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20131121235639) do
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
+    t.integer "tech_score",        default: 0
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
     t.integer "dance_score",       default: 0
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 20131121235639) do
     t.integer  "ks_project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "useful"
   end
 
   add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id"

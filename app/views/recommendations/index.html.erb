@@ -10,3 +10,8 @@ Your scores:
 This project was backed by <%= @neighbor.name %><br>
 <img src="<%= @neighbor.image_url %>">
 <% end %><br>
+<% if @ranked_active_projects %>
+<% @array.each do |unit| %>
+  <%= link_to unit[0].title, "http://www.kickstarter.com" + unit[0].url %> : <%= unit[1] %><br>
+  <% end %>
+<% end %>

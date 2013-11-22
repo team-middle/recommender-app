@@ -33,7 +33,6 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    raise
     session.clear
     params.clear
     redirect_to sessions_path, notice: "logged out"

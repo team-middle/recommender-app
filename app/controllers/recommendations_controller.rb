@@ -7,20 +7,32 @@ before_action :set_user_from_session, :only => [:index, :create]
   end
 
   def create
-    @user.assign_center # need to write this method
-    ks_users_in_cluster = KsUser.where(:center => @user.center)
-    @neighbor = ks_users_in_cluster.sample
+    @user.center || @user.assign_center
+    ks_users_in_cluster = KsUser.where(:center => @user.center).shuffle
 
-    @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
+    # begin    
+    #   @neighbor = ks_users_in_cluster.sample
+    #   @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
+    # end while @active_projects.empty?
 
-    if @active_projects
-      @project = @active_projects.sample
-    else
-      @neighbor = ks_users_in_cluster.sample
-      @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
+    @ranked_active_projects = Hash.new(0)
+    ks_users_in_cluster.each do |user|
+      actives = user.ks_projects.select { |p| p.still_active? }
+      actives.each do |project|
+        @ranked_active_projects[project] += 1
+      end
     end
 
-    @rec = Recommendation.new(:user => @user, :ks_project => @project)
+    @ranked_active_projects.keys.each do |project|
+      Recommendation.find_or_create_by(:user => @user, :ks_project => project)
+    end
+    @array = @ranked_active_projects.sort_by { |k,v| v }.reverse
+
+
+
+    # @project = @ranked_active_projects.sample
+    # @rec = Recommendation.new(:user => @user, :ks_project => @project)
+
     # find a ks_user in the database with the same center as @user
     # find a project that ks_user has backed, and set that project -- rec.ks_project = project
 
