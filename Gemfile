@@ -32,6 +32,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
+
+gem 'rails_12factor'
 gem 'pg'
 gem 'omniauth'
 gem 'koala', '~> 1.3'
