@@ -11,7 +11,14 @@ before_action :set_user_from_session, :only => [:index, :create]
     ks_users_in_cluster = KsUser.where(:center => @user.center)
     @neighbor = ks_users_in_cluster.sample
 
-    @project = @neighbor.ks_projects.sample
+    @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
+
+    if @active_projects
+      @project = @active_projects.sample
+    else
+      @neighbor = ks_users_in_cluster.sample
+      @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
+    end
 
     @rec = Recommendation.new(:user => @user, :ks_project => @project)
     # find a ks_user in the database with the same center as @user
