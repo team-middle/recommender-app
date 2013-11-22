@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
 
       old_score = self.send("#{category}_score")
-      feedback ? new_score = old_score + 10 : new_score = old_score - 10
+      feedback == "true" ? new_score = old_score + 10 : new_score = old_score - 10
       new_score = 100 if new_score > 100
       new_score = 0 if new_score < 0
       self.update("#{category}_score" => new_score)

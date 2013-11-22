@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def login
-    session[:oauth] = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', 'http://localhost:3000/users/create')
+    session[:oauth] = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', 'http://localhost:3000/sessions/show')
     @auth_url = session[:oauth].url_for_oauth_code(:permissions => "read_stream publish_stream")
 
     redirect_to @auth_url
@@ -29,7 +29,12 @@ class SessionsController < ApplicationController
     # @graph = Koala::Facebook::GraphAPI.new(@facebook_cookies["access_token"])
     @likes = @api.get_connections("me","likes")
 
-    render :page
+    #render :page
+    session[:username] = @user_profile["username"]
+
+    @user = User.find_or_create_by(:username => session[:username])
+    @user.create_scores(@likes)
+    render :"recommendations/index"
   end
 
   def logout

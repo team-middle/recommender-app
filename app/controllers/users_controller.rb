@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
-    raise
-    @user.adjust_score(params[:category], params[:feedback])
+    @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
+    @user.assign_center
     redirect_to recommendations_path
   end
 
@@ -106,10 +106,15 @@ class UsersController < ApplicationController
     likes = api.get_connections("me","likes")
     
     @user = User.find_or_create_by(:username => session[:username])
-    @user.create_scores(likes) # will populate the 13 dimensions
+
+    if @user.scores
+    else   
+      @user.create_scores(likes) # will populate the 13 dimensions
+    end
 
     if @user.save
-      redirect_to recommendations_path
+      render :"recommendations/index"
+      #redirect_to recommendations_path
     else
       render :index, notice: "error"
     end
