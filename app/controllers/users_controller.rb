@@ -7,16 +7,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def adjust_score(category, feedback)
+  def adjust_score
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
-
-    old_score = @user.send("#{category}_score") 
-    feedback ? new_score = old_score + 10 : new_score = old_score - 10
-    new_score = 100 if new_score > 100
-    new_score = 0 if new_score < 0
-    @user.update("#{category}_score" => new_score)
+    @user.adjust_score(params[:category], params[:feedback])
+    redirect_to recommendations_path
   end
 
   def recommend
