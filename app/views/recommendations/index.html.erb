@@ -16,5 +16,9 @@ This project was backed by <%= @neighbor.name %><br>
 <% if @ranked_active_projects %>
 <% @array.each do |unit| %>
   <%= link_to unit[0].title, "http://www.kickstarter.com" + unit[0].url %> : <%= unit[1] %><br>
-  <% end %>
+  <%= form_tag :controller => "users", :action => 'adjust_score' %>
+    <%= submit_tag "good recommendation", :id => "true" %>
+    <%= submit_tag "bad recommendation", :id => "false" %>
+    <%= hidden_field_tag "category", unit[0].category %>
+<% end %>
 <% end %>
