@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def adjust_score
+    # will get a POST to adjust_score action
+    # params will have the project category and the like/dislike
+    # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
+    
+  end
+
   def recommend
 
     render :recommend

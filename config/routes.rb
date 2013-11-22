@@ -6,6 +6,7 @@ RecommenderApp::Application.routes.draw do
 
   get '/test' => 'users#test'
 
+  get '/about' => 'admin#about', :as => :about
   get '/login' => 'sessions#login'
   get '/sessions' => 'sessions#index'
   get '/sessions/page' => 'sessions#page'

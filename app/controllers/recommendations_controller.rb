@@ -7,7 +7,7 @@ before_action :set_user_from_session, :only => [:index, :create]
   end
 
   def create
-    @user.center || @user.assign_center
+    @user.assign_center
     ks_users_in_cluster = KsUser.where(:center => @user.center).shuffle
 
     # begin    
