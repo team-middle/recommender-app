@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :adjust_score]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -8,9 +8,11 @@ class UsersController < ApplicationController
   end
 
   def adjust_score
+    set_user_from_session
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
+    raise
     @user.adjust_score(params[:category], params[:feedback])
     redirect_to recommendations_path
   end
@@ -143,12 +145,16 @@ class UsersController < ApplicationController
       session[:oauth]
     end
 
-    def set_user
-      @user = User.find(params[:id])
+    def set_user_from_session
+      @user = User.find_by(:username => session[:username])
     end
 
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
+
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :c1, :c2, :c3 , :c4 , :c5 , :c6 , :c7 , :c8 , :c9 , :c10 , :c11 , :c12 , :c13)
-    end
+    # def user_params
+    #   params.require(:user).permit(:username, :c1, :c2, :c3 , :c4 , :c5 , :c6 , :c7 , :c8 , :c9 , :c10 , :c11 , :c12 , :c13)
+    # end
 end

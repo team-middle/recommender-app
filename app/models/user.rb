@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
       new_score = 100 if new_score > 100
       new_score = 0 if new_score < 0
       self.update("#{category}_score" => new_score)
+      self.save
     end
 
 
