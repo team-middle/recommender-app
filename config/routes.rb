@@ -22,6 +22,9 @@ RecommenderApp::Application.routes.draw do
   post '/admin' => 'admin#reset'
   post '/users/adjust_score' => 'users#adjust_score'
 
+  get '/auth/facebook/callback' => 'users#create'
+
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
