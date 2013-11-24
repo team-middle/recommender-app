@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
-  # POST /users
-  # POST /users.json
+  def adjust_score
+    set_user_from_session
+    # will get a POST to adjust_score action
+    # params will have the project category and the like/dislike
+    # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
+    @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
+    @user.assign_center
+    redirect_to recommendations_path
+  end
+  
   def create
     session[:access_token] = FacebookOAuth.get_access_token(params[:code])
 
