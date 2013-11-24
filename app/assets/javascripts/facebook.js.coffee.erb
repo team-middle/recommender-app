@@ -5,16 +5,15 @@ jQuery ->
     url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
     dataType: 'script'
     cache: true
-#     popup: true
 
 window.fbAsyncInit = ->
 
   FB.init(appId: "1479578555600942", cookie: true)
 
-  $('#login').click (e) ->
-    e.preventDefault()
-    FB.login (response) ->
-      window.location = '/auth/facebook/callback' if response.authResponse
+#   $('#login').click (e) ->
+#     e.preventDefault()
+#     FB.login (response) ->
+#       window.location = '/auth/facebook/callback' if response.authResponse
 
   $('#logout').click (e) ->
     FB.getLoginStatus (response) ->
