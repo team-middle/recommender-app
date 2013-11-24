@@ -6,47 +6,9 @@
   social icon #1 | social icon #2 | social icon #3
 </div>
 <br>
-<h2><%= link_to "Login with Facebook to get started", login_path %></h2>
+<h2 id="login"><%= link_to "Login with Facebook to get started", "/auth/facebook" %></h2>
 <h6>(We're going to ask for access to your likes, location, and friends, but we won't store any information that we get from Facebook.)</h6>
 
 
-
+<a href="<%= logout_path %>" id="logout">Logout</a>
 </center>
-
-<script type="text/javascript">
-          window.fbAsyncInit = function() {
-            FB.init({
-              appId  : '1479578555600942',
-              status : true, // check login status
-              cookie : true, // enable cookies to allow the server to access the session
-              popup: true,
-              xfbml  : true  // parse XFBML
-            });
-          };
-
-          (function(d) {
-            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-            js = d.createElement('script'); js.id = id; js.async = true;
-            js.src = "//connect.facebook.net/en_US/all.js";
-            d.getElementsByTagName('head')[0].appendChild(js);
-          }(document));
-
-          $(function() {
-            $('a').click(function(e) {
-              e.preventDefault();
-
-              FB.login(function(response) {
-                if (response.authResponse) {
-                  $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...');
-
-                  // since we have cookies enabled, this request will allow omniauth to parse
-                  // out the auth code from the signed request in the fbsr_XXX cookie
-                  $.getJSON('/auth/facebook/callback', function(json) {
-                    $('#connect').html('Connected! Callback complete.');
-                    $('#results').html(JSON.stringify(json));
-                  });
-                }
-              }, { scope: 'user_likes, user_location' });
-            });
-          });
-        </script>

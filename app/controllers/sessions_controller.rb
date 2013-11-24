@@ -4,13 +4,35 @@ class SessionsController < ApplicationController
 
   end
 
-  def login
+  def create
+    auth_hash = request.env['omniauth.auth']
+    session[:username] = auth_hash['extra']['raw_info']['username']
+    present = User.find_by(:username => session[:username])
+    if present
+      notice = "welcome, back #{session[:username]}"
+    else
+      user = User.new(:username => session[:username])
+      user.save
+      notice = "thanks for using Kickamender, #{session[:username]}"
+    end
 
-    auth_url = FacebookOAuth.url_for_oauth_code(:permissions => "read_stream publish_stream")
-
-
-    redirect_to auth_url
+    redirect_to recommendations_path, notice: notice
   end
+  # def create
+  #   raise
+  #   user = User.from_omniauth(env["omniauth.auth"])
+  #   session[:username] = user.username
+  #   redirect_to root_url
+
+  # end
+
+
+  def destroy
+    session.clear
+
+    redirect_to root_url, notice: "logged out"
+  end
+
 
   def show
     if params[:code]
@@ -39,11 +61,6 @@ class SessionsController < ApplicationController
 
   end
 
-  def logout
-    session.clear
-    params.clear
-    redirect_to sessions_path, notice: "logged out"
-  end
 
 
 

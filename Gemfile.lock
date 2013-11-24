@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 271f73becbb2aea9c1b771e09419b9bc0287fe55
+  revision: 0d3574472f3b84800f0d6ddf2c72b30d3131db1b
   specs:
     anjlab-bootstrap-rails (3.0.2.0)
       railties (>= 3.0)
@@ -42,7 +42,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
-    capybara (2.1.0)
+    capybara (2.2.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -105,7 +105,6 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    lockfile (2.1.0)
     lumberjack (1.0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -134,7 +133,7 @@ GEM
       omniauth (~> 1.0)
     pg (0.17.0)
     polyglot (0.3.3)
-    pry (0.9.12.3)
+    pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -194,14 +193,13 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0.0)
       websocket (~> 1.0.4)
-    simplecov (0.8.1)
+    simplecov (0.8.2)
       docile (~> 1.1.0)
-      lockfile (>= 2.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.4.7)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
