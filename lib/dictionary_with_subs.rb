@@ -18,7 +18,7 @@ CATEGORY_DICTIONARY = { # film
 :"tv channel" => "film",
 :"tv genre" => "film",
 :"movies/music" => "film",
-# music
+# music -- there must be genres for music likes!
   classical music
   country & folk 
   electronic music
@@ -55,23 +55,32 @@ CATEGORY_DICTIONARY = { # film
 :"book store" => "publishing",
 :"library" => "publishing",
 :"magazine" => "publishing",
+  nonfiction
 :"editor" => "publishing",
 :"journalist" => "publishing",
+  nonfiction
 :"event planning/event services" => "publishing",
 :"media/news/publishing" => "publishing",
+  nonfiction
 :"professional services" => "publishing",
 :"school" => "publishing",
 :"non-profit organization" => "publishing",
 :"government organization" => "publishing",
 :"cause" => "publishing",
+  nonfiction
 :"political party" => "publishing",
+  nonfiction
 :"education" => "publishing",
 :"legal/law" => "publishing",
 :"news personality" => "publishing",
+  nonfiction
 :"teacher" => "publishing",
 :"non-governmental organization (ngo)" => "publishing",
+  nonfiction
 :"community organization" => "publishing",
+  nonfiction
 :"political organization" => "publishing",
+  nonfiction
 # art
   conceptual art
   crafts
@@ -104,6 +113,7 @@ CATEGORY_DICTIONARY = { # film
 :"cars" => "technology",
   hardware
 :"computers" => "technology",
+  open software
 :"software" => "technology",
   open software
 :"office supplies" => "technology",
@@ -135,6 +145,7 @@ CATEGORY_DICTIONARY = { # film
 :"engineering/construction" => "technology",
   hardware
 :"telecommunication" => "technology",
+  hardware
 :"biotechnology" => "technology",
 :"computers/technology" => "technology",
   open software
@@ -153,15 +164,23 @@ CATEGORY_DICTIONARY = { # film
 :"vitamins/supplements" =>"technology" ,
 # design
   graphic design
-  produt design
+  product design
 :"bags/luggage" => "design",
+  product design
 :"home decor" => "design",
+  product design
 :"furniture" => "design",
+  product design
 :"household supplies" => "design",
+  product design
 :"kitchen/cooking" => "design",
+  product design
 :"patio/garden" => "design",
+  product design
 :"home improvement" => "design",
+  product design
 :"retail and consumer merchandise" => "design",
+  product design
 :"small business" => "design",
 :"pet supplies" => "design",
 :"baby goods/kids goods" => "design",
@@ -177,7 +196,9 @@ CATEGORY_DICTIONARY = { # film
   video games
 :"athlete" => "games",
 :"games/toys" => "games",
+  tabletop games 
 :"app" => "games",
+  video games
 :"sports/recreation/activities" => "games",
 :"sports league" => "games",
 :"professional sports team" => "games",
