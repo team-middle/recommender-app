@@ -65,19 +65,19 @@ h2.subTitle:after, h1.noSubtitle:after{
 	background-color:#7DC24F;
 }
 #home {
-	background-image:url('../images/theme-pics/paralax-sea-green-3.jpg');
+	background-image:url('paralax-sea-green-3.jpg');
 }
 #paralaxSlice1 {
-	background-image: url('../images/theme-pics/paralax-1.jpg');
+	background-image: url('paralax-1.jpg');
 }
 #paralaxSlice2 {
-	background-image: url('../images/theme-pics/paralax-grey-2.jpg');
+	background-image: url('paralax-grey-2.jpg');
 }
 #paralaxSlice3 {
-	background-image: url('../images/theme-pics/paralax-grey-3.jpg');
+	background-image: url('paralax-grey-3.jpg');
 }
 #paralaxSlice4 {
-	background-image: url('../images/theme-pics/paralax-4.jpg');
+	background-image: url('paralax-4.jpg');
 }
 .paralaxText blockquote, .paralaxText h1, .paralaxText h2, .paralaxText h3, .paralaxText p, .paralaxText i{
 	color:#fff;
