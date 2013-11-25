@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 271f73becbb2aea9c1b771e09419b9bc0287fe55
-  specs:
-    anjlab-bootstrap-rails (3.0.2.0)
-      railties (>= 3.0)
-      sass (>= 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -220,7 +212,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  anjlab-bootstrap-rails!
   better_errors
   binding_of_caller
   capybara
