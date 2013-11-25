@@ -7,7 +7,7 @@ RecommenderApp::Application.routes.draw do
   get '/test' => 'users#test'
 
   get '/about' => 'admin#about', :as => :about
-  # get '/auth/facebook' => 'sessions#create', :as => :login
+  #get '/auth/facebook' => 'sessions#create', :as => :login
   get '/sessions' => 'sessions#index'
   get '/sessions/page' => 'sessions#page'
   get '/sessions/show' => 'sessions#show'
