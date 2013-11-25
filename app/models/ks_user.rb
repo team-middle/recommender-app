@@ -1,6 +1,6 @@
 class KsUser < ActiveRecord::Base
-  has_many :ks_project_backers
-  has_many :ks_projects, :through => :ks_project_backers
+  has_many :ks_project_backers, :dependent => :destroy
+  has_many :ks_projects, -> { uniq }, :through => :ks_project_backers
   belongs_to :center
 
 
@@ -124,5 +124,13 @@ class KsUser < ActiveRecord::Base
       end
     end
   end
+
+  def self.find_duplicates(scope)
+    users = KsUser.where("id < #{scope}")
+    users.select do |user|
+      user.id != KsUser.find_by(:url => user.url).id
+    end
+  end
+
 
 end

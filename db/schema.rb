@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131122154932) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
@@ -34,8 +37,8 @@ ActiveRecord::Schema.define(version: 20131122154932) do
     t.integer "ks_project_id"
   end
 
-  add_index "ks_project_backers", ["ks_project_id"], name: "index_ks_project_backers_on_ks_project_id"
-  add_index "ks_project_backers", ["ks_user_id"], name: "index_ks_project_backers_on_ks_user_id"
+  add_index "ks_project_backers", ["ks_project_id"], name: "index_ks_project_backers_on_ks_project_id", using: :btree
+  add_index "ks_project_backers", ["ks_user_id"], name: "index_ks_project_backers_on_ks_user_id", using: :btree
 
   create_table "ks_projects", force: true do |t|
     t.string  "url"
@@ -59,7 +62,6 @@ ActiveRecord::Schema.define(version: 20131122154932) do
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
-    t.integer "tech_score",        default: 0
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
     t.integer "dance_score",       default: 0
@@ -89,8 +91,8 @@ ActiveRecord::Schema.define(version: 20131122154932) do
     t.boolean  "useful"
   end
 
-  add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id"
-  add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id"
+  add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id", using: :btree
+  add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

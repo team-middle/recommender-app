@@ -1,0 +1,24 @@
+
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
+INSERT INTO "schema_migrations" VALUES('20131119145841');
+INSERT INTO "schema_migrations" VALUES('20131119151049');
+INSERT INTO "schema_migrations" VALUES('20131119153405');
+INSERT INTO "schema_migrations" VALUES('20131119183546');
+INSERT INTO "schema_migrations" VALUES('20131119192159');
+INSERT INTO "schema_migrations" VALUES('20131119214212');
+INSERT INTO "schema_migrations" VALUES('20131119232841');
+INSERT INTO "schema_migrations" VALUES('20131119184415');
+INSERT INTO "schema_migrations" VALUES('20131120170357');
+INSERT INTO "schema_migrations" VALUES('20131120183943');
+INSERT INTO "schema_migrations" VALUES('20131120185618');
+INSERT INTO "schema_migrations" VALUES('20131120215455');
+INSERT INTO "schema_migrations" VALUES('20131121212447');
+INSERT INTO "schema_migrations" VALUES('20131121233527');
+INSERT INTO "schema_migrations" VALUES('20131121235639');
+INSERT INTO "schema_migrations" VALUES('20131122154932');
+CREATE TABLE "ks_projects" ("id" SERIAL PRIMARY KEY NOT NULL, "url" varchar(255), "backer_count" integer, "title" varchar(255), "creator_id" varchar(255), "parent_category" varchar(255), "category" varchar(255), "funding_goal" integer, "pledged" integer, "latitude" varchar(255), "longitude" varchar(255), "updates_count" integer, "comments_count" integer, "scraped" boolean, "description" varchar(255), "end_date" varchar(255), "image_url" varchar(255));
+INSERT INTO "ks_projects" VALUES(1,'/projects/1345409198/welcome-to-the-small-world-a-book-of-big-surprises',47,'Welcome to the Small World: A Book of BIG Surprises!','1345409198','Publishing','Children''s Book',9500,3720,'45.02374458313','-93.264568328858',0,0,'t','There are tiny people living right here in our big world. And here''s our book to prove it.','Tue, 17 Dec 2013 22:04:09 -0000','https://s3.amazonaws.com/ksr/projects/682513/photo-main.jpg?1384401730');
+INSERT INTO "ks_projects" VALUES(2,'/projects/240113606/classic-country-names',23,'Classic Country Names','240113606','Design','Design',1000,561,'39.075366973877','-94.575485229492',2,1,'t','A poster jam-packed with legendary names of country music!','Thu, 14 Nov 2013 02:02:58 -0000','https://s3.amazonaws.com/ksr/projects/709332/photo-main.jpg?1382715215');
+INSERT INTO "ks_projects" VALUES(3,'/projects/spikelee/the-newest-hottest-spike-lee-joint',6421,'The Newest Hottest Spike Lee Joint','spikelee','Film & Video','Narrative Film',1250000,1418910,'40.645500183106','-73.961376190185',65,1170,'t','Human beings who are addicted to Blood. Funny, Sexy and Bloody. A new kind of love story (and not a remake of "Blacula").','Wed, 21 Aug 2013 16:15:41 -0000','https://s3.amazonaws.com/ksr/projects/613155/photo-main.jpg?1375328178');
