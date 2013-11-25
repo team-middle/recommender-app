@@ -203,6 +203,17 @@ h1.noSubtitle{
 	margin-bottom:90px;
 }
 
+.customTitle {
+	font-family: 'Roboto', sans-serif;
+	font-weight: bolder;
+	font-size: 8em;
+	color: white;
+}
+
+.titleDot {
+	font-family: 'Open Sans', sans-serif;
+	color: #7DC24F;
+}
 
 .bigTitle, h1.bigTitle, h2.bigTitle, h3.bigTitle {
 	font-weight: 800;
