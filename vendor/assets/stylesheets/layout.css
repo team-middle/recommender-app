@@ -609,7 +609,8 @@ body#fullScreen #mainHeader{display:none;}
 #mapWrapper{ height:350px; }
 
 #homeFullScreen {
-	background-image: url('paralax-blue-2.jpg');
+	/*background-image: url('paralax-blue-2.jpg');*/
+	background-image: url('big-city.jpg');
 	/*background-image: url('../images/theme-pics/paralax-1.jpg');*/
 	height:100%;
 	display:table;
