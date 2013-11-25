@@ -1,3 +1,4 @@
+<%= notice %>
 <h1>Kickammender</h1>
 <h3>Kickstarter recommendations, tailored to you</h3>
 
@@ -13,6 +14,7 @@ Your scores:
 This project was backed by <%= @neighbor.name %><br>
 <img src="<%= @neighbor.image_url %>">
 <% end %><br>
+<div class="recommendations" style="float:left">
 <% if @ranked_active_projects %>
   <% @array.each do |unit| %>
     <%= form_tag :controller => "users", :action => 'adjust_score' do %>
@@ -23,3 +25,20 @@ This project was backed by <%= @neighbor.name %><br>
       <% end %>
   <% end %>
 <% end %>
+</div>
+
+<br>
+<div class="most_similar" style="float:right">
+<% if @most_similar %>
+We found you to be most similar to this beautiful person: <%= @most_similar.name %>. <br>
+<img src="<%=@most_similar.image_url%>">
+
+They've backed these projects:
+<ul>
+<% @most_similar.ks_projects.each do |proj| %>
+  <li><%= link_to proj.title, "http://www.kickstarter.com" + proj.url %></li>
+<% end %>
+</ul>
+<% end %>
+</div>
+

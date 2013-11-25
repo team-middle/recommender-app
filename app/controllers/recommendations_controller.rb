@@ -14,6 +14,9 @@ before_action :set_user_from_session, :only => [:index, :create]
     #   @neighbor = ks_users_in_cluster.sample
     #   @active_projects = @neighbor.ks_projects.select { |p| p.still_active? }
     # end while @active_projects.empty?
+    @most_similar = ks_users_in_cluster.min_by do |user|
+      Kmeans.distance(@user.scores, user.scores)
+    end
 
     @ranked_active_projects = Hash.new(0)
     ks_users_in_cluster.each do |user|

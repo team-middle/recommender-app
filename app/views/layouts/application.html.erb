@@ -12,12 +12,15 @@
     <%= link_to "About", about_path %>
     ....Socials icons....
     <%= link_to "Admin", admin_path %>
+    <%= link_to "Logout", logout_path, :id => "logout" %>
   </nav>
 
 <%= yield %>
 
-<br><br><br>
-<footer>
+<div style="clear:both">
+  </div>
+<br><br><br><br>
+<footer style="clear:both">
   Made with <%= image_tag "brain-xxl.png", size: "20x20"%> by <a href="http://www.twitter.com/jnoconor">@jnoconor</a> and <a href="http://www.twitter.com/mpolycar">@mpolycar</a>.
 </footer>
 

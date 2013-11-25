@@ -37,7 +37,7 @@ end
 
 gem 'rails_12factor'
 gem 'pg'
-gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'koala', '~> 1.3'
 
 # Use ActiveModel has_secure_password

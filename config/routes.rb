@@ -7,12 +7,11 @@ RecommenderApp::Application.routes.draw do
   get '/test' => 'users#test'
 
   get '/about' => 'admin#about', :as => :about
-  get '/login' => 'sessions#login'
+  # get '/auth/facebook' => 'sessions#create', :as => :login
   get '/sessions' => 'sessions#index'
   get '/sessions/page' => 'sessions#page'
-  get '/sessions' => 'sessions#index'
   get '/sessions/show' => 'sessions#show'
-  get '/sessions/logout' => 'sessions#logout', :as => :logout
+  get '/sessions/logout' => 'sessions#destroy', :as => :logout
 
   get '/users/create' => 'users#create', :as => :create_user
   post '/users/adjust_score' => 'users#adjust_score', :as => :adjust_score
@@ -21,6 +20,9 @@ RecommenderApp::Application.routes.draw do
   get '/admin/results' => 'admin#results', :as => :results
   post '/admin' => 'admin#reset'
   post '/users/adjust_score' => 'users#adjust_score'
+
+  get '/auth/facebook/callback' => 'sessions#create'
+  get 'auth/failure' => 'sessions#index'
 
   resources :users
 

@@ -3,6 +3,7 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+#
 #development:
 #  adapter: sqlite3
 #  database: db/development.sqlite3
@@ -40,3 +41,4 @@
    database: my_database_production
    pool: 5
    timeout: 500
+

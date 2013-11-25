@@ -1,12 +1,13 @@
 <%= notice %>
+<center>
 <h1>Kickammender!</h1>
 <h4>Kickstarter recommendations, tailored to you</h4>
 <div id="socials">
   social icon #1 | social icon #2 | social icon #3
 </div>
 <br>
-<h2><%= link_to "Login with Facebook to get started", login_path %></h2>
-<h5>(We're going to ask for access to your likes, location, and friends, but we won't store any information that we get from Facebook.)</h5>
+<h2 id="login"><%= link_to "Login with Facebook to get started", "/auth/facebook" %></h2>
+<h6>(We're going to ask for access to your likes, location, and friends, but we won't store any information that we get from Facebook.)</h6>
 
 
-
+</center>
