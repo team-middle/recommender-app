@@ -79,6 +79,9 @@ h2.subTitle:after, h1.noSubtitle:after{
 #paralaxSlice4 {
 	background-image: url('paralax-4.jpg');
 }
+#paralaxSlice5 {
+	background-image: url('big-city.jpg');
+}
 .paralaxText blockquote, .paralaxText h1, .paralaxText h2, .paralaxText h3, .paralaxText p, .paralaxText i{
 	color:#fff;
 }
