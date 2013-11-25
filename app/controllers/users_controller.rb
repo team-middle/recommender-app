@@ -12,8 +12,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    session[:access_token] = FacebookOAuth.get_access_token(params[:code])
-
+    # session[:access_token] = FacebookOAuth.get_access_token(params[:code])
     api = Koala::Facebook::API.new(session[:access_token])
     user_profile = api.get_object('me')
     session[:username] = user_profile["username"]
@@ -21,9 +20,9 @@ class UsersController < ApplicationController
     
     @user = User.find_or_create_by(:username => session[:username])
 
-    if @user.scores
-    else   
+    if @user.scores.first.nil?
       @user.create_scores(likes) # will populate the 13 dimensions
+    else   
     end
 
 

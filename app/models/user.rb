@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
 
   attr_reader :counts
 
-  def self.from_omniauth(auth)
-    raise
-    where(auth.slice(:provider, :username)).find_or_create_by(:username => session[:username])
-  end
+  # def self.from_omniauth(auth)
+  #   raise
+  #   where(auth.slice(:provider, :username)).find_or_create_by(:username => session[:username])
+  # end
 
 
     def user_data_as_coordinate
