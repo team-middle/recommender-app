@@ -34,6 +34,13 @@ class KsUser < ActiveRecord::Base
     self.find_by(:art_score => array[0], :comics_score => array[1], :dance_score => array[2], :design_score => array[3], :fashion_score => array[4], :film_score => array[5], :food_score => array[6], :games_score => array[7], :music_score => array[8], :photography_score => array[9], :publishing_score => array[10], :technology_score => array[11], :theater_score => array[12])
   end
 
+  def date_joined
+    date = self.joined.split[0]
+    time_args = date.split("-")
+    joined_time = Time.new(*time_args)
+  end
+
+
   def score_sum # for validating the data
     art_score + comics_score + dance_score + design_score + fashion_score + film_score + food_score + games_score + music_score + photography_score + publishing_score + technology_score + theater_score
   end

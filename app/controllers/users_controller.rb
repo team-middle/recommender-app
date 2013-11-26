@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def adjust_score
     set_user_from_session
+    raise
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0

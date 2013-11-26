@@ -19,11 +19,10 @@ RecommenderApp::Application.routes.draw do
   get '/admin' => 'admin#index', :as => :admin 
   get '/admin/results' => 'admin#results', :as => :results
   post '/admin' => 'admin#reset'
-  post '/users/adjust_score' => 'users#adjust_score'
 
   get '/auth/facebook/callback' => 'sessions#create'
   get '/sessions/create' => 'sessions#create'
-  get 'auth/failure' => 'sessions#index'
+  get '/auth/failure' => 'sessions#index'
 
   get '/recommendations' => 'recommendations#create', :as => :recommendations
 

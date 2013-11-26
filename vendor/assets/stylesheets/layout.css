@@ -47,6 +47,19 @@ Description: layout styles
 	margin-bottom: 15px;
 }
 
+.similar-image {
+	border: 5px solid #7DC24F;
+	border-radius: 20px;
+}
+
+.similar-user {
+	text-align: left;
+}
+
+.thumbs {
+	padding-top: 20px;
+}
+
 .container .jumbotron{border-radius: 0;}
 .jumbotron {font-size: 16px;}
 .jumbotron h1 {text-align: left;}
@@ -290,6 +303,12 @@ h2.subTitle:after, h1.noSubtitle:after {
 	left:50%;
 }
 
+h2.similar-user:after {
+	margin: 0;
+	padding: 0;
+	display: none;
+	width: 0;
+}
 
 
 /* remove the underline on H1 when not needed */

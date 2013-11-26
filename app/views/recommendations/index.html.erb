@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
-<!--<![endif]-->
-<head>
-    <!-- Basic Page Needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>The Kickammender -- An Intelligent Recommendation Engine for Kickstarter</title>
-    <meta name="description" content="Kickammender is an intelligent recommendation engine for potential Kickstarter backers.">
-    <meta name="author" content="Little NEKO">
-    <!-- Mobile Specific Metas
-    ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- CSS
-    ================================================== -->
-    <!-- Bootstrap  -->
-    <link type="text/css" rel="stylesheet" href="assets/bootstrap.min.css">
-    <!-- web font  -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet" type="text/css">
-    <!-- plugin css  -->
-    <link rel="stylesheet" type="text/css" href="assets/js-plugin/animation-framework/animate.css" />
-    <link rel="stylesheet" type="text/css" href="assets/js-plugin/magnific-popup/magnific-popup.css" />
-    <link type="text/css" rel="stylesheet" href="assets/js-plugin/isotope/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/flexslider.css" />
-    <link rel="stylesheet" type="text/css" href="assets/js-plugin/pageSlide/jquery.pageslide.css" />
-    <!-- Owl carousel-->
-    <link rel="stylesheet" href="assets/js-plugin/owl.carousel/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="assets/js-plugin/owl.carousel/owl-carousel/owl.theme.css">
-    <!-- icon fonts -->
-    <link type="text/css" rel="stylesheet" href="assets/custom-icons.css">
-    <link type="text/css" rel="stylesheet" href="assets/custom-icons-ie7.css">
-    <!-- Custom css -->
-    <link type="text/css" rel="stylesheet" href="assets/layout.css">
-    <link type="text/css" id="colors" rel="stylesheet" href="assets/green.css">
-    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
-    <script src="assets/modernizr-2.6.1.min.js"></script>
-    <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="assets/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png">
-  </head>
+
   <body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen">
     <!-- Preloader -->
     <div id="preloader">
@@ -136,7 +89,7 @@
                     </div>
                   </div>
                   <h2><%= link_to @array[0][0].title, "http://www.kickstarter.com" + @array[0][0].url, target: '_blank' %></h2>
-                  <p class="project-description"><%= @array[0][0].description %></p>
+                  
                 </article>
               </div>
 
@@ -145,7 +98,7 @@
                   <section class="imgWrapper">
                   <a href="http://www.kickstarter.com<%= @array[1][0].url %>" target="_blank"><img src="<%= @array[1][0].image_url %>" class="img-responsive rec-image"></a></section>
                   <h2><%= link_to @array[1][0].title, "http://www.kickstarter.com" + @array[1][0].url, target: '_blank' %></h2>
-                  <div><p class="project-description"><%= @array[1][0].description %></p>
+                  
                 </article>
               </div>
 
@@ -155,10 +108,65 @@
                   <a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" class="img-responsive rec-image"></a>
                 </section>
                   <h2><%= link_to @random.title, @random.url %></h2>
-                  <p class="project-description"><%= @random.description %></p>
 
                 </article>
               </div>
+              <div style="clear:both">
+              </div>
+              <!-- descriptions --> 
+              
+            <div class="col-md-4 col-sm-6">
+              <p class="project-description">"<%= @array[0][0].description %>"</p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p class="project-description">"<%= @array[1][0].description %>"</p>
+            </div>
+              <div class="col-md-4 col-sm-6">
+              <p class="project-description">"<%= @random.description %>"</p>
+            </div>
+              
+              <div style="clear:both">
+              </div>
+
+              <!-- ratings -->
+              <div class="col-sm-4 thumbs" align="center">
+                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+
+                    <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
+                    <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
+
+                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <input type="hidden" id="<%= @array[0][0].title %>" name="category" value="<%= @array[0][0].parent_category %>">
+                    <%= submit_tag %>
+                    <% end %>
+
+
+              </div>
+              <div class="col-sm-4 thumbs" align="center">
+                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+
+                    <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
+                    <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
+
+                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <input type="hidden" id="<%= @array[1][0].title %>" name="category" value="<%= @array[1][0].parent_category %>">
+                    <%= submit_tag %>
+                    <% end %>
+
+              </div>
+              <div class="col-sm-4 thumbs" align="center">
+                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+
+                    <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
+                    <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
+
+                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <input type="hidden" id="<%= @array[2][0].title %>" name="category" value="<%= @array[2][0].parent_category %>">
+                    <%= submit_tag %>
+                    <% end %>
+
+              </div>
+
 
             </div>
           </div>
@@ -170,517 +178,64 @@
           <div class="maskParent">
             <div class="paralaxMask"></div>
             <div class="paralaxText container">
-              <blockquote class="bigTitle">I'm not a girl,<br />Not yet a woman</blockquote>
+              <blockquote class="bigTitle">Pretty cool, right?</blockquote>
             </div>
           </div>
         </div>
-
-        <section class="slice" id="works">
-          <div class="container clearfix">
+<!-- similar user -->
+        <section class="slice noPaddingBottom">
+          <div class="container">
             <div class="row">
-              <div class="col-sm-12">
-                <h1>Our Work</h1>
-                <h2 class="subTitle">Latest cool projects we've been working on</h2>
+              <div class="col-xs-12">
+                <h1>Someone Like You</h1>
+                <h2 class="subTitle">We found you to be most similar to this handsome devil </h2>
               </div>
-              <nav id="filter" class="col-md-12 text-center">
+            </div>
+
+              <div class="col-sm-6">
+                <center>
+                <p>
+                  <a href="<%= @most_similar.url %>"><img src="<%= @most_similar.image_url%>" class="img-responsive similar-image"></a>
+                </p>
+              <h2><%= link_to @most_similar.name, @most_similar.url %></h2>
+                            <p><%= @most_similar.description %> </p>
+              <p>From <%= @most_similar.location %></p>
+              <p>Joined on <%= @most_similar.date_joined.strftime('%B %e, %Y') %></p>
+            </center>
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                              <h2>Here's some projects they've backed in the past:</h2>
+                <h3></h3>
+                <p></p>
                 <ul>
-                  <li><a href="" class="current btn btn-sm" data-filter="*">All</a></li>
-                  <li><a href=""  class="btn btn-sm" data-filter=".graphics" >Graphics</a></li>
-                  <li><a href=""  class="btn btn-sm" data-filter=".women">Women</a></li>
-                  <li ><a href="" class="btn btn-sm" data-filter=".cats">Cats</a></li>
+                  <% @most_similar.ks_projects.take(5).each do |project| %>
+                  <li><%= link_to project.title, project.url %></li>
+                  <% end %>
                 </ul>
-              </nav>
 
-              <div class="portfolio-items  isotopeWrapper clearfix imgHover" id="3">
-                <article class="col-sm-4 isotopeItem women">
-                  <section class="imgWrapper">
-                    <img alt="" src="assets/portfolio/vign6.jpg" class="img-responsive">
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks"> 
-                      <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-picture iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a> 
-                      <a href="assets/portfolio/zoom6.jpg" class="image-link" title="Full width image">
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a> 
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Full width image</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-image.html" class="moreLink portfolioSheet">&rarr; read more</a>
-                    </p>
-                  </section>
-                </article>
-
-                <article class="col-sm-4 isotopeItem cats">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign1.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks"> 
-                      <a href="portfolio-project-fullwidth-video.html" title="link" class="portfolioSheet sizer">
-                        <i class="icon-videocam iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a> 
-                      <a href="http://www.youtube.com/watch?v=aqrtF7L86NQ" class="image-iframe" title="Video Popup" >
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>video</span>
-                      </a> 
-                    </div>   
-                  </div>
-                  <section class="boxContent">
-                    <h3>Video YouTube</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-video.html" class="moreLink portfolioSheet">&rarr; read more</a>
-                    </p>
-                  </section>
-                </article>
-
-                <article class="col-sm-4 isotopeItem graphics">
-                  <section class="imgWrapper">
-                    <img alt="" src="assets/portfolio/vign7.jpg" class="img-responsive">
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks"> 
-                      <a href="portfolio-project-fullwidth-video.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-videocam iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a> 
-                      <a href="http://vimeo.com/ondemand/5335/75660130" class="image-iframe" title="Video Popup" >
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>video</span>
-                      </a> 
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Video Vimeo</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-video.html" class="moreLink portfolioSheet">&rarr; read more</a>
-                    </p>
-                  </section>
-                </article>
-
-                <article class="col-sm-4 isotopeItem cats">
-                  <section class="imgWrapper">
-                    <img alt="" src="assets/portfolio/vign3.jpg" class="img-responsive">
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks"> 
-                      <a href="portfolio-project-fullwidth-carousel.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-camera iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a> 
-                      <a href="assets/portfolio/carousel-1.jpg" class="image-link" title="Zoom" data-gallery="assets/portfolio/carousel-2.jpg,assets/portfolio/carousel-3.jpg">
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>gallery</span>
-                      </a> 
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Gallery</h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-carousel.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                    </p>
-                  </section>
-                </article>
-                <article class="col-sm-4 isotopeItem cats">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign2.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks">
-                      <a href="portfolio-project-fullwidth-carousel.html" title="link" class="sizer portfolioSheet"> <i class="icon-picture iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a>
-                      <a href="assets/portfolio/zoom2.jpg" class="image-link" title="Gallery Popup" >
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a>
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Lorem ipsum dolor sit amet</h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-carousel.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                    </p>
-                  </section>
-                </article>
-
-                <article class="col-sm-4 isotopeItem women">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign4.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks">
-                      <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-picture iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a>
-                      <a href="assets/portfolio/zoom4.jpg" class="image-link" title="Zoom">
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a>
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Lorem ipsum dolor sit amet</h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                      <a href="portfolio-project-fullwidth-image.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                    </p>
-                  </section>
-                </article>
+                 </div>
 
 
-                <article class="col-sm-4 isotopeItem graphics">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign8.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks">
-                      <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-picture iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a>
-                      <a href="assets/portfolio/zoom8.jpg" class="image-link" title="Zoom" >
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a>
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Lorem ipsum dolor sit amet</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat.<br>
-                      <a href="portfolio-project-fullwidth-image.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                    </p>
-                  </section>
-                </article>
 
-                <article class="col-sm-4 isotopeItem women">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign5.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks">
-                      <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-picture iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a>
-                      <a href="assets/portfolio/zoom5.jpg" class="image-link" title="Zoom" >
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a>
-                    </div>
-                  </div>
-                  <section class="boxContent">
-                    <h3>Lorem ipsum dolor sit amet</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat.<br>
-                      <a href="portfolio-project-fullwidth-image.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                    </p>
-                  </section>
-                </article>
-
-                <article class="col-sm-4 isotopeItem graphics">
-                  <section class="imgWrapper"> 
-                    <img alt="" src="assets/portfolio/vign9.jpg" class="img-responsive"> 
-                  </section>
-                  <div class="mediaHover">
-                    <div class="mask"></div>
-                    <div class="iconLinks">
-                      <a href="portfolio-project-fullwidth-carousel.html" title="link" class="sizer portfolioSheet">
-                        <i class="icon-camera iconRounded iconBig"></i>
-                        <span>link</span>
-                      </a>
-                      <a href="assets/portfolio/zoom9.jpg" class="image-link" title="Zoom">
-                        <i class="icon-search iconRounded iconBig"></i>
-                        <span>zoom</span>
-                      </a> </div>
-                    </div>
-                    <section class="boxContent">
-                      <h3>Lorem ipsum dolor sit amet</h3>
-                      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate nunc ut tellus sollicitudin placerat. <br>
-                        <a href="portfolio-project-fullwidth-carousel.html" class="moreLink portfolioSheet">&rarr; read more</a> 
-                      </p>
-                    </section>
-                  </article>
-
-
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div id="paralaxSlice1" data-stellar-background-ratio="0.5">
-            <div class="maskParent">
-              <div class="paralaxMask"></div>
-              <div class="paralaxText">
-                <i class="icon-star iconBig"></i>
-                <blockquote class="mt15">Baby hit me one more time.<br/><small> -- Joe </small></blockquote>
-              </div>
             </div>
           </div>
-          <section class="slice" id="team">
-            <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
-                  <h1>Meet our team</h1>
-                  <h2 class="subTitle">We are beautiful and smart</h2>
-                </div>
-                
-                <div class="col-sm-4">
-                  <article>
-                    <div><img src="assets/team/pic2.jpg" alt="" class="img-responsive"></div>
-                    <div class="boxContent color4">
-                      <h3>Johanna Newsom</h3>
-                      <p>Salesman</p>
-                    </div>
-                    <div class="boxContent color1"> <a href="mailto:your.email@little-neko.com">j.newsom@ashley.com</a>
-                      <ul class="socialNetwork mt15">
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Tumblr"><i class="icon-tumblr-1 iconRounded"></i></a></li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
-                <div class="col-sm-4">
-                  <article>
-                    <div><img src="assets/team/pic3.jpg" alt="" class="img-responsive"></div>
-                    <div class="boxContent color4">
-                      <h3>Alexander Doe</h3>
-                      <p>Graphic designer</p>
-                    </div>
-                    <div class="boxContent color1"> <a href="mailto:your.email@little-neko.com">a.doe@ashley.com</a>
-                      <ul class="socialNetwork mt15">
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Twitter"><i class="icon-twitter-bird iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on YouTube"><i class="icon-youtube iconRounded"></i></a></li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
-                <div class="col-sm-4">
-                  <article>
-                    <div><img src="assets/team/pic4.jpg" alt="" class="img-responsive"></div>
-                    <div class="boxContent color4">
-                      <h3>Pamela Anderson</h3>
-                      <p>Programmer</p>
-                    </div>
-                    <div class="boxContent color1"> <a href="mailto:your.email@little-neko.com">p.anderson66@ashley.com</a>
-                      <ul class="socialNetwork mt15">
-                        <li> <a href="#" class="tips" title="" data-original-title="follow me on Facebook"><i class="icon-facebook-1 iconRounded"></i></a> </li>
-                        <li> <a href="#" class="tips" title="" data-original-title="follow me on Twitter"><i class="icon-twitter-bird iconRounded"></i></a> </li>
-                        <li> <a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a> </li>
-                        <li> <a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i> </a> </li>
-                        <li> <a href="#" class="tips" title="" data-original-title="follow me on Flickr"><i class="icon-flickr iconRounded"></i> </a> </li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div id="paralaxSlice4" data-stellar-background-ratio="0.5" >
-            <div class="maskParent">
-              <div class="paralaxMask"></div>
-
-              <div class="paralaxText">
-                <blockquote>Oops, I did it again</blockquote>
-
-              </div>
-            </div>
-          </div>
-          <section class="slice"  id="contactSlice" >
-            <div class="container">
-              <div class="row">
-
-                <div class="col-sm-12">
-                  <h1 class="noSubtitle">Contact us</h1>
-                </div>
-                
-                <div class="col-sm-4">
-                  <h4>Address:</h4>
-                  <address>
-                    Himalaya Company<br/>
-                    77 Mass. Ave., E14/E15<br/>
-                    Cambridge, MA 02139-4307 USA <br/>
-                  </address>
-                  <h4>Phone:</h4>
-                  <address>
-                    615.987.1234<br/>
-                  </address>
-                </div>
-                <form method="post" action="assets/js-plugin/neko-contact-ajax-plugin/php/form-handler.php" id="contactfrm" role="form">
-
-                  <div class="col-sm-4"> 
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter name"  title="Please enter your name (at least 2 characters)"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" title="Please enter a valid email address"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="phone">Phone</label>
-                      <input name="phone" class="form-control required digits" type="tel" id="phone" size="30" value="" placeholder="Enter email phone" title="Please enter a valid phone number (at least 10 characters)">
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label for="comments">Comments</label>
-                      <textarea name="comment" class="form-control" id="comments" cols="3" rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>
-                    </div>
-                    <fieldset class="clearfix securityCheck">
-                      <legend>Security</legend>
-                      <div class="form-group">
-                        <img src="assets/js-plugin/neko-contact-ajax-plugin/php/image.php" alt="Image verification" id="verifyImg"/>
-                        <input class="required form-control" id="verify" name="verify" type="text" >
-                      </div>
-                    </fieldset>
-                  </div>                        
-                  <div class="col-md-8 col-md-offset-4">
-                    <div class="result"></div>
-                    <button name="submit" type="submit" class="btn btn-lg" id="submit"> Submit</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </section>
+        <!-- end similar user -->
+        
           
-          <!-- call to action -->
-          <div class="container mb15">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="color1 ctaBox ">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-8">
-                        <h1>
-                          <strong>Ashley Bootstrap Website Template</strong> is perfect for simple and clean presentation of your business.
-                        </h1>
-
-                      </div>
-                      <div class="col-md-4">
-                        <a class="btn btn-lg" title="" href="https://wrapbootstrap.com/theme/ashley-one-page-parallax-bootstrap-3-WB0R11207" target="blank">
-                          <i class="icon-flash"></i> purchase now
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- call to action -->
-
+          <% else %>
+          <p>Looks like something went wrong. Sorry! <a href="/">Head back</a></p>
           <% end %>
 
           <!-- content -->
-          <!-- footer -->
-          <footer class="color4">
-            <section id="mainFooter">
-              <div class="container" id="footer">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="footerWidget">
-                      <img src="assets/neko-logo.png" alt="latest Little Neko news" id="footerLogo">
-                      <p><a href="http://www.little-neko.com" title="Little Neko, website template creation">Little Neko</a> is a web design and development studio. We build responsive HTML5 and CSS3 templates, integrating best web design practises and up-to-date web technologies to create great user experiences. We love what we do and we hope you too ! </p>
-                    </div>
-                  </div>
 
-
-                  <div class="col-sm-4">
-                    <div class="footerWidget">
-                      <h3>Little NEKO</h3>
-                      <address>
-                        <p> <i class="icon-location"></i>&nbsp;77 Mass. Ave., E14/E15<br>
-                          Cambridge, MA 02139-4307 USA <br>
-                          <i class="icon-phone"></i>&nbsp;615.987.1234 <br>
-                          <i class="icon-mail-alt"></i>&nbsp;<a href="mailto:little@little-neko.com">little@little-neko.com</a>
-                        </p>
-                      </address>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="footerWidget">
-                      <h3>We're social</h3>
-                      <ul class="socialNetwork pull-right">
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
-                        <li><a href="https://twitter.com/LIttleNeko1" class="tips" title="" data-original-title="follow me on Twitter" target="_blank"><i class="icon-twitter-bird iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Google+"><i class="icon-gplus-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Linkedin"><i class="icon-linkedin-1 iconRounded"></i></a></li>
-                        <li><a href="#" class="tips" title="" data-original-title="follow me on Dribble"><i class="icon-dribbble iconRounded"></i></a></li>
-                      </ul>     
-                      
-                    </div>
-                  </div>
-
-
-
-
-                </div>
-              </div>
-            </section>
-          </footer>
-          <section  id="footerRights">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-12 text-center">
-                  <p>Copyright © 2012 <a href="http://www.little-neko.com" target="blank">Little NEKO</a> / All rights reserved.</p>
-                </div>
-
-              </div>
-            </div>
-          </section>
-          <!-- End footer -->
         </div>
         <!-- global wrapper -->
     <!-- End Document 
     ================================================== -->
-    <script type="text/javascript" src="assets/js-plugin/respond/respond.min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min.js"></script>
-    <!-- third party plugins  -->
-    <script type="text/javascript" src="assets/bootstrap.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/easing/jquery.easing.1.3.js"></script>
 
-    <script type="text/javascript" src="assets/jquery.flexslider-min.js"></script>
-
-    <script type="text/javascript" src="assets/js-plugin/isotope/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/neko-contact-ajax-plugin/js/jquery.form.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/parallax/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/parallax/js/jquery.localscroll-1.2.7-min.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/parallax/js/jquery.stellar.min.js"></script>
-    <!-- <script type="text/javascript" src="assets/js-plugin/smoothscroll/SmoothScroll.js"></script> -->
-    <script type="text/javascript" src="assets/js-plugin/pageSlide/jquery.pageslide-custom.js"></script>
-    <script type="text/javascript" src="assets/js-plugin/jquery.sharrre-1.3.4/jquery.sharrre-1.3.4.min.js"></script>
-
-    <script type="text/javascript" src="assets/js-plugin/owl.carousel/owl-carousel/owl.carousel.min.js"></script>
-
-
-    <!-- Custom  -->
-    <script type="text/javascript" src="assets/custom.js"></script>
     <script type="text/javascript">
       var height = $(window).height();
 
@@ -690,8 +245,10 @@
 
       }, 2000);
 
+    $(document).ready(function(){
+      $('.first_rec').hide();
+      $('.submit').hide();
+    });
+
     </script>
 
-
-  </body>
-  </html>
