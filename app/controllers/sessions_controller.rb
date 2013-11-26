@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
   def destroy
     session.clear
 
-    redirect_to root_url, notice: "logged out"
+    redirect_to '/', notice: "logged out"
   end
 
 
