@@ -18,6 +18,7 @@ before_action :set_user_from_session, :only => [:index, :create]
       Kmeans.distance(@user.scores, user.scores)
     end
 
+    # there are thousands of users who share the exact same score footprint -- it makes sense to find all of them when looking for active projects
     @ranked_active_projects = Hash.new(0)
     ks_users_in_cluster.each do |user|
       actives = user.ks_projects.select { |p| p.still_active? }
@@ -31,7 +32,7 @@ before_action :set_user_from_session, :only => [:index, :create]
     end
     @array = @ranked_active_projects.sort_by { |k,v| v }.reverse
 
-
+    @random = KsProject.random_active
 
     # @project = @ranked_active_projects.sample
     # @rec = Recommendation.new(:user => @user, :ks_project => @project)

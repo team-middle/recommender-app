@@ -464,12 +464,12 @@ $(document).ready(function() {
 
                 $('.mediaHover', $this).height($('.imgWrapper', $this).height());   
 
-                $('.mask', this).css('height', $('.imgWrapper', this).height());
+                $('.mask', this).css('height', $('.imgWrapper', this).height()/3.5);
                 $('.mask', this).css('width', $('.imgWrapper', this).width());
                 $('.mask', this).css('margin-top', $('.imgWrapper', this).height());
 
 
-                $('.mask', this).stop(1).show().css('margin-top', $('.imgWrapper', this).height()).animate({marginTop: 0},200, function() {
+                $('.mask', this).stop(1).show().css('margin-top', $('.imgWrapper', this).height()).animate({marginTop: fromTop*2 },200, function() {
 
                     $('.iconLinks', $this).css('display', 'block');
                     if(Modernizr.csstransitions) {

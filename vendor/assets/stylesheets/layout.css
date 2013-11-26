@@ -41,6 +41,12 @@ Description: layout styles
 
 }
 
+.rec-image {
+	border: 5px solid #FFF;
+	border-radius: 20px;
+	margin-bottom: 15px;
+}
+
 .container .jumbotron{border-radius: 0;}
 .jumbotron {font-size: 16px;}
 .jumbotron h1 {text-align: left;}
@@ -389,6 +395,10 @@ hr {
 .hero-unit blockquote {
 	font-family:Georgia, "Times New Roman", Times, serif;
 	font-style: italic;
+}
+
+p.project-description {
+	font-size: 1.2em;
 }
 
 /*** MEDIA QUERIES ***/

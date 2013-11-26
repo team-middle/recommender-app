@@ -98,11 +98,11 @@
                     <h2>...tailored specifically to you.</h2>
                   </li>
                   <li>
-                    <h2>The only one of its kind</h2>
+                    <h2>The only one of its kind.</h2>
                   </li>
                 </ul>
               </div> 
-              <a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1"></i>Login with Facebook</a>
+
             </div>
           </div>
         </section>
@@ -115,14 +115,27 @@
             <div class="row">
               <div class="col-xs-12">
                 <h1>Recommendations for you</h1>
-                <h2 class="subTitle">Here's a few projects we think you might be interested in</h2>
+                <h2 class="subTitle">Here's a few projects we think you might be interested in backing</h2>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4 col-sm-6 ">
+              <div class="col-md-4 col-sm-6 imgHover">
                 <article class="boxFeature-2">
-                  <section class="imgWrapper"><img src="<%= @array[0][0].image_url %>" class="img-responsive"></section>
-                  <h2><%= link_to @array[0][0].title %></h2>
+                  <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @array[0][0].url %>"><img src="<%= @array[0][0].image_url %>" target="_blank" class="img-responsive rec-image"></a></section>
+                  <div class="mediaHover">
+                    <div class="mask"></div>
+                    <div class="iconLinks"> 
+                      <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
+                        <i class="icon-picture iconRounded iconBig"></i>
+                        <span><%= @array[0][0].backer_count %> backers!</span>
+                      </a> 
+                      <a href="assets/portfolio/zoom6.jpg" class="image-link" title="Full width image">
+                        <i class="icon-search iconRounded iconBig"></i>
+                        <span>zoom</span>
+                      </a> 
+                    </div>
+                  </div>
+                  <h2><%= link_to @array[0][0].title, "http://www.kickstarter.com" + @array[0][0].url, target: '_blank' %></h2>
                   <p class="project-description"><%= @array[0][0].description %></p>
                 </article>
               </div>
@@ -130,17 +143,20 @@
               <div class="col-md-4 col-sm-6">
                 <article class="boxFeature-2">
                   <section class="imgWrapper">
-                  <img src="<%= @array[1][0].image_url %>" class="img-responsive"></section>
-                  <h2><%= link_to @array[1][0].title %></h2>
-                  <p class="project-description"><%= @array[1][0].description %></p>
+                  <a href="http://www.kickstarter.com<%= @array[1][0].url %>" target="_blank"><img src="<%= @array[1][0].image_url %>" class="img-responsive rec-image"></a></section>
+                  <h2><%= link_to @array[1][0].title, "http://www.kickstarter.com" + @array[1][0].url, target: '_blank' %></h2>
+                  <div><p class="project-description"><%= @array[1][0].description %></p>
                 </article>
               </div>
 
               <div class="col-md-4 col-sm-6">
                 <article class="boxFeature-2">
-                  <i class="icon-th-large-outline iconBig"></i>
-                  <h2>[third (random) rec]</h2>
-                  <p>[desc]</p>
+                  <section class="imgWrapper">
+                  <a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" class="img-responsive rec-image"></a>
+                </section>
+                  <h2><%= link_to @random.title, @random.url %></h2>
+                  <p class="project-description"><%= @random.description %></p>
+
                 </article>
               </div>
 
@@ -148,11 +164,6 @@
           </div>
         </section>
         <!-- services --> 
-
-
-
-
-
 
         
         <div id="paralaxSlice5" data-stellar-background-ratio="0.5">

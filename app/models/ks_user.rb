@@ -3,6 +3,16 @@ class KsUser < ActiveRecord::Base
   has_many :ks_projects, -> { uniq }, :through => :ks_project_backers
   belongs_to :center
 
+  # to rescore the users:
+    # select your sample with KsUser.where("id < #{sample}")
+    # set category counts and scores for each user
+      # eg
+      # users.each { |u| u.set_category_counts; u.set_category_scores }
+    # (optionally, select prolific backers and/or detect and delete duplicate users)
+    # run KsUser.aggregate_points_from_table_data
+    # plug points into Kmeans.new.cluster
+    # add new centers to database with Center.add_centers(clusters_hash.keys)
+    # add centers by adding KsUser.add_centers(clusters_hash)
 
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]
 
