@@ -7,29 +7,29 @@
 
 $(document).ready(function() {   
     "use strict";
-    var $colorsHTML ='<style>.styleSwitcher {background:#fff; position:fixed; top:200px; width:155px;left:-157px;z-index:9999}' +
-    '.switcher.dark{background:#555;}' +
-    '.styleSwitcher ul li{display:inline-block;}' +
-    '.styleSwitcher ul {display:block; padding:10px; margin:0}' +
-    '.styleSwitcher ul li a {display:block; text-indent:-3000px; overflow:hidden; border:1px solid #555; width:20px; height:20px; margin:0 5px 5px 0;}' +
-    '.styleSwitcher h1 {padding:0 0 0 10px;font-size:14px; text-transform:uppercase; color:#555;border:none; margin:0; text-align:left;}' +
-    '.styleSwitcher h1:after {content:none;}' +
-    '.styleSwitcher #showHideSwitcher{outline:none; width:50px; height:50px; position:absolute; right:-50px; background:#fff; top:0; font-size:24px; text-align:center; line-height:50px; color:#555;}' +
-    '</style>' +
-    '<div class="styleSwitcher">' +
-    '<a href="#" id="showHideSwitcher"><i class="icon-cog"></i></a>' +
-    '<h1>style switcher</h1><ul class="switcher">' +
-    '<li><a href="css/orange.css" style="background:#F86D18">Orange</a></li>' +
-    '<li><a href="css/yellow.css" style="background:#FFCC00">Yellow</a></li>' +
-    '<li><a href="css/sea-green.css" style="background:#3CB6B6">Sea green</a></li>' +
-    '<li><a href="css/green.css" style="background:#A4C618">Green</a></li>' +
-    '<li><a href="css/blue.css" style="background:#136597">Dark blue</a></li>' +
-    '<li><a href="css/light.css" style="background:#44BCDD">Light blue</a></li>' +
-    '<li><a href="css/pink.css" style="background:#F897F5">Pink</a></li>' +
-    '<li><a href="css/coffee.css" style="background:#A38757">Coffee</a></li>' +
-    '<li><a href="css/red.css" style="background:#E44832">Red</a></li>' +
-    '<li><a href="css/purple.css" style="background:#C44AD0">Purple</a></li>' +
-    '</ul>' +
+    // var $colorsHTML ='<style>.styleSwitcher {background:#fff; position:fixed; top:200px; width:155px;left:-157px;z-index:9999}' +
+    // '.switcher.dark{background:#555;}' +
+    // '.styleSwitcher ul li{display:inline-block;}' +
+    // '.styleSwitcher ul {display:block; padding:10px; margin:0}' +
+    // '.styleSwitcher ul li a {display:block; text-indent:-3000px; overflow:hidden; border:1px solid #555; width:20px; height:20px; margin:0 5px 5px 0;}' +
+    // '.styleSwitcher h1 {padding:0 0 0 10px;font-size:14px; text-transform:uppercase; color:#555;border:none; margin:0; text-align:left;}' +
+    // '.styleSwitcher h1:after {content:none;}' +
+    // '.styleSwitcher #showHideSwitcher{outline:none; width:50px; height:50px; position:absolute; right:-50px; background:#fff; top:0; font-size:24px; text-align:center; line-height:50px; color:#555;}' +
+    // '</style>' +
+    // '<div class="styleSwitcher">' +
+    // '<a href="#" id="showHideSwitcher"><i class="icon-cog"></i></a>' +
+    // '<h1>style switcher</h1><ul class="switcher">' +
+    // '<li><a href="css/orange.css" style="background:#F86D18">Orange</a></li>' +
+    // '<li><a href="css/yellow.css" style="background:#FFCC00">Yellow</a></li>' +
+    // '<li><a href="css/sea-green.css" style="background:#3CB6B6">Sea green</a></li>' +
+    // '<li><a href="css/green.css" style="background:#A4C618">Green</a></li>' +
+    // '<li><a href="css/blue.css" style="background:#136597">Dark blue</a></li>' +
+    // '<li><a href="css/light.css" style="background:#44BCDD">Light blue</a></li>' +
+    // '<li><a href="css/pink.css" style="background:#F897F5">Pink</a></li>' +
+    // '<li><a href="css/coffee.css" style="background:#A38757">Coffee</a></li>' +
+    // '<li><a href="css/red.css" style="background:#E44832">Red</a></li>' +
+    // '<li><a href="css/purple.css" style="background:#C44AD0">Purple</a></li>' +
+    // '</ul>' +
     /*'<ul class="switcher dark">' +
     '<li><a href="css/dark-orange.css" style="background:#F86D18">Dark Orange</a></li>' +
     '<li><a href="css/dark-yellow.css" style="background:#FFCC00">Dark Yellow</a></li>' +
@@ -44,7 +44,7 @@ $(document).ready(function() {
     '</ul>' +*/
     '</div>'; 
 
-    $("body").append($colorsHTML);  
+    // $("body").append($colorsHTML);  
 
     var s = document.createElement("script");
     s.type = "text/javascript";

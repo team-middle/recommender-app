@@ -35,6 +35,12 @@ Description: layout styles
 .btn:active, .btn.active{
 -webkit-box-shadow:none;box-shadow:none
 }
+
+.recommendations {
+	height: 100vh;
+
+}
+
 .container .jumbotron{border-radius: 0;}
 .jumbotron {font-size: 16px;}
 .jumbotron h1 {text-align: left;}
@@ -528,7 +534,7 @@ hr {
 /* HEADER
 ================================================== */
 #mainHeader{background:#eee;}
-.navbar-brand{padding-top:30px;padding-left: 0;}
+.navbar-brand{padding-top:10px;padding-left: 0;}
 
 
 .fixedHeader {
@@ -600,7 +606,7 @@ hr {
 	.navbar-nav > li > a {
 		padding-top:0;
 		padding-bottom:0;
-		height:88px;
+		height:40px;
 	}
 }
 
@@ -616,7 +622,7 @@ hr {
 ================================================== */
 body#fullScreen {padding-top: 0}
 body#fullScreen #mainHeader{display:none;}
-#home{padding-top:44px;}
+#home{padding-top:1px;}
 #mapWrapper{ height:350px; }
 
 #homeFullScreen {
@@ -636,7 +642,7 @@ body#fullScreen #mainHeader{display:none;}
 	text-align:center;
 	margin:auto;
 }
-.btn.homeBtn {position:relative; background:rgba(255,255,255,0.25);}
+.btn.homeBtn {position:relative; background:rgba(255,255,255,0.25); color: white;}
 
 #logoBig img{width:300px; margin:auto; position: relative}
 #homeFullScreen #flexHome {margin: 0;}
@@ -712,7 +718,11 @@ margin-bottom:-44px;
 	display: inline-block;
 }
 #flexHome h1:after  {content:''}
-#flexHome h2 {text-align:left; display: inline-block;}
+#flexHome h2 {
+	text-align:left; 
+	display: inline-block;
+	font-size: 2.4em;
+}
 .flexslider .slides > li {height:110px;}
 
 .flex-control-nav{position:static; margin-top:22px;}

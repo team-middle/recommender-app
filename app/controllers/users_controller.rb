@@ -25,13 +25,12 @@ class UsersController < ApplicationController
     else   
     end
 
-
-    if @user.save
-      # render :"recommendations/index"
-      redirect_to recommendations_path
-    else
-      render :index, notice: "error"
-    end
+    redirect_to recommendations_path
+    # if @user.save
+    #   # render :"recommendations/index"
+    # else
+    #   render :index, notice: "error"
+    # end
   end
 
   private

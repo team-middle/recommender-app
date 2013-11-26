@@ -1,13 +1,13 @@
 RecommenderApp::Application.routes.draw do
 
-  resources :recommendations
+  # resources :recommendations
 
   root 'sessions#index'
 
   get '/test' => 'users#test'
 
   get '/about' => 'admin#about', :as => :about
-  #get '/auth/facebook' => 'sessions#create', :as => :login
+  # get '/auth/facebook' => 'sessions#create', :as => :login
   get '/sessions' => 'sessions#index'
   get '/sessions/page' => 'sessions#page'
   get '/sessions/show' => 'sessions#show'
@@ -22,7 +22,10 @@ RecommenderApp::Application.routes.draw do
   post '/users/adjust_score' => 'users#adjust_score'
 
   get '/auth/facebook/callback' => 'sessions#create'
+  get '/sessions/create' => 'sessions#create'
   get 'auth/failure' => 'sessions#index'
+
+  get '/recommendations' => 'recommendations#create', :as => :recommendations
 
   resources :users
 
