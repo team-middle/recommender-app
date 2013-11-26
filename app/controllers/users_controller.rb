@@ -2,13 +2,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def adjust_score
-    raise params.inspect
-    # set_user_from_session
+    set_user_from_session
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
-    # @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
-    # @user.assign_center
+    @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
+    @user.assign_center
+    message = { message: 'success' }
+    render :json => message
     # redirect_to recommendations_path
   end
   

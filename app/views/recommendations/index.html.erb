@@ -68,11 +68,11 @@
             <div class="row">
               <div class="col-xs-12">
                 <h1>Recommendations for you</h1>
-                <h2 class="subTitle">Here's a few projects we think you might be interested in backing</h2>
+                <h2 class="subTitle">Here's a few projects we think you might be interested in backing -- <%= @user.scores %></h2>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4 col-sm-6 imgHover">
+              <div class="col-md-4 col-sm-6 first-column">
                 <article class="boxFeature-2">
                   <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @array[0][0].url %>"><img src="<%= @array[0][0].image_url %>" target="_blank" class="img-responsive rec-image"></a></section>
                   <div class="mediaHover">
@@ -93,7 +93,7 @@
                 </article>
               </div>
 
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-4 col-sm-6 second-column">
                 <article class="boxFeature-2">
                   <section class="imgWrapper">
                   <a href="http://www.kickstarter.com<%= @array[1][0].url %>" target="_blank"><img src="<%= @array[1][0].image_url %>" class="img-responsive rec-image"></a></section>
@@ -102,7 +102,7 @@
                 </article>
               </div>
 
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-4 col-sm-6 second-column">
                 <article class="boxFeature-2">
                   <section class="imgWrapper">
                   <a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" class="img-responsive rec-image"></a>
@@ -115,13 +115,13 @@
               </div>
               <!-- descriptions --> 
               
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 first-column">
               <p class="project-description">"<%= @array[0][0].description %>"</p>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6 second-column">
               <p class="project-description">"<%= @array[1][0].description %>"</p>
             </div>
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-4 col-sm-6 third-column">
               <p class="project-description">"<%= @random.description %>"</p>
             </div>
               
@@ -129,7 +129,7 @@
               </div>
 
               <!-- ratings -->
-              <div class="col-sm-4 thumbs" align="center">
+              <div class="col-sm-4 thumbs first-column" align="center">
                     <%= form_tag adjust_score_path, id: 'first_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
@@ -142,7 +142,7 @@
 
 
               </div>
-              <div class="col-sm-4 thumbs" align="center">
+              <div class="col-sm-4 thumbs second-column" align="center">
                     <%= form_tag adjust_score_path, id: 'second_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
@@ -154,7 +154,7 @@
                     <% end %>
 
               </div>
-              <div class="col-sm-4 thumbs" align="center">
+              <div class="col-sm-4 thumbs third-column" align="center">
                     <%= form_tag adjust_score_path, id: 'third_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
@@ -237,15 +237,14 @@
     <!-- End Document 
     ================================================== -->
 
-
-    <script type="text/javascript">
-      var height = $(window).height();
+  <script type="text/javascript">
+    var height = $(window).height();
 
     $('html, body').animate({
 
       scrollTop: height
 
-      }, 2000);
+    }, 2000);
 
     $(document).ready(function(){
       $('input:radio').hide();
@@ -266,8 +265,13 @@
           type: "POST",
           url: $(this).attr("action") + "?&authenticity_token=" + auth_token,
           data: $(this).serialize(),
-          dataType: "script"
-        })
+          dataType: "script",
+          complete: function(returnData){
+            console.log(returnData.responseText);
+            var class = $(this).attr('class');
+            $(class).hide();
+          } 
+        });
 
         event.preventDefault();
       });
