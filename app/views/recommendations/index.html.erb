@@ -135,7 +135,7 @@
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
-                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
                     <input type="hidden" id="first_rec" name="category" value="<%= @array[0][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
@@ -148,7 +148,7 @@
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
-                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
                     <input type="hidden" id="second_rec" name="category" value="<%= @array[1][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
@@ -160,7 +160,7 @@
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
-                    <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
+                    <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
                     <input type="hidden" id="third_rec" name="category" value="<%= @array[2][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
@@ -237,6 +237,7 @@
     <!-- End Document 
     ================================================== -->
 
+
     <script type="text/javascript">
       var height = $(window).height();
 
@@ -248,10 +249,33 @@
 
     $(document).ready(function(){
       $('input:radio').hide();
-      $('input:submit').hide();
+      // $('input:submit').hide();
+
+      $('form').submit(function(event){
+        var $form = $(this);
+        var $inputs = $form.find('input');
+        var auth_token = $form.find('input[name="authenticity_token"]').val();
+
+        $inputs.each(function(i,field){
+          if($(field).attr('checked') == 'checked'){
+            id = $(field).attr('id');
+          }
+        });
+
+        $.ajax({
+          type: "POST",
+          url: $(this).attr("action") + "?&authenticity_token=" + auth_token,
+          data: $(this).serialize(),
+          dataType: "script"
+        })
+
+        event.preventDefault();
+      });
+
     });
 
     </script>
+
 
 
 
