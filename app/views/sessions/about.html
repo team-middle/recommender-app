@@ -1,0 +1,60 @@
+<h1>The Kickammmender Project</h1>
+
+<h2>The Kickammmender Project is an intelligent recommendation engine that suggests Kickstarter projects that a user might be interested in backing.</h2>
+
+<h3>Why a Recommendation Engine is needed</h3>
+
+<p>We forsee the number of crowdfunded projects and the community backing them to dramatically increase in the next couple of years. What we see now is only the baby steps of a shift to a world that is a more connected community, where if you have an interesting and innovative idea and the skills to make it happen, then you can find the resources to build it. 
+The problem with this explosive growth in the field is that it will become increasingly difficult to find the projects that interest you. Say there are a million projects that are currently active. How do you find the one you find the most intrigueing to you?</p>
+
+
+Stadium Analogy
+How the Recommendation Engine Works
+
+<!-- Imagine you are interested in backing a kickstarter project. Say there are 35 thousand projects on kickstarter and you want to find the one that you find most appealing. Currently the only way to discover projects is to look at the new projects, the most popular projects or the editors picks.
+I think this is equivalent to walking to a stadium with tens of thousands of people and trying to find people with the same interests as you. Looking at the popular pages is kind of like a camera focusing on one person and putting their face on the jumbotron so that everyone else can see them. Looking at the new projects is equivalent to hanging out by the entrance and meeting people just coming into the stadium. The editors choice 
+ -->
+
+Lets forget for a moment that computers and the web exists. Say you are at a fundraising event where 50,000 projects are looking for backers and there are 200,000 people that are looking for projects to back. Currently, the situation is extremely chaotic. It is similar to being in a football stadium with 50,000 people that have projects and are looking for your funding. The editors choice panel on kickstarter is like having a few lucky people being broadcast on the jumbotron in the stadium. The new projects panel is like hanging out by the entrance and seeing the flood new projects coming in. Its a mess.
+
+What the Kickammender recommendation engine does is transform the stadium into a skyscraper. As you enter the lobby of the building, a receptionist analyses your interests and tells you to go to room 17 on the 62nd floor. In this room is a round table with prolific kickstarter backers. All of these people have similar interests and personalities to you. The people that love theater, find comics mildly interesting, and hate technology will probably be placed at the same table. The receptionist was very good at placing people with similar interests at the same table. Some tables might have 50 people and others might only have 10 people.
+
+At the dining table, people talk about the projects that they have backed and the user takes note of the projects that have been mentioned often that are still looking for funding. These are true recommendations. They are based off of actual backers and not what the people proposing the project say. More importantly, the backers that we are listening to are the users that have shown to have similar interests to the us.
+
+Now imagine we get a chance to talk to everyone at our table and we find that we have the most similar interests to a specific user. We take note of that person so that we can keep in touch in the future. When they find any new projects that they would like to back they let us know since we will probably also find that project interesting as well.
+
+After a busy day of networking and a full stomack we take the elevator back down to the lobby, we thank the receptionist for choosing such an amazing room for you and go home. 
+
+Now imagine an engine that does all of this with a single mouse click. Welcome to the beauty of Kickammender. 
+
+
+
+<h3>Trivial Recommendation Engines</h3>
+
+<p>
+We thought about how to tackle this problem. Would you want to give recommendations based on what your friends backed? This is a pretty easy thing to implement but I dont think it works very well. Just because I may have a bunch of friends on facebook that liked fifty shades of grey does not mean that I am interested in that kind of thing. I definitely dont want to get book recommendations based on my friends liking that book. 
+</p>
+
+<h3>Our Approach</h3>
+
+<p>Our approach was more complicated but gives much better and more personalized recommendations. Imagine a dining hall with 100 prolific kickstarter backers. We look at the interests of each of the backers and arrange people with similar interests to sit at the same table. When a new user logs in to the site we look at his interests and give him a seat at a table where the people have interests similar to him. At the table the user gets assigned to, the user learns about the new projects people with similar interests have backed.</p>
+
+<h3>Giving a user a score</h3>
+<p>The first question you may ask is how we classify a persons interests. We look at the categories of all of the projects the person has backed and give them scores based on that. For example if Alex backed 6 Art projects, another 3 projects that had to do with Theater, 2 Comics, 2 Design and 1 Film then we normalize these scores and give him a 100 in Art, 50 Theater, 33 in Comics and Design and 17 in Film. What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex. 
+</p>
+
+<h3>Grouping people with similar interests</h3>
+<p>The next step is to group people with similar interests into groups or clusters. We do this by using a Machine Learning algorithm called K Means Clustering. This takes in data points and the number of groups we want and it outputs centers of the groups and the member of each group. 
+We specify the number of clusters we want and the algorithm will separate the points or in this case the users into different clusters. This visual shows how 2 dimensional datapoints are separated into 4 clusters. [http://shabal.in/visuals/kmeans/2.html](K Means Clustering gif). This shows how the algorithm works in 2 dimensions. You can imagine the axiis being how much a person likes art and the other being Technology. Kickstarter however has 13 categories. We wrote the algorithm to work in 13 dimensions. Harder to visualize but same kind of principle. 
+</p>
+
+<h3>K-Means++</h3>
+<p>One of the things we notice from this gif is that the clusters that are created are different depending on what seed values we start with. We implemented some additional logic which is called K-Means++ which was proposed in 2007 as a way to choose seed points that will let the K-Means algorithm choose better clusters. 
+
+
+We went onto kickstarter and scraped data from 5,000 users that had backed numerous projects. We saw which projects they had backed and the categories of these projects. With this information we had 5,000 data points. A rule of thumb in data science is that a good number of clusters, K = sqrt(n/2). This is from [http://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set#cite_note-1](wikipedia). This evaluates to 50 clusters. To make an intelligent selection about the 50 seeds we need, we run the K-Means++ algorithm. The machine learning algorithm is then run and we obtain 50 groups that contain kickstarter users with similar interests. When we get a new user to our app, we look at their facebook likes and map these likes to the 13 broad kickstarter categories. We then calculate the distance of the users score to each of the cluster centers. We select the nearest cluster to the user and assign that user to that group. To give a user a recommendation, we look at the active projects that other people in the users cluster have backed. We rank these in order of how many people in the certain cluster have backed it and provide it to the user. 
+</p>
+
+<h3>Getting User Feedback</h3>
+<p>We want to make these recommendations very personal to the user. As time goes by and the user uses the site more and more, we want our engine to adapt to the users needs. For each recommendation we give, we look at if the user liked it or not. When a user liked a project that is in the food category, we change his score to represent this. It would be the similar to if he liked a food on facebook. The next time he logs onto the site, he may be closer to another cluster that is more Food friendly. 
+</p>
