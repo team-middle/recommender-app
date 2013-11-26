@@ -130,38 +130,38 @@
 
               <!-- ratings -->
               <div class="col-sm-4 thumbs" align="center">
-                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+                    <%= form_tag adjust_score_path, id: 'first_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
                     <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-                    <input type="hidden" id="<%= @array[0][0].title %>" name="category" value="<%= @array[0][0].parent_category %>">
+                    <input type="hidden" id="first_rec" name="category" value="<%= @array[0][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
 
 
               </div>
               <div class="col-sm-4 thumbs" align="center">
-                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+                    <%= form_tag adjust_score_path, id: 'second_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
                     <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-                    <input type="hidden" id="<%= @array[1][0].title %>" name="category" value="<%= @array[1][0].parent_category %>">
+                    <input type="hidden" id="second_rec" name="category" value="<%= @array[1][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
 
               </div>
               <div class="col-sm-4 thumbs" align="center">
-                    <%= form_tag :controller => "users", :action => 'adjust_score' do %>
+                    <%= form_tag adjust_score_path, id: 'third_form' do %>
 
                     <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
                     <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
                     <label for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-                    <input type="hidden" id="<%= @array[2][0].title %>" name="category" value="<%= @array[2][0].parent_category %>">
+                    <input type="hidden" id="third_rec" name="category" value="<%= @array[2][0].parent_category %>">
                     <%= submit_tag %>
                     <% end %>
 
@@ -178,7 +178,7 @@
           <div class="maskParent">
             <div class="paralaxMask"></div>
             <div class="paralaxText container">
-              <blockquote class="bigTitle">Pretty cool, right?</blockquote>
+              <h1 class="">Pretty cool, right?</h1>
             </div>
           </div>
         </div>
@@ -232,6 +232,7 @@
           <!-- content -->
 
         </div>
+      </div>
         <!-- global wrapper -->
     <!-- End Document 
     ================================================== -->
@@ -246,9 +247,12 @@
       }, 2000);
 
     $(document).ready(function(){
-      $('.first_rec').hide();
-      $('.submit').hide();
+      $('input:radio').hide();
+      $('input:submit').hide();
     });
 
     </script>
+
+
+
 
