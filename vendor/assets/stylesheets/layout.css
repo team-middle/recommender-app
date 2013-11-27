@@ -655,9 +655,7 @@ body#fullScreen #mainHeader{display:none;}
 #mapWrapper{ height:350px; }
 
 #homeFullScreen {
-	/*background-image: url('paralax-blue-2.jpg');*/
 	background-image: url('big-city.jpg');
-	/*background-image: url('../images/theme-pics/paralax-1.jpg');*/
 	height:100%;
 	display:table;
 }
@@ -1071,7 +1069,7 @@ width: 60px;
         float: right !important;
     }
 
-    #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4 {
+    #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4, #paralaxSlice5, #homeFullScreen {
         background-size: 120%;
     }
 }
@@ -1080,7 +1078,7 @@ width: 60px;
         width:auto;
     }
 
-    #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4 {
+    #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4, #paralaxSlice5, #homeFullScreen {
     background-attachment: fixed;
     }
 }
