@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
     @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
     @user.assign_center
-    message = { message: 'success' }
+    message = { message: 'first-column' }
     render :json => message
     # redirect_to recommendations_path
   end
