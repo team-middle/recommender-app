@@ -36,6 +36,14 @@ Description: layout styles
 -webkit-box-shadow:none;box-shadow:none
 }
 
+#math-pic {
+	width: 65%;
+	height: 75%;
+	border: 5px solid #7DC24F;
+	border-radius: 200px;
+	margin: 15px;
+}
+
 .recommendations {
 	height: 100vh;
 
