@@ -35,9 +35,11 @@ class KsUser < ActiveRecord::Base
   end
 
   def date_joined
-    date = self.joined.split[0]
-    time_args = date.split("-")
-    joined_time = Time.new(*time_args)
+    if self.joined
+      date = self.joined.split[0]
+      time_args = date.split("-")
+      joined_time = Time.new(*time_args).strftime('%B %e, %Y')
+    end
   end
 
 
@@ -142,12 +144,59 @@ class KsUser < ActiveRecord::Base
     end
   end
 
-  def self.find_duplicates(scope)
-    users = KsUser.where("id < #{scope}")
-    users.select do |user|
-      user.id != KsUser.find_by(:url => user.url).id
+  def self.scrape_vitals(range)
+    users = KsUser.where(:id => range)
+    
+    users.each do |user|
+      url = user.url
+      user_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{url}"))
+      user.image_url = user_page.xpath("//meta[@property='og:image']/@content").text
+      user.name = user_page.xpath("//meta[@property='kickstarter:name']/@content").text
+      user.joined = user_page.xpath("//meta[@property='kickstarter:joined']/@content").text
+      user.description = user_page.xpath("//meta[@property='og:description']/@content").text
+      user.location = user_page.css("span.location").text
+      user.save
     end
   end
+
+  def self.find_duplicates(range)
+    users = KsUser.where(:id => range)
+    users.select do |user|
+      KsUser.where(:url => user.url).size > 1
+    end
+  end
+
+  def stuffzyx
+    # find all of the ks_user_ids for a given url
+    # collect all of the projects that they have backed in total
+    # check each project to see if a ks_project_backer relation has been created for the original user
+    # if not, create the record
+    # if so, move on
+    
+    dups.each do |duplicate|
+      group_of_same = KsUser.where(:url => duplicate.url)
+      orig = group_of_same.min_by { |u| u.id }
+
+      backed_projects = group_of_same.collect do |clone|
+        clone.ks_projects
+      end.flatten.uniq
+
+      backed_projects.each do |project|
+        orig.ks_projects.find_or_create_by(:url => project.url)
+      end
+
+      orig.save
+
+      group_of_same.reject! { |u| u.id == orig.id }
+
+      group_of_same.each do |clone|
+        clone.destroy
+      end
+
+    end
+
+  end
+
 
 
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user_from_session
 
   def adjust_score
     set_user_from_session
@@ -34,6 +35,14 @@ class UsersController < ApplicationController
     #   render :index, notice: "error"
     # end
   end
+
+  def show
+    @recommendations = Recommendation.where(:user => @user)
+
+  
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

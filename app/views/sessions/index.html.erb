@@ -1,4 +1,4 @@
-<body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen">
+
   <!-- Preloader -->
   <div id="preloader">
     <div id="status">
@@ -6,61 +6,6 @@
     </div>
   </div>
 	<!-- Preloader -->
-		<!-- Primary Page Layout 
-		================================================== -->
-		<!-- globalWrapper -->
-		<div id="globalWrapper" class="localscroll">
-			<div class="row">
-
-	
-			<!-- header -->
-			<header id="mainHeader" class="navbar-fixed-top" role="banner">
-				<div class="container">
-					<nav class="navbar navbar-default scrollMenu" role="navigation">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-							<a class="navbar-brand" class="" href="#homeFullScreen">Kickammender.</a> </div>
-							<div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
-								<ul class="nav navbar-nav pull-right">
-									<li class="active"><a href="#homeFullScreen">Home</a> </li>
-									<li><a href="#recommendations">Your Recs</a> </li>
-									<li><a href="#profile">Your Profile</a> </li>
-									<li><a id="logout" href="/sessions/logout">Logout</a> </li>
-									<li><a href="#about">How This Works</a> </li>
-								</ul>
-							</div>
-
-						</nav>
-					</div>
-				</header>
-				<!-- header -->
-				<!-- content -->
-				<section id="homeFullScreen" data-stellar-background-ratio="0.5">
-						<div class="maskParent">
-							<div class="paralaxMask"></div>
-							<div id="fullScreenSliderWrapper">
-								<div id="logoBig">
-									<div class="paralaxText container customTitle">Kickammender<span class="titleDot">.</span></div>
-
-									</div>
-
-								<div class="flexslider" id="flexHome">
-									<ul class="slides">
-										<li>
-											<h2>Kickstarter recommendations</h2>							
-										</li>
-										<li>
-											<h2>...tailored specifically to you.</h2>
-										</li>
-										<li>
-											<h2>The only one of its kind</h2>
-										</li>
-									</ul>
-								</div> 
-								<a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1"></i>Login with Facebook</a>
-							</div>
-						</div>
-				</section>
 
 <!-- empty div; need to have id 'paralaxSlice1' in the doc to make parallax work --> 
   <div id="paralaxSlice1" data-stellar-background-ratio="0.5"></div>
@@ -76,7 +21,10 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-4"><img id="math-pic" src="http://www2.technologyreview.com/player/07/06/19Rowe/images/3.jpg" class="img-responsive">Since Kickstarter launched four years ago, almost $1 billion has been raised by ordinary people supporting creative projects they believe in. Because of Kickstarter, we think differently about how great products get made. It's more democratic, it's more personal, it's great for both creators and consumers. But with so many projects to choose from, it can sometimes be difficult to find ones that you can really get excited about. We can help you. </div>
+							<div class="col-sm-4">
+								<h2>[some math-y picture]</h2>
+								<h3>--</h3>
+								Since Kickstarter launched four years ago, almost $1 billion has been raised by ordinary people supporting creative projects they believe in. Because of Kickstarter, we think differently about how great products get made. It's more democratic, it's more personal, it's great for both creators and consumers. But with so many projects to choose from, it can sometimes be difficult to find ones that you can get really excited about. We can help you. </div>
 							<div class="col-sm-4">
 								<h2>Step 1</h2>
 								<h3>Log in with Facebook</h3>
@@ -93,7 +41,10 @@
 								<h3>Make your recommendations better</h3>
 								<p></p>
 								<p> Once you've gotten your first recommendations, you can let us know whether you like them or not. We'll save the ones you like so you can find them later, and we'll dynamically adjust our recommendations and find you projects that you might like better.</p>
+								<br>
+								<center>
 								<p><a class="btn" href="/auth/facebook"><i class="icon-facebook-1"></i>Get started</a></p>
+							</center>
 							</div>
 						</div>
 					</div>
