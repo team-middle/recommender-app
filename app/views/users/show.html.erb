@@ -1,63 +1,30 @@
+  <header id="displayHeader" class="navbar-fixed-top" role="banner">
+    <div class="container">
+      <nav class="navbar navbar-default scrollMenu" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="#homeFullScreen">Kickammender.</a> 
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
+          <ul class="nav navbar-nav pull-right">
+            <li class="active"><a href="/">Home</a> </li>
+            <li><a href="/recommendations">Your Recs</a> </li>
+            <li><%= link_to "Your Profile", user_path(@user) %> </li>
+            <li><a id="logout" href="/sessions/logout">Logout</a> </li>
+            <li><a href="#about">How This Works</a> </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </header>
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-<p>
-  <strong>Art:</strong>
-  <%= @user.c1 %>
-</p>
-<p>
-  <strong>Comics:</strong>
-  <%= @user.c2 %>
-</p>
-<p>
-  <strong>Dance:</strong>
-  <%= @user.c3 %>
-</p>
-<p>
-  <strong>Design:</strong>
-  <%= @user.c4 %>
-</p>
-<p>
-  <strong>Fashion:</strong>
-  <%= @user.c5 %>
-</p>
-<p>
-  <strong>Film/Video:</strong>
-  <%= @user.c6 %>
-</p>
-<p>
-  <strong>Food:</strong>
-  <%= @user.c7 %>
-</p>
-<p>
-  <strong>Games:</strong>
-  <%= @user.c8 %>
-</p>
-<p>
-  <strong>Music:</strong>
-  <%= @user.c9 %>
-</p>
-<p>
-  <strong>Photography:</strong>
-  <%= @user.c10 %>
-</p>
-<p>
-  <strong>Publishing:</strong>
-  <%= @user.c11 %>
-</p>
-<p>
-  <strong>Technology:</strong>
-  <%= @user.c12 %>
-</p>
-<p>
-  <strong>Theater:</strong>
-  <%= @user.c13 %>
-</p>
-<h1>You may like:</h1>
-<% @recommend.each do |rec| %>
-  <p> <%= rec %><br>Recommendation Engine is still in progress. Coming soon!</p>
+<!-- empty div; need to have id 'paralaxSlice1' in the doc to make parallax work --> 
+  <div id="paralaxSlice1" data-stellar-background-ratio="0.5"></div>
+ 
+
+<h1>You said you were interested in the following projects:</h1>
+<% @recommendations.each do |rec| %>
+  <p> <%= rec.ks_project.title %><br></p>
 <% end %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+

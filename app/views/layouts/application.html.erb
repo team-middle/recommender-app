@@ -47,6 +47,60 @@
     <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png">
   </head>
 <body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen">
+<body>
+
+<!-- Primary Page Layout 
+================================================== -->
+<!-- globalWrapper -->
+<div id="globalWrapper" class="localscroll">
+<!-- header -->
+  <header id="mainHeader" class="navbar-fixed-top" role="banner">
+    <div class="container">
+      <nav class="navbar navbar-default scrollMenu" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="#homeFullScreen">Kickammender.</a> 
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
+          <ul class="nav navbar-nav pull-right">
+            <li class="active"><a href="#homeFullScreen">Home</a> </li>
+            <li><a href="/recommendations">Your Recs</a> </li>
+            <li><% if @user %><%= link_to "Your Profile", user_path(@user) %><% end %> </li>
+            <li><a id="logout" href="/sessions/logout">Logout</a> </li>
+            <li><a href="#about">How This Works</a> </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+<!-- header -->
+<!-- content -->
+  <section id="homeFullScreen" data-stellar-background-ratio="0.5">
+    <div class="maskParent">
+      <div class="paralaxMask"></div>
+      <div id="fullScreenSliderWrapper">
+        <div id="logoBig">
+          <div class="paralaxText container customTitle">Kickammender<span class="titleDot">.</span></div>
+        </div>
+
+        <div class="flexslider" id="flexHome">
+          <ul class="slides">
+            <li>
+              <h2>Kickstarter recommendations</h2>              
+            </li>
+            <li>
+              <h2>...tailored specifically to you.</h2>
+            </li>
+            <li>
+              <h2>The only one of its kind.</h2>
+            </li>
+          </ul>
+        </div> 
+        <a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1"></i>Login with Facebook</a>
+      </div>
+    </div>
+  </section>
 
 
 <!-- ========== end header ========== -->
