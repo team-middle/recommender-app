@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122154932) do
+ActiveRecord::Schema.define(version: 20131130195140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,14 +54,16 @@ ActiveRecord::Schema.define(version: 20131122154932) do
     t.integer "updates_count"
     t.integer "comments_count"
     t.boolean "scraped"
-    t.string  "description"
+    t.text    "description"
     t.string  "end_date"
     t.string  "image_url"
+    t.boolean "active"
   end
 
   create_table "ks_users", force: true do |t|
     t.string  "url"
     t.boolean "scraped"
+    t.integer "tech_score",        default: 0
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
     t.integer "dance_score",       default: 0
@@ -79,7 +81,7 @@ ActiveRecord::Schema.define(version: 20131122154932) do
     t.string  "image_url"
     t.string  "name"
     t.string  "joined"
-    t.string  "description"
+    t.text    "description"
     t.string  "location"
   end
 

@@ -20,9 +20,7 @@ class KsProject < ActiveRecord::Base
   end
 
   def self.random_active
-    projects = KsProject.where(:scraped => true).limit(1000) 
-    active_projects = projects.select { |p| p.still_active? }
-    active_projects.sample
+    KsProject.where(:active => true).sample
   end
 
   def ending_soon?

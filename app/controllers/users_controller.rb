@@ -4,10 +4,14 @@ class UsersController < ApplicationController
 
   def adjust_score
     set_user_from_session
+    rated_project = KsProject.find_by(:url => params[:url])
+    recommendation = Recommendation.find_or_create_by(:user => @user, :ks_project => rated_project)
+    recommendation.update(:useful => params[:feedback])
+
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
-    @user.adjust_score(params[:category].split.first.downcase, params[:feedback])
+    @user.adjust_score(rated_project.parent_category.split.first.downcase, params[:feedback])
     @user.assign_center
     message = { message: 'first-column' }
     render :json => message
@@ -38,7 +42,8 @@ class UsersController < ApplicationController
 
   def show
     @recommendations = Recommendation.where(:user => @user)
-
+    @liked_recs = @recommendations.where(:useful => true)
+    @categories = Recommendation.display_categories(@liked_recs)
   
   end
 

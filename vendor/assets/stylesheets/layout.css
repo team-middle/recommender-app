@@ -46,7 +46,15 @@ Description: layout styles
 
 .recommendations {
 	height: 100vh;
+}
 
+
+#recommendations {
+	min-height: 800px;
+}
+
+.profile-recommendation {
+	height: 400px;
 }
 
 .rec-image {
@@ -65,7 +73,31 @@ Description: layout styles
 }
 
 .thumbs {
-	padding-top: 20px;
+	border-radius: 12px;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+
+.thumbs:hover {
+	opacity: 0.5;
+}
+
+.active-recs {
+	min-height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.description, .ratings {
+	min-height: 120px;
+	padding: 5px;
+}
+
+h2.rec-title {
+	min-height: 50px;
 }
 
 .container .jumbotron{border-radius: 0;}
@@ -680,6 +712,9 @@ body#fullScreen #mainHeader{display:none;}
 }
 .btn.homeBtn {position:relative; background:rgba(255,255,255,0.25); color: white;}
 
+#logoBig {
+	padding-top: 50px;
+}
 #logoBig img{width:300px; margin:auto; position: relative}
 #homeFullScreen #flexHome {margin: 0;}
 #homeFullScreen #flexHome h1, #homeFullScreen #flexHome .flex-control-nav{text-align: center; margin-bottom: 44px;}

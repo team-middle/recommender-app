@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <title>The Kickammender -- An Intelligent Recommendation Engine for Kickstarter</title>
     <meta name="description" content="Kickammender is an intelligent recommendation engine for potential Kickstarter backers.">
-    <meta name="author" content="Little NEKO">
+    <meta name="author" content="jnoconor and mpolycar">
     <!-- Mobile Specific Metas
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -64,9 +64,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
           <ul class="nav navbar-nav pull-right">
             <li class="active"><a href="#homeFullScreen">Home</a> </li>
-            <li><a href="/recommendations">Your Recs</a> </li>
-            <li><% if @user %><%= link_to "Your Profile", user_path(@user) %><% end %> </li>
-            <li><a id="logout" href="/sessions/logout">Logout</a> </li>
+            <li><% if @user %><a href="/recommendations">Your Recs</a> </li>
+            <li><%= link_to "Your Profile", user_path(@user) %> </li>
+            <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
             <li><a href="#about">How This Works</a> </li>
           </ul>
         </div>
@@ -97,7 +97,7 @@
             </li>
           </ul>
         </div> 
-        <a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1"></i>Login with Facebook</a>
+        <% unless @user %><a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1"></i>Login with Facebook</a><% end %>
       </div>
     </div>
   </section>
