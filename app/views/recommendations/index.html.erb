@@ -6,7 +6,7 @@
 </div>
 <!-- Preloader -->
 <!-- recommendations -->
-  <% if @array %><!-- hidden section until recommendations are generated -->
+  <% if @active_recs %><!-- hidden section until recommendations are generated -->
   <section id="recommendations" class="slice color4 recommendations">
     <div class="container">
       <div class="row">
@@ -15,17 +15,18 @@
           <h2 class="subTitle">Here's a few projects we think you might be interested in backing -- <%= @user.scores %></h2>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 first-column">
+      <div class="row active-recs">
+        <% @active_recs.take(2).each_with_index do |rec, i| %>
+        <div class="col-md-4 col-sm-6 column-<%=i%>">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @array[0][0].url %>"><img src="<%= @array[0][0].image_url %>" target="_blank" class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>"><img src="<%= rec.ks_project.image_url %>" target="_blank" class="img-responsive rec-image"></a>
             </section>
             <div class="mediaHover">
               <div class="mask"></div>
               <div class="iconLinks"> 
                 <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
                   <i class="icon-picture iconRounded iconBig"></i>
-                  <span><%= @array[0][0].backer_count %> backers!</span>
+                  <span><%= rec.ks_project.backer_count %> backers!</span>
                 </a> 
                 <a href="assets/portfolio/zoom6.jpg" class="image-link" title="Full width image">
                   <i class="icon-search iconRounded iconBig"></i>
@@ -33,79 +34,49 @@
                 </a> 
               </div>
             </div>
-            <h2><%= link_to @array[0][0].title, "http://www.kickstarter.com" + @array[0][0].url, target: '_blank' %></h2>
-            
+            <h2 class="rec-title"><%= link_to rec.ks_project.title, "http://www.kickstarter.com" + rec.ks_project.url, target: '_blank' %></h2>
+<!-- descriptions --> 
+            <div class="description">
+            <p class="project-description">"<%= rec.ks_project.description %>"</p>
+            </div>
+  <! -- ratings -->
+            <div class="ratings" align="center">
+            <%= form_tag adjust_score_path, id: "form-#{i}" do %>
+
+            <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
+            <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
+
+            <label class="thumbs" for="feedback_true"><a href=""><%= image_tag "thumbs-up-xxl.png", size: "40x40", class: "white-thumbs-up"%></a></label>| <label class="thumbs" for="feedback_false"><a href=""><%= image_tag "thumbs-down-xxl.png", size: "40x40", class: "white-thumbs-down" %></a></label>
+            <input type="hidden" id="first_rec" name="url" value="<%= rec.ks_project.url %>">
+            <%= submit_tag %>
+            <% end %>
+            </div>
           </article>
         </div>
-
-        <div class="col-md-4 col-sm-6 second-column">
+        <% end %>
+<!-- a random pick --> 
+        <div class="col-md-4 col-sm-6 column-3">
           <article class="boxFeature-2">
-            <section class="imgWrapper">
-            <a href="http://www.kickstarter.com<%= @array[1][0].url %>" target="_blank"><img src="<%= @array[1][0].image_url %>" class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" target="_blank" class="img-responsive rec-image"></a>
             </section>
-            <h2><%= link_to @array[1][0].title, "http://www.kickstarter.com" + @array[1][0].url, target: '_blank' %></h2>
-            
+
+            <h2 class="rec-title"><%= link_to @random.title, "http://www.kickstarter.com" + @random.url, target: '_blank' %></h2>
+            <div class="description">
+            <p class="project-description">"<%= @random.description %>"</p>
+            </div>
+            <div class="ratings" align="center">
+            <%= form_tag adjust_score_path, id: "form-3" do %>
+
+            <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
+            <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
+
+            <label class="thumbs" for="feedback_true"><a href=""><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></a></label>| <label class="thumbs" for="feedback_false"><a href=""><%= image_tag "thumbs-down-xxl.png", size: "40x40", class: "" %></a></label>
+            <input type="hidden" id="first_rec" name="url" value="<%= @random.url %>">
+            <%= submit_tag %>
+            </div>
           </article>
         </div>
-
-        <div class="col-md-4 col-sm-6 second-column">
-          <article class="boxFeature-2">
-            <section class="imgWrapper">
-            <a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" class="img-responsive rec-image"></a>
-          </section>
-            <h2><%= link_to @random.title, @random.url %></h2>
-
-          </article>
-        </div>
-        <div style="clear:both">
-        </div>
-        <!-- descriptions --> 
-        
-        <div class="col-md-4 col-sm-6 first-column">
-          <p class="project-description">"<%= @array[0][0].description %>"</p>
-        </div>
-        <div class="col-md-4 col-sm-6 second-column">
-          <p class="project-description">"<%= @array[1][0].description %>"</p>
-        </div>
-        <div class="col-md-4 col-sm-6 third-column">
-          <p class="project-description">"<%= @random.description %>"</p>
-        </div>
-
-        <!-- ratings -->
-        <div class="col-sm-4 thumbs first-column" align="center">
-          <%= form_tag adjust_score_path, id: 'first_form' do %>
-
-          <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
-          <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
-
-          <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-          <input type="hidden" id="first_rec" name="category" value="<%= @array[0][0].parent_category %>">
-          <%= submit_tag %>
-          <% end %>
-        </div>
-        <div class="col-sm-4 thumbs second-column" align="center">
-          <%= form_tag adjust_score_path, id: 'second_form' do %>
-
-          <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
-          <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
-
-          <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-          <input type="hidden" id="second_rec" name="category" value="<%= @array[1][0].parent_category %>">
-          <%= submit_tag %>
-          <% end %>
-
-        </div>
-        <div class="col-sm-4 thumbs third-column" align="center">
-          <%= form_tag adjust_score_path, id: 'third_form' do %>
-
-          <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
-          <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
-
-          <label class="thumbs" for="feedback_true"><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></label>| <label class="thumbs" for="feedback_false"><%= image_tag "thumbs-down-xxl.png", size: "40x40"%></label>
-          <input type="hidden" id="third_rec" name="category" value="<%= @array[2][0].parent_category %>">
-          <%= submit_tag %>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </section>
@@ -181,12 +152,15 @@
 
   $(document).ready(function(){
     $('input:radio').hide();
-    // $('input:submit').hide();
+    $('input:submit').hide();
 
-    $('form').submit(function(event){
+    $('form').click(function(event){
       var $form = $(this);
       var $inputs = $form.find('input');
       var auth_token = $form.find('input[name="authenticity_token"]').val();
+      $form.parent().parent().parent().fadeOut('slow', function(){
+        $(this).remove();
+      });
 
       $inputs.each(function(i,field){
         if($(field).attr('checked') == 'checked'){
@@ -200,6 +174,7 @@
         data: $(this).serialize(),
         dataType: "script",
         complete: function(returnData){
+
           console.log(returnData.responseText);
           var response = returnData.responseText;
           var html_class = response.message;
