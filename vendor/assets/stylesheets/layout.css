@@ -44,6 +44,9 @@ Description: layout styles
 	margin: 15px;
 }
 
+.icon-star {
+	color: #7DC24F;
+}
 .recommendations {
 	height: 100vh;
 }

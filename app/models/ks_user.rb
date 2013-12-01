@@ -161,6 +161,19 @@ class KsUser < ActiveRecord::Base
     end
   end
 
+  def self.scrape_bio(range)
+    users = KsUser.where(:id => range)
+    
+    users.each do |user|
+      bio_url = "http://www.kickstarter.com/profiles/" + user.url.split("/").last + "/bio"
+
+      bio_page = Nokogiri::HTML(open(bio_url))
+      user.bio = bio_page.css("div#profile-bio-full p").text
+      user.save
+    end
+  end
+
+
   def self.find_duplicates(range)
     users = KsUser.where(:id => range)
     users.select do |user|

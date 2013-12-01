@@ -59,11 +59,11 @@
       <nav class="navbar navbar-default scrollMenu" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="#homeFullScreen">Kickammender.</a> 
+          <a class="navbar-brand" href="/">Kickammender.</a> 
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
           <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="#homeFullScreen">Home</a> </li>
+            <li class="active"><a href="/">Home</a> </li>
             <li><% if @user %><a href="/recommendations">Your Recs</a> </li>
             <li><%= link_to "Your Profile", user_path(@user) %> </li>
             <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
@@ -76,10 +76,13 @@
   </header>
 <!-- header -->
 <!-- content -->
+
   <section id="homeFullScreen" data-stellar-background-ratio="0.5">
+
     <div class="maskParent">
       <div class="paralaxMask"></div>
       <div id="fullScreenSliderWrapper">
+
         <div id="logoBig">
           <div class="paralaxText container customTitle">Kickammender<span class="titleDot">.</span></div>
         </div>
@@ -127,6 +130,19 @@
           <div class="footerWidget">
 
             <h3>Think it's cool?</h3>
+            <!-- AddThis Button BEGIN -->
+              <div class="addthis_toolbox addthis_default_style addthis_32x32_style" addthis:url="http://www.kickammender.com">
+              <ul class="socialNetwork">
+              <li><a class="addthis_button_facebook tips" data-original-title="share this on Facebook"></a></li>
+              <li><a class="addthis_button_twitter tips" data-original-title="share this on Twitter"></a></li>
+              <li><a class="addthis_button_hackernews tips" data-original-title="share this on Hacker News"></a></li>
+              <li><a class="addthis_button_reddit tips" data-original-title="share this on Reddit"></a></li>
+
+              </div>
+              <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+              <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529a94c531794907"></script>
+              <!-- AddThis Button END -->
+<% if false %>
             <ul class="socialNetwork pull-right">
               <li><a href="#" class="tips" title="" data-original-title="share this on Facebook"><i class="icon-facebook-1 iconRounded"></i></a></li>
               <li><a href="https://twitter.com/LIttleNeko1" class="tips" title="" data-original-title="share this on Twitter" target="_blank"><i class="icon-twitter-bird iconRounded"></i></a></li>
@@ -134,7 +150,7 @@
               <li><a href="#" class="tips" title="" data-original-title="share this on Reddit"><i class="icon-linkedin-1 iconRounded"></i></a></li>
               <li><a href="#" class="tips" title="" data-original-title="share this on HackerNews"><i class="icon-dribbble iconRounded"></i></a></li>
             </ul>     
-            
+<% end %>            
           </div>
         </div>
 
