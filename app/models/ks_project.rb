@@ -28,13 +28,8 @@ class KsProject < ActiveRecord::Base
   end
 
   def add_user(user)
-    # if !KsProjectBacker.where(:ks_project => self).where(:ks_user => user).empty?
-    #   binding.pry
-    #   return
-    # else
       self.ks_project_backers.find_or_create_by(:ks_user => user)
       self.save
-    # end
   end
 
   def self.scrape_without_users(projects)
@@ -117,9 +112,3 @@ class KsProject < ActiveRecord::Base
   end
 
 end
-
-#Ruby
-# 0year, 1month, 2day, 3hour, 4min, 5sec, 6utc_offset
-#KS 
-# "Sun, 28 Oct 2012 06:59:00 -0000"
-#0weekday/junk, 1day, 2month, 3year, 4houretc, 5utc

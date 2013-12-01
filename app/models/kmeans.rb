@@ -39,7 +39,6 @@ class Kmeans
   end
 
   def self.distance(center, point)
-    # (center[0] - point[0])**2 + (center[1] - point[1])**2
     sum = 0
     (0..center.count-1).each do |d|
       sum += (center[d] - point[d])**2
@@ -48,7 +47,6 @@ class Kmeans
   end
 
   def distance(center, point)
-    # (center[0] - point[0])**2 + (center[1] - point[1])**2
     sum = 0
     (0..center.count-1).each do |d|
       sum += (center[d] - point[d])**2
@@ -65,19 +63,16 @@ class Kmeans
       new_assignment[new_cluster] << point
     end
     self.assignments = new_assignment
-   #old_assignments.sort != assignments.sort #changed?
   end
 
 
   def cluster(k,points,max_iters)
     seeds = kmplusplus(k,points)
     self.assignments = {}
-   #points.uniq.shuffle.take(k).each do |center|
     seeds.each do |seed|
       self.assignments[seed] = []
     end
     points.each do |point|
-   #  self.assignments[assignments.keys.sample] << point
       closest_seed = seeds.min_by do |seed|
         distance(seed, point)
       end

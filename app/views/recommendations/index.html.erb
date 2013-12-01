@@ -172,13 +172,6 @@
         }
       });
 
-      // $inputs.each(function(i,field){
-      //   if($(field).attr('checked') == 'checked'){
-      //     id = $(field).attr('id');
-      //     console.log(id);
-      //   }
-      // });
-
       $.ajax({
         type: "POST",
         url: $form.attr("action") + "?&authenticity_token=" + auth_token,

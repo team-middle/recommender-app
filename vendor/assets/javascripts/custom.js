@@ -46,40 +46,40 @@ $(document).ready(function() {
 
     // $("body").append($colorsHTML);  
 
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.src = "assets/jquery.cookie.js";
-    $("body").append(s);  
+    // var s = document.createElement("script");
+    // s.type = "text/javascript";
+    // s.src = "assets/jquery.cookie.js";
+    // $("body").append(s);  
 
 
 
-    if($.cookie("css")) {
-        $("#colors").attr("href",$.cookie("css"));
-    }
-    $(".switcher li a").click(function() { 
+    // if($.cookie("css")) {
+    //     $("#colors").attr("href",$.cookie("css"));
+    // }
+    // $(".switcher li a").click(function() { 
 
-        $("#colors").attr("href",$(this).attr("href"));
-        $.cookie("css",$(this).attr("href"));
-        return false;
-    });
+    //     $("#colors").attr("href",$(this).attr("href"));
+    //     $.cookie("css",$(this).attr("href"));
+    //     return false;
+    // });
 
-    $('#showHideSwitcher').click(function(e) { 
-       if($('.styleSwitcher').css('left') === '-157px'){
-           $('.styleSwitcher').animate(
-            {'left':0},
-            300, 'easeOutQuart',function() {
-                // stuff to do after animation is complete
-            });
+    // $('#showHideSwitcher').click(function(e) { 
+    //    if($('.styleSwitcher').css('left') === '-157px'){
+    //        $('.styleSwitcher').animate(
+    //         {'left':0},
+    //         300, 'easeOutQuart',function() {
+    //             // stuff to do after animation is complete
+    //         });
 
-       }else{
-           $('.styleSwitcher').animate(
-            {'left':-157},
-            300, 'easeInQuart',function() {
-                // stuff to do after animation is complete
-            });
-       }
-       e.preventDefault();
-   });
+    //    }else{
+    //        $('.styleSwitcher').animate(
+    //         {'left':-157},
+    //         300, 'easeInQuart',function() {
+    //             // stuff to do after animation is complete
+    //         });
+    //    }
+   //     e.preventDefault();
+   // });
 });
 
 /*************** COLORS TO BE ERASED WHEN INSTALLING THE THEME ***********/
@@ -727,12 +727,12 @@ if($('.previewTrigger').length){
 |--------------------------------------------------------------------------
 */
 // PAGE SLIDE
-$(".portfolioSheet").pageslide({
-    direction: "left",
-    modal: true,
-    iframe: false,
-    speed: "250"
-});
+// $(".portfolioSheet").pageslide({
+//     direction: "left",
+//     modal: true,
+//     iframe: false,
+//     speed: "250"
+// });
 
 
 /*

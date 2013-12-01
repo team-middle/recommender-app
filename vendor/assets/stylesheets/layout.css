@@ -114,6 +114,9 @@ h2.rec-title {
 	min-height: 50px;
 }
 
+.gen-more {
+	margin-bottom: 50px;
+}
 
 .container .jumbotron{border-radius: 0;}
 .jumbotron {font-size: 16px;}

@@ -15,12 +15,13 @@ class UsersController < ApplicationController
     @user.assign_center
     message = { message: 'first-column' }
     render :json => message
-    # redirect_to recommendations_path
   end
 
   def delete_saved
     rec = @user.recommendations.find(params[:rec_id])
     rec.update(:useful => nil)
+
+    render :json => "success"
   end
   
   def follow
@@ -29,7 +30,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    # session[:access_token] = FacebookOAuth.get_access_token(params[:code])
     api = Koala::Facebook::API.new(session[:access_token])
     user_profile = api.get_object('me')
     session[:username] = user_profile["username"]
@@ -43,11 +43,6 @@ class UsersController < ApplicationController
     end
 
     redirect_to recommendations_path
-    # if @user.save
-    #   # render :"recommendations/index"
-    # else
-    #   render :index, notice: "error"
-    # end
   end
 
   def show

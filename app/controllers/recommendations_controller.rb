@@ -20,7 +20,7 @@ before_action :set_user_from_session, :only => [:index, :create]
       @most_similar_image_url = "http://www.kickstarter.com" + @most_similar.image_url
     end
 
-    # there are thousands of users who share the exact same score footprint -- it makes sense to find all of them when looking for active projects
+    # there are many users who share the exact same score footprint -- it makes sense to find all of them when looking for active projects
     @ranked_active_projects = Hash.new(0)
     ks_users_in_cluster.each do |user|
       actives = user.ks_projects.where(:active => true)
@@ -38,13 +38,6 @@ before_action :set_user_from_session, :only => [:index, :create]
     @active_recs = Recommendation.where(:user => @user, :useful => nil)
 
     @random = KsProject.random_active
-    raise
-
-    # @project = @ranked_active_projects.sample
-    # @rec = Recommendation.new(:user => @user, :ks_project => @project)
-
-    # find a ks_user in the database with the same center as @user
-    # find a project that ks_user has backed, and set that project -- rec.ks_project = project
 
     # TODO: implement with AJAX
     render :index

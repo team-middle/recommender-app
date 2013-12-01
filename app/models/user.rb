@@ -8,12 +8,6 @@ class User < ActiveRecord::Base
 
   attr_reader :counts
 
-  # def self.from_omniauth(auth)
-  #   raise
-  #   where(auth.slice(:provider, :username)).find_or_create_by(:username => session[:username])
-  # end
-
-
     def user_data_as_coordinate
       array = (1..13).collect do |i|
         category = CATEGORIES[i-1]
@@ -27,7 +21,7 @@ class User < ActiveRecord::Base
     # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
 
       old_score = self.send("#{category}_score")
-      feedback == "true" ? new_score = old_score + 10 : new_score = old_score - 10
+      feedback == "true" ? new_score = old_score + 20 : new_score = old_score - 20
       new_score = 100 if new_score > 100
       new_score = 0 if new_score < 0
       self.update("#{category}_score" => new_score)

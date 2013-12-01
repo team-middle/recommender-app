@@ -2,12 +2,6 @@ class SessionsController < ApplicationController
 
   def index
     @user = current_user
-
-  end
-
-  def redirect
-
-    redirect_to '/users/create'
   end
 
   def create
@@ -26,50 +20,10 @@ class SessionsController < ApplicationController
 
     redirect_to create_user_path
   end
-  # def create
-  #   raise
-  #   user = User.from_omniauth(env["omniauth.auth"])
-  #   session[:username] = user.username
-  #   redirect_to root_url
-
-  # end
-
 
   def destroy
     session.clear
-
     redirect_to '/', notice: "logged out"
   end
-
-
-  def show
-    if params[:code]
-      session[:access_token] = FacebookOAuth.get_access_token(params[:code])
-    end
-
-    @api = Koala::Facebook::API.new(session[:access_token])
-
-    begin 
-      @user_profile = @api.get_object('me')
-    rescue
-      redirect_to '/sessions', notice: "error" and return
-    end
-  
-    @friends = @api.get_connection(@user_profile["id"], "friends")
-    @facebook_cookies = FacebookOAuth.get_user_info_from_cookies(cookies)
-    # @graph = Koala::Facebook::GraphAPI.new(@facebook_cookies["access_token"])
-    @likes = @api.get_connections("me","likes")
-
-    #render :page
-    session[:username] = @user_profile["username"]
-
-    @user = User.find_or_create_by(:username => session[:username])
-    @user.create_scores(@likes)
-    render :"recommendations/index"
-
-  end
-
-
-
 
 end

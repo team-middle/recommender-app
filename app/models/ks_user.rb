@@ -181,7 +181,7 @@ class KsUser < ActiveRecord::Base
     end
   end
 
-  def stuffzyx
+  def clean_duplicates(dups)
     # find all of the ks_user_ids for a given url
     # collect all of the projects that they have backed in total
     # check each project to see if a ks_project_backer relation has been created for the original user
@@ -199,19 +199,14 @@ class KsUser < ActiveRecord::Base
       backed_projects.each do |project|
         orig.ks_projects.find_or_create_by(:url => project.url)
       end
-
       orig.save
 
       group_of_same.reject! { |u| u.id == orig.id }
-
       group_of_same.each do |clone|
         clone.destroy
       end
-
     end
 
   end
-
-
 
 end
