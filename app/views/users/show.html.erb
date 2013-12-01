@@ -52,7 +52,10 @@
                       <%= rec.ks_project.description %><br>
                     </p>
                   </section>
-                  <%= link_to "delete", delete_save_path %>
+                  <%= form_tag delete_saved_path do %>
+                  <%= hidden_field_tag "rec_id", rec.id, {:id => rec.id} %>
+                  <%= submit_tag "delete", class: "btn-link delete-submit"%>
+                  <% end %>
                 </article>
                 <% end %>
 
@@ -104,3 +107,29 @@
             </div>
           </section>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('.delete-submit').click(function(event){
+      var $form = $(this).parent();
+
+      var auth_token = $form.find('input[name="authenticity_token"]').val();
+      $form.parent().fadeOut('slow', function(){
+        $(this).remove();
+      });
+
+      $.ajax({
+        type: "POST",
+        url: $form.attr("action") + "?&authenticity_token=" + auth_token,
+        data: $form.serialize(),
+        dataType: "script",
+        complete: function(returnData){
+
+        } 
+      });
+
+      event.preventDefault();
+    });
+
+  });
+</script>

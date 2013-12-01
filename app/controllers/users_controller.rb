@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :set_user_from_session, only: [:adjust_score, :follow, :show]
+  before_action :set_user_from_session, only: [:adjust_score, :follow, :show, :delete_saved]
 
   def adjust_score
     set_user_from_session
@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     message = { message: 'first-column' }
     render :json => message
     # redirect_to recommendations_path
+  end
+
+  def delete_saved
+    rec = @user.recommendations.find(params[:rec_id])
+    rec.update(:useful => nil)
   end
   
   def follow
