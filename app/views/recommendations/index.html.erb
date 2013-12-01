@@ -21,19 +21,6 @@
           <article class="boxFeature-2">
             <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>"><img src="<%= rec.ks_project.image_url %>" target="_blank" class="img-responsive rec-image"></a>
             </section>
-            <div class="mediaHover">
-              <div class="mask"></div>
-              <div class="iconLinks"> 
-                <a href="portfolio-project-fullwidth-image.html" title="link" class="sizer portfolioSheet">
-                  <i class="icon-picture iconRounded iconBig"></i>
-                  <span><%= rec.ks_project.backer_count %> backers!</span>
-                </a> 
-                <a href="assets/portfolio/zoom6.jpg" class="image-link" title="Full width image">
-                  <i class="icon-search iconRounded iconBig"></i>
-                  <span>zoom</span>
-                </a> 
-              </div>
-            </div>
             <h2 class="rec-title"><%= link_to rec.ks_project.title, "http://www.kickstarter.com" + rec.ks_project.url, target: '_blank' %></h2>
 <!-- descriptions --> 
             <div class="description">
