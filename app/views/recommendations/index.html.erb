@@ -41,14 +41,14 @@
             </div>
   <! -- ratings -->
             <div class="ratings" align="center">
-            <%= form_tag adjust_score_path, id: "form-#{i}" do %>
+            <%= form_tag adjust_score_path, id: "form-#{i}", class: "rate" do %>
 
             <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
             <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
             <label class="thumbs" for="feedback_true"><a href=""><%= image_tag "thumbs-up-xxl.png", size: "40x40", class: "white-thumbs-up"%></a></label>| <label class="thumbs" for="feedback_false"><a href=""><%= image_tag "thumbs-down-xxl.png", size: "40x40", class: "white-thumbs-down" %></a></label>
             <input type="hidden" id="first_rec" name="url" value="<%= rec.ks_project.url %>">
-            <%= submit_tag %>
+            <%= submit_tag nil, class: "hide" %>
             <% end %>
             </div>
           </article>
@@ -65,14 +65,14 @@
             <p class="project-description">"<%= @random.description %>"</p>
             </div>
             <div class="ratings" align="center">
-            <%= form_tag adjust_score_path, id: "form-3" do %>
+            <%= form_tag adjust_score_path, id: "form-3", class: "rate" do %>
 
             <%= radio_button_tag(:feedback, "true", true, class: 'first_rec') %>
             <%= radio_button_tag(:feedback, "false", false, class: 'first_rec') %>
 
             <label class="thumbs" for="feedback_true"><a href=""><%= image_tag "thumbs-up-xxl.png", size: "40x40"%></a></label>| <label class="thumbs" for="feedback_false"><a href=""><%= image_tag "thumbs-down-xxl.png", size: "40x40", class: "" %></a></label>
             <input type="hidden" id="first_rec" name="url" value="<%= @random.url %>">
-            <%= submit_tag %>
+            <%= submit_tag nil, class: "hide" %>
             </div>
           </article>
         </div>
@@ -119,13 +119,20 @@
           <h3></h3>
           <p></p>
           <ul>
-            <% @most_similar.ks_projects.take(5).each do |project| %>
+            <% @most_similar.ks_projects.take(6).each do |project| %>
             <li><%= link_to project.title, project.url %></li>
             <% end %>
           </ul>
-        </div>
+      </div>
+      <div class="col-sm-6" style="height:75px"></div>
+      <div class="col-sm-6">
+        <%= form_tag follow_path do %>
+        <center><input type="submit" class="btn tips nav" data-original-title="save this user to stay up to date on what they've backed" value="follow?"></center>
+        <%= hidden_field_tag "most_similar_id", @most_similar.id %>
+        <% end %>
       </div>
     </div>
+
   </section>
   <!-- end similar user -->
 
@@ -152,9 +159,9 @@
 
   $(document).ready(function(){
     $('input:radio').hide();
-    $('input:submit').hide();
+    $('input:submit.hide').hide();
 
-    $('form').click(function(event){
+    $('form.rate').click(function(event){
       var $form = $(this);
       var $inputs = $form.find('input');
       var auth_token = $form.find('input[name="authenticity_token"]').val();

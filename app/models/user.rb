@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :recommendations
+  has_many :user_follows, :dependent => :destroy
+  has_many :ks_users, :through => :user_follows
   belongs_to :center
   
   CATEGORIES = ["art", "comics", "dance", "design", "fashion", "film", "food", "games", "music", "photography", "publishing", "technology", "theater"]

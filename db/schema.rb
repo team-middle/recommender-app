@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130195140) do
+ActiveRecord::Schema.define(version: 20131130235556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,13 @@ ActiveRecord::Schema.define(version: 20131130195140) do
 
   add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id", using: :btree
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
+
+  create_table "user_follows", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "ks_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"

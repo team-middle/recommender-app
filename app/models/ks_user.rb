@@ -1,6 +1,8 @@
 class KsUser < ActiveRecord::Base
   has_many :ks_project_backers, :dependent => :destroy
   has_many :ks_projects, -> { uniq }, :through => :ks_project_backers
+  has_many :user_follows, :dependent => :destroy
+  has_many :users, :through => :user_follows
   belongs_to :center
 
   # to rescore the users:
