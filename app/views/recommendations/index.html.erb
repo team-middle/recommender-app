@@ -102,7 +102,7 @@
 
       <div class="row">
         <div class="col-sm-6">
-          <% if @most_similar.bio %>
+          <% if !@most_similar.bio.empty? %>
           <h2>About</h2>
           <p><%= @most_similar.bio %>
           <% end %>
@@ -152,37 +152,41 @@
     $('input:radio').hide();
     $('input:submit.hide').hide();
 
-    $('form.rate').click(function(event){
-
-      var $form = $(this);
+    $('label.thumbs').click(function(event){
+      var $form = $(this).parent();
       var $inputs = $form.find('input');
       var auth_token = $form.find('input[name="authenticity_token"]').val();
-      $form.parent().parent().parent().fadeOut('slow', function(){
+      var url = $form.find('input[name="url"]').val();
+      var feedback = $(this).attr('for').split("_")[1];
+
+      $form.parents('.col-md-4').fadeOut('slow', function(){
         $(this).remove();
         var rec_count = $('.col-md-4').size();
+        var url = $('a:contains("Your Profile")').attr('href');
+
         if(rec_count == 0){
-          var gen = "<center><a href='/recommendations' class='gen-more btn'>Generate some more recommendations?</a></center>";
+          var gen = "<center><a href='/recommendations' class='gen-more btn'>Generate some more recommendations</a></center>";
+          var check = "<center><a href='" + url + "' class='btn'>Check out what you've saved</a></center>"
+          $('.active-recs').prepend(check);
           $('.active-recs').prepend(gen);
         }
       });
 
-      $inputs.each(function(i,field){
-        if($(field).attr('checked') == 'checked'){
-          id = $(field).attr('id');
-        }
-      });
+      // $inputs.each(function(i,field){
+      //   if($(field).attr('checked') == 'checked'){
+      //     id = $(field).attr('id');
+      //     console.log(id);
+      //   }
+      // });
 
       $.ajax({
         type: "POST",
-        url: $(this).attr("action") + "?&authenticity_token=" + auth_token,
-        data: $(this).serialize(),
+        url: $form.attr("action") + "?&authenticity_token=" + auth_token,
+        data: {feedback: feedback, url: url},
         dataType: "script",
         complete: function(returnData){
 
           console.log(returnData.responseText);
-          var response = returnData.responseText;
-          var html_class = response.message;
-          console.log(html_class);
 
         } 
       });
