@@ -1,30 +1,10 @@
-  <header id="displayHeader" class="navbar-fixed-top" role="banner">
-    <div class="container">
-      <nav class="navbar navbar-default scrollMenu" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="#homeFullScreen">Kickammender.</a> 
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
-          <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="/">Home</a> </li>
-            <li><a href="/recommendations">Your Recs</a> </li>
-            <li><%= link_to "Your Profile", user_path(@user) %> </li>
-            <li><a id="logout" href="/sessions/logout">Logout</a> </li>
-            <li><a href="/about">How This Works</a> </li>
-          </ul>
-        </div>
 
-      </nav>
-    </div>
-  </header>
 <!-- empty div; need to have id 'paralaxSlice1' in the doc to make parallax work --> 
-  <div id="paralaxSlice1" data-stellar-background-ratio="0.5"></div>
 
 
         <section class="slice" id="recommendations">
           <div class="container clearfix">
-            <div class="row">
+            <div class="row" id="favorites">
               <div class="col-sm-12">
                 <h1>Your Favorites</h1>
                 <h2 class="subTitle">You were interested in these projects</h2>
@@ -106,7 +86,10 @@
             </div>
           </section>
 <% end %>
+
+
 <script type="text/javascript">
+
   $(document).ready(function(){
 
     $('.delete-submit').click(function(event){
