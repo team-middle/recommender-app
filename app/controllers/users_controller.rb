@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def delete_saved
+    
+  end
+
+
   def create
     # session[:access_token] = FacebookOAuth.get_access_token(params[:code])
     api = Koala::Facebook::API.new(session[:access_token])

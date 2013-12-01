@@ -2,6 +2,10 @@ class AdminController < ApplicationController
   def index
   end
 
+  def about
+    set_user_from_session
+  end
+
   def reset
    #@user = User.find_by(:username => "Joe")
    #@point = @user.user_data_as_coordinate
@@ -50,6 +54,11 @@ class AdminController < ApplicationController
     @sample_user = KsUser.find(20)
     
   end
+
+  private
+    def set_user_from_session
+      @user = User.find_by(:username => session[:username])
+    end
 
 
 end

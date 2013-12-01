@@ -16,7 +16,7 @@ RecommenderApp::Application.routes.draw do
   get '/users/create' => 'users#create', :as => :create_user
   post '/users/adjust_score' => 'users#adjust_score', :as => :adjust_score
   post '/follow' => 'users#follow', :as => :follow
-  post '/users/delete_save' => 'users#delete_save', :as => :delete_save
+  post '/users/delete_saved' => 'users#delete_saved', :as => :delete_saved
 
   get '/admin' => 'admin#index', :as => :admin 
   get '/admin/results' => 'admin#results', :as => :results
