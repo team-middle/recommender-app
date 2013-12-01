@@ -43,6 +43,7 @@ class KsProject < ActiveRecord::Base
         puts "already scraped #{project.url}"
         next
       else
+        project_backers_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{project.url}/backers"))
         project.title = project_backers_page.xpath("//meta[@property='og:title']/@content").text
         project.creator_id = project_backers_page.xpath("//meta[@property='kickstarter:creator']/@content").text.split(/\//).last
         project.description = project_backers_page.xpath("//meta[@property='og:description']/@content").text
@@ -105,6 +106,13 @@ class KsProject < ActiveRecord::Base
         puts "there was an error"
       end
     puts "   finished scraping #{project.title}, #{project.id}"
+    end
+  end
+
+  def self.find_duplicates(range)
+    projects = KsProject.where(:id => range)
+    projects.select do |project|
+      KsProject.where(:url => project.url).size > 1
     end
   end
 

@@ -1,7 +1,7 @@
 <!-- Preloader -->
 <div id="preloader">
   <div id="status">
-    <img src="assets/loader.gif" alt=""/><h1 class="noSubtitle">Calculating your personal results across 13 dimensions...</h1>
+    <img src="assets/loader.gif" alt=""/><h1 class="noSubtitle">Generating your personal results...</h1>
   </div>
 </div>
 <!-- Preloader -->
@@ -19,7 +19,7 @@
         <% @active_recs.take(2).each_with_index do |rec, i| %>
         <div class="col-md-4 col-sm-6 column-<%=i%>">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>"><img src="<%= rec.ks_project.image_url %>" target="_blank" class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>" target="_blank"><img src="<%= rec.ks_project.image_url %>" class="img-responsive rec-image"></a>
             </section>
             <h2 class="rec-title"><%= link_to rec.ks_project.title, "http://www.kickstarter.com" + rec.ks_project.url, target: '_blank' %></h2>
 <!-- descriptions --> 
@@ -44,7 +44,7 @@
 <!-- a random pick --> 
         <div class="col-md-4 col-sm-6 column-3">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @random.url %>"><img src="<%= @random.image_url %>" target="_blank" class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @random.url %>" target="_blank"><img src="<%= @random.image_url %>"class="img-responsive rec-image"></a>
             </section>
 
             <h2 class="rec-title"><%= link_to @random.title, "http://www.kickstarter.com" + @random.url, target: '_blank' %></h2>
@@ -95,7 +95,6 @@
           </p>
         <h2><%= link_to @most_similar.name, "http://www.kickstarter.com" + @most_similar.url %></h2>
         <p><%= @most_similar.description if !@most_similar.description.empty?%> </p>
-        <p><%= @most_similar.bio if @most_similar.bio %></p>
         <p><% if !@most_similar.location.empty? %>From <%= @most_similar.location %><% end %></p>
         <p><% if !@most_similar.date_joined.empty? %>Joined on <%= @most_similar.date_joined %><% end %></p>
         </center>
@@ -103,6 +102,10 @@
 
       <div class="row">
         <div class="col-sm-6">
+          <% if @most_similar.bio %>
+          <h2>About</h2>
+          <p><%= @most_similar.bio %>
+          <% end %>
           <h2>Here's some projects they've backed in the past:</h2>
           <h3></h3>
           <p></p>
@@ -112,10 +115,10 @@
             <% end %>
           </ul>
       </div>
-      <div class="col-sm-6" style="height:75px"></div>
+      <div class="col-sm-6" style="height:25px"></div>
       <div class="col-sm-6">
         <%= form_tag follow_path do %>
-        <center><input type="submit" class="btn tips nav" data-original-title="save this user to stay up to date on what they've backed" value="follow?"></center>
+        <center><input type="submit" class="btn btn-sm tips nav" data-original-title="save this user to stay up to date on what they've backed" value="follow"></center>
         <%= hidden_field_tag "most_similar_id", @most_similar.id %>
         <% end %>
       </div>
@@ -150,11 +153,17 @@
     $('input:submit.hide').hide();
 
     $('form.rate').click(function(event){
+
       var $form = $(this);
       var $inputs = $form.find('input');
       var auth_token = $form.find('input[name="authenticity_token"]').val();
       $form.parent().parent().parent().fadeOut('slow', function(){
         $(this).remove();
+        var rec_count = $('.col-md-4').size();
+        if(rec_count == 0){
+          var gen = "<center><a href='/recommendations' class='gen-more btn'>Generate some more recommendations?</a></center>";
+          $('.active-recs').prepend(gen);
+        }
       });
 
       $inputs.each(function(i,field){

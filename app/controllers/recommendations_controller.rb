@@ -38,6 +38,7 @@ before_action :set_user_from_session, :only => [:index, :create]
     @active_recs = Recommendation.where(:user => @user, :useful => nil)
 
     @random = KsProject.random_active
+    raise
 
     # @project = @ranked_active_projects.sample
     # @rec = Recommendation.new(:user => @user, :ks_project => @project)
