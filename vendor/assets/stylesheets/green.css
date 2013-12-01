@@ -61,7 +61,7 @@ h2.subTitle:after, h1.noSubtitle:after{
 .paralaxText blockquote:before, .paralaxText blockquote:after {
 	color:#fff;
 }
-#home, #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4, #paralaxSlice5 {
+#home, #paralaxSlice1, #paralaxSlice2, #paralaxSlice3, #paralaxSlice4, #paralaxSlice5, #formulaSlice #wordCloudSlice {
 	background-color:#7DC24F;
 }
 #home {
@@ -75,6 +75,12 @@ h2.subTitle:after, h1.noSubtitle:after{
 }
 #paralaxSlice3 {
 	background-image: url('paralax-grey-3.jpg');
+}
+#formulaSlice {
+	background-image: url('dramatic_formula.jpg');
+}
+#wordCloudSlice {
+	background-image: url('fb_word_cloud.jpg');
 }
 #paralaxSlice4 {
 	background-image: url('paralax-4.jpg');
