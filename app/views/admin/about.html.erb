@@ -77,6 +77,15 @@
           </div>
         </div>
 
+        <div id="wordCloudSlice" data-stellar-background-ratio="0.5">
+          <div class="maskParent">
+            <div class="paralaxMask"></div>
+            <div class="paralaxText">
+              <img class="similar-image" src="/assets/Facebook-Like-Button.jpg" alt="Facebook like button" width="10%">
+            </div>
+          </div>
+        </div>
+
         <section class="slice" id="about">
           <div class="container">
             <div class="row">
@@ -87,17 +96,21 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-4"> <img src="/assets/plant_growing_from_coins.jpg" alt="services" class="img-responsive"> </div>
               <div class="col-sm-4">
-                <p>The first question you may ask is how we classify a persons interests. We look at the categories of all of the projects the person has backed and give them scores based on that. For example if Alex backed 6 Art projects, another 3 projects that had to do with Theater, 2 Comics, 2 Design and 1 Film then we normalize these scores and give him a 100 in Art, 50 Theater, 33 in Comics and Design and 17 in Film. What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex. </p>
-                <img src="/assets/youlikethis.jpg" alt="facebook like">
+                <center>
+                  <img class="no-border-rounded-image" src="/assets/facebook-like-click.jpg" alt="clicking a facebook like" width="75%" class="img-responsive">
+                </center>
               </div>
 
               <div class="col-sm-4">
-                <h2>Ashley website template</h2>
-                <p> The Hatter's remark seemed to have no sort of meaning in it, and yet it was certainly English. 'I don't quite understand you,' she said, as politely as she could. 'The Dormouse is asleep again,' said the Hatter, and he poured a little hot tea upon its nose. </p>
-                <h3>I don't quite understand you</h3>
-                <p> The Dormouse shook its head impatiently, and said, without opening its eyes, 'Of course, of course; just what I was going to remark myself.' 'Have you guessed the riddle yet?' the Hatter said, turning to Alice again. </p>
+                <h2>Classifying by Kickstarter Projects Backed</h2>
+                <p>The first question you may ask is how we classify a persons interests. We look at the categories of all of the projects the person has backed and give them scores based on that. For example if Alex backed 6 Art projects, another 3 projects that had to do with Theater, 2 Comics, 2 Design and 1 Film then we normalize these scores and give him a 100 in Art, 50 Theater, 33 in Comics and Design and 17 in Film. </p>
+              </div>
+
+              <div class="col-sm-4">
+                <h2>Classifying by Facebook Likes</h2>
+                <img src="/assets/youlikethis.jpg" alt="facebook like">
+                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
               </div>
             </div>
           </div>
@@ -115,7 +128,7 @@
               <div class="col-sm-4">
                 <h2>K Means Clustering</h2>
                 <p>The next step is to group people with similar interests into groups or clusters. We do this by using a Machine Learning algorithm called K Means Clustering. This takes in data points and the number of groups we want and it outputs centers of the groups and the member of each group.</p> 
-                <p>We specify the number of clusters we want and the algorithm will separate the points or in this case the users into different clusters. This visual shows how 2 dimensional datapoints are separated into 4 clusters. [http://shabal.in/visuals/kmeans/2.html](K Means Clustering gif). This shows how the algorithm works in 2 dimensions. You can imagine the axiis being how much a person likes art and the other being Technology. Kickstarter however has 13 categories. We wrote the algorithm to work in 13 dimensions. Harder to visualize but same kind of principle.</p>
+                <p>We specify the number of clusters we want and the algorithm will separate the points or in this case the users into different clusters. This visual shows how 2 dimensional datapoints are separated into 4 clusters. This shows how the algorithm works in 2 dimensions. You can imagine the axiis being how much a person likes art and the other being Technology. Kickstarter however has 13 categories. We wrote the algorithm to work in 13 dimensions. Harder to visualize but same kind of principle.</p>
              </div>
               <div class="col-sm-4">
                 <img class="kmeans-gif" src="/assets/kmeans2.gif" width="100%" alt="K Means Clustering gif" loop=infinite>
@@ -125,10 +138,11 @@
               </div>
 
               <div class="col-sm-4">
-                <p>Now imagine we get a chance to talk to everyone at our table and we find that we have the most similar interests to a specific user. We take note of that person so that we can keep in touch in the future. When they find any new projects that they would like to back they let us know since we will probably also find that project interesting as well.</p>
-                <p>After a busy day of networking and a full stomack we take the elevator back down to the lobby, we thank the receptionist for choosing such an amazing room for you and go home.</p>
-                <p>Now imagine an engine that does all of this with a single mouse click. Welcome to the beauty of Kickammender.</p> 
- 
+                <h2>K-Means++</h2>
+                <p>One of the things we notice from this gif is that the clusters that are created are different depending on what seed values we start with. We implemented some additional logic which is called K-Means++ which was proposed in 2007 as a way to choose seed points that will let the K-Means algorithm choose better clusters.</p> 
+
+                <p>We went onto kickstarter and scraped data from 5,000 users that had backed numerous projects. We saw which projects they had backed and the categories of these projects. With this information we had 5,000 data points. A rule of thumb in data science is that a good number of clusters, K = sqrt(n/2). This is from [http://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set#cite_note-1](wikipedia). This evaluates to 50 clusters. To make an intelligent selection about the 50 seeds we need, we run the K-Means++ algorithm. The machine learning algorithm is then run and we obtain 50 groups that contain kickstarter users with similar interests. When we get a new user to our app, we look at their facebook likes and map these likes to the 13 broad kickstarter categories. We then calculate the distance of the users score to each of the cluster centers. We select the nearest cluster to the user and assign that user to that group. To give a user a recommendation, we look at the active projects that other people in the users cluster have backed. We rank these in order of how many people in the certain cluster have backed it and provide it to the user. </p>
+
                 <br>
                 <center>
                 <p><a class="btn" href="/auth/facebook"><i class="icon-facebook-1"></i>Get started</a></p>
@@ -136,6 +150,32 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
+        <section class="slice" id="about">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1>Getting Feedback from Users</h1>
+                <h2 class="subTitle">Having the user train our engine to suit their exact personality</h2>
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col-sm-4">
+                <center>
+                </center>
+              </div>
+
+              <div class="col-sm-4">
+              <p>We want to make these recommendations very personal to the user. As time goes by and the user uses the site more and more, we want our engine to adapt to the users needs. For each recommendation we give, we look at if the user liked it or not. When a user liked a project that is in the food category, we change his score to represent this. It would be the similar to if he liked a food on facebook. The next time he logs onto the site, he may be closer to another cluster that is more Food friendly. 
+              </p>
+              </div>
+
+              <div class="col-sm-4">
+                <h2>Classifying by Facebook Likes</h2>
+                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
+              </div>
+            </div>
+          </div>
+        </section>
 

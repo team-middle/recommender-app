@@ -62,7 +62,12 @@ Description: layout styles
 
 .kmeans-gif {
   border: 5px solid #7DC24F;
-  border-radius: 100px;
+  border-radius: 120px;
+}
+
+.no-border-rounded-image {
+	border: 0px solid #7DC24F;
+	border-radius: 20px;
 }
 
 .similar-user {
