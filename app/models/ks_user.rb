@@ -1,6 +1,8 @@
 class KsUser < ActiveRecord::Base
   has_many :ks_project_backers, :dependent => :destroy
   has_many :ks_projects, -> { uniq }, :through => :ks_project_backers
+  has_many :user_follows, :dependent => :destroy
+  has_many :users, :through => :user_follows
   belongs_to :center
 
   # to rescore the users:
@@ -158,6 +160,19 @@ class KsUser < ActiveRecord::Base
       user.save
     end
   end
+
+  def self.scrape_bio(range)
+    users = KsUser.where(:id => range)
+    
+    users.each do |user|
+      bio_url = "http://www.kickstarter.com/profiles/" + user.url.split("/").last + "/bio"
+
+      bio_page = Nokogiri::HTML(open(bio_url))
+      user.bio = bio_page.css("div#profile-bio-full p").text
+      user.save
+    end
+  end
+
 
   def self.find_duplicates(range)
     users = KsUser.where(:id => range)

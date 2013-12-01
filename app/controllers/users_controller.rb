@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :set_user_from_session
+  before_action :set_user_from_session, only: [:adjust_score, :follow, :show]
 
   def adjust_score
     set_user_from_session
@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     # redirect_to recommendations_path
   end
   
+  def follow
+    @user.user_follows.find_or_create_by(:ks_user_id => params[:most_similar_id])    
+    redirect_to user_path(@user)
+  end
+
   def create
     # session[:access_token] = FacebookOAuth.get_access_token(params[:code])
     api = Koala::Facebook::API.new(session[:access_token])
@@ -44,7 +49,11 @@ class UsersController < ApplicationController
     @recommendations = Recommendation.where(:user => @user)
     @liked_recs = @recommendations.where(:useful => true)
     @categories = Recommendation.display_categories(@liked_recs)
-  
+    follows = @user.user_follows
+    @followed_users = follows.collect do |follow|
+      follow.ks_user
+    end
+
   end
 
 

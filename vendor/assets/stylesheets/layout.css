@@ -44,6 +44,9 @@ Description: layout styles
 	margin: 15px;
 }
 
+.icon-star {
+	color: #7DC24F;
+}
 .recommendations {
 	height: 100vh;
 }
@@ -99,6 +102,7 @@ Description: layout styles
 h2.rec-title {
 	min-height: 50px;
 }
+
 
 .container .jumbotron{border-radius: 0;}
 .jumbotron {font-size: 16px;}

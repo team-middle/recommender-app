@@ -64,3 +64,43 @@
 <center><h2>Nothing yet! Get some more <%= link_to "recommendations?", recommendations_path %></h2></center>
 <% end %>
           </section>
+<div id="paralaxSlice1" data-stellar-background-ratio="0.5">
+    <div class="maskParent">
+      <div class="paralaxMask"></div>
+      <div class="paralaxText container">
+        <h1><i class="star"></i></h1>
+      </div>
+    </div>
+  </div>
+<% if !@followed_users.empty? %>
+<section class="slice" id="follows">
+          <div class="container clearfix">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1>People You're Following</h1>
+                <h2 class="subTitle">You wanted to keep tabs on these users</h2>
+              </div>
+              <div class="clearfix">
+                <% @followed_users.each do |user| %>
+                <article class="col-sm-3 center isotopeItem">
+                  <section class="imgWrapper">
+                    <a href="http://www.kickstarter.com<%=user.url %>"> <img alt="" src="<%= user.image_url %>" class="img-responsive">
+                  </section>
+
+                  <section class="boxContent">
+                    <h3><%= link_to user.name, "http://www.kickstarter.com" + user.url %></h3>
+                    <p>
+                      <%= user.description %><br>
+                      <% if user.bio %>
+                      <%= user.bio %>
+                      <% end %>
+                    </p>
+                  </section>
+                </article>
+                <% end %>
+
+                </div>
+              </div>
+            </div>
+          </section>
+<% end %>
