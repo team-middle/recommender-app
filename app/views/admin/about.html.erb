@@ -1,3 +1,4 @@
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=ruby&skin=desert"></script>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
   <header id="displayHeader" class="navbar-fixed-top" role="banner">
     <div class="container">
@@ -88,8 +89,31 @@
               <div class="col-sm-4">
                 <h2>Ruby Implementation</h2>
                 <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
-
-                <p><%= image_tag "cluster_method.jpg", width: "100%" %></p>
+                <pre class="prettyprint code-scrollable-block">
+def cluster(k,points,max_iters)
+  seeds = kmplusplus(k,points)
+  self.assignments = {}
+  seeds.each do |seed|
+    self.assignments[seed] = []
+  end
+  points.each do |point|
+    closest_seed = seeds.min_by do |seed|
+      distance(seed, point)
+    end
+    self.assignments[closest_seed] << point
+  end
+  self.centers = assignments.keys
+  iter = 0
+  begin 
+    old_centers = self.centers.dup
+    self.centers = calculate_new_centers(k)
+    self.centers != old_centers ? changed = true : changed = false
+    reassign_groups(centers)
+    iter += 1
+  end  while iter <= max_iters && changed
+  self.assignments
+end # end of cluster method 
+                 </pre>
               </div>
             </div>
           </div>
