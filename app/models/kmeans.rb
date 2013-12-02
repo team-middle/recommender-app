@@ -39,11 +39,9 @@ class Kmeans
   end
 
   def self.distance(center, point)
-    sum = 0
-    (0..center.count-1).each do |d|
+    (0..center.count-1).inject(0) do |sum,d|
       sum += (center[d] - point[d])**2
     end
-    sum
   end
 
   def distance(center, point)

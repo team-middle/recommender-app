@@ -39,7 +39,7 @@
                 <p>How do you find Kickstarter projects? Most likely, if you've backed a project, you heard about it from a friend or a trusted online source. It's probably the only project you've backed, and it was probably one of the largest projects on the site. When your information about projects is limited to what bubbles up through some other channel, it can be difficult to find things you're interested in.</p>
 
 
-                <p>We think Kickstarter is a great resource and a great idea, so we wanted to build something that would provide users with targeted suggestions for projects they might be interested in backing.        
+                <p>We think Kickstarter is a great resource and a great idea, so we wanted to build something that would provide users with targeted suggestions for projects they might be interested in backing. We are also eagerly awaiting the birth of Skynet and have made our first contribution with this project.         
                 </p>
 
               </div>
@@ -88,9 +88,7 @@
 
               <div class="col-sm-4">
                 <h2>Ruby Implementation</h2>
-                [add modal zoom]
-                <p><%= image_tag "cluster_method.jpg", width: "100%", style: "border-radius:10px;" %></p>
-                <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
+
                 <pre class="prettyprint code-scrollable-block">
 def cluster(k,points,max_iters)
   seeds = kmplusplus(k,points)
@@ -116,6 +114,8 @@ def cluster(k,points,max_iters)
   self.assignments
 end # end of cluster method 
                  </pre>
+                <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
+                <p>We had some trouble with the quality of our output when using random starting points, so we instead opted to create an intelligent method to select starting points for the algorithm, so our final process is closer to a <em>k</em>-means++ implementation (<%=link_to "reference", "http://en.wikipedia.org/wiki/K-means++"%>).
               </div>
             </div>
           </div>
@@ -141,17 +141,26 @@ end # end of cluster method
 
               <div class="col-sm-6">
                 <h2>How we classify Kickstarter users</h2>
-                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. With all of the associations, we have a database of more than one million records. Each project on Kickstarter belongs to one of 13 main categories, which we use to classify the users in our database. For each each user, we generated a 13-dimensional profile that approximates their interest in each of the main categories based on which projects they've backed. These are the backers scores' in the diagram above. Then we used the <em>k</em>-means algorithm to generate clusters of similar users. 
+                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. With all of the associations, we have a database of more than one million records. We take this data and convert it to scores for each user, and then feed those scores into recommendation engine. </p>
 
-                <p>In our most recent clustering, we evaluated 9923 users who had each backed more than 4 projects and divided them into 65 clusters. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed. The cluster that a user belongs to is represented by the 
+                <p>The scores are based on the project categories on Kickstarter. Each project on Kickstarter belongs to one of 13 main categories. For each user, we count how many times they have backed a project in each category. Then we normalize the counts into scores and develop a profile on 13-dimensions, with a score for each category. This effectively approximates their interests and gives us an idea of what kind of projects they're likely to back. Now we have a point for each user, and we can cluster similar points together with <em>k</em>-means algorithm.</p>
+
+                <p>In our most recent clustering, we evaluated 9923 users who had each backed more than 4 projects and divided them into 65 clusters. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed.
                 </p>
 
               </div>
 
               <div class="col-sm-6">
                 <h2>How we classify users of our site</h2>
-                <p>Users of Kickammender sign in with Facebook. From the Facebook Graph API, we grab the user's likes. Each like on Facebook falls into one of roughly 150 categories. Just like we did for each Kickstarter user, we generate a 13-dimensional profile for our user, this time mapping the categories of their Facebook likes to project categories on Kickstarter.</p> 
-                <p>They are then assigned to the center that is closest to them by Euclidean distance, just as all of the other points in the dataset. The cluster with that center is now the user's cluster. In this cluster are all of the Kickstarter users that are most similar to the user of our site, and it is the projects that these users have backed that we use to generate our recommendations.
+                <p>For users of our site, instead of measuring their interest in each Kickstarter category, we have them sign in with Facebook. From the Facebook Graph API, we grab their likes. Each like on Facebook falls into one of roughly 150 categories, which we translated into their most closely related Kickstarter categories. In this way we can develop a 13-dimensional profile for a user that can be easily compared against the Kickstarter backers in our database.</p>
+
+                <p>We assign them to the center that is closest by Euclidean distance, just as all of the other points in the dataset.
+                <pre class="prettyprint code-scrollable-block">
+centers.each do |center|
+  distances[center] = Kmeans.distance(center.scores, self.scores)
+end
+self.center = distances.sort_by {|center, distance| distance}.first[0]</pre>
+                  The cluster with that center is now the cluster the user belongs to. In this cluster are all of the Kickstarter backers who are most similar to the user, and it is the projects these backers have supported that we draw from to generate our recommendations.
               </div>
             </div>
           </div>
@@ -190,7 +199,7 @@ end
               <div class="col-sm-4">
 
                 <h2>Recommendations</h2>
-                <p>We pull out the top two and offer them to the user. We also add a random pick, which may come from. This is in part to allow the to escape their cluster if they've been classified poorly, and also to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. </p>
+                <p>We pull out the top two and offer them to the user. We also add a random pick, which may be any active project in the database. This is in part to allow the user to escape their cluster if they've been classified poorly, and in part to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. A random pick provides some mitigation.</p>
 
               </div>
 
@@ -227,9 +236,9 @@ end
             <div class="row">
               <div class="col-sm-4">
                 <h2>Limitations</h2>
-                <p>We picked Facebook likes to classify a user mostly because it is convenient &mdash; you just have to sign in with a single click and the rest is taken care of. So far, Facebook likes have proven to be a reasonable approximation, but there are better ways and we recognize the limitations of this method. So we wanted to build a system that allowed us to improve our recommendations with user feedback. 
+                <p>We picked Facebook likes to classify a user mostly because it is convenient &mdash; there is minimal effort required for the user. You sign in with a single click and the rest is automatic. You don't have to fill out a survey or even enter search terms. The results are presented to you as painlessly as possible. So far, we've found Facebook likes to be a reasonable approximation to classify users, but there are better ways and we recognize the limitations of this method. So to help strike a better balance between accuracy and convenience, we wanted to include a system that takes user feedback to improves our recommendations. 
 
-                <p>We've allowed users rate their recommendations wtih a thumbs up or a thumbs down. We record this feedback in our database and dynamically adjust their score with each click. The next time they ask for recommendations, their scores may be different enough that they are assigned to a new cluster. If not, they will still receive a new set of recommendations from the same cluster, as projects that a user has already rated are excluded. This new cluster will hopefully have a selection of projects that are more appealing to the user.</p>
+                <p>We've allowed users rate to their recommendations with a thumbs up or a thumbs down. We record this rating in our database and dynamically adjust their score with each click. The next time they ask for recommendations, their scores may be different enough that they are assigned to a new cluster. If not, they will still receive a new set of recommendations from the same cluster, as projects that a user has already rated are excluded. This new cluster will hopefully have a selection of projects that are more appealing to the user.</p>
                 <center>
                 </center>
               </div>
@@ -238,16 +247,17 @@ end
                 <h2>The user's profile</h2>
               <p>Since we are recording both positive and negative feedback, we built an interface for users to take a look through the projects they have liked. This means that they can browse through some recommendations, rate them up or down, and then come back later to see what they've liked. If you're looking for a Kickstarter project to back, this can really help a lot. 
               </p>
-              <p>Since we also provide a Kickstarter user who we calculated to be most similar, we allow our users to follow them. We thought that maybe if you find someone who has backed a lot of projects that you find interesting, you could keep track of them and know when they've backed something new. The feature as currently implemented is mostly a demonstration rather than a functional tool. </p>
+              <p>We also allow our users to "follow" the Kickstarter users from our database that we identify as most similar to them. We thought that maybe if you find someone who has backed a lot of projects that you find interesting, you could keep track of them and know when they've backed something new. The feature as currently implemented is mostly a demonstration rather than a functional tool. </p>
+                <p style="padding-top:50px"><center><i class="icon-star iconBig"></i></center></p>
               </div>
-
               <div class="col-sm-4">
-                <h2>Classifying by Facebook Likes</h2>
-                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p>
+                <h2>summary?</h2>
+              </div>
+              <div class="col-sm-4">
+                <h2>About Us</h2>
+                <p>We're students at the <%= link_to "Flatiron School", "http://www.flatironschool.com"%> in New York City. Three months ago we had never coded in Ruby.</p>
                 <p>We had a lot of fun building this. Let us know what you think.</p><p class="pull-right"><%= link_to "Joe", "http://www.twitter.com/jnoconor"%> and <%= link_to "Michael", "http://www.twitter.com/mpolycar" %></p>
                 </div>
-                <div class="col-sm-4 pull-right"> 
-                <i class="icon-star iconBig pull-right"></i>
               </div>
             </div>
           </div>
