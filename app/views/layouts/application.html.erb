@@ -33,7 +33,7 @@
     <%= stylesheet_link_tag "custom-icons-ie7" %>
     <!-- Custom css -->
     <%= stylesheet_link_tag "layout" %>
-    <%#= stylesheet_link_tag "green" %>
+    <%= stylesheet_link_tag "green" %>
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
     <%= javascript_include_tag "modernizr-2.6.1.min" %>
     <!-- Favicons
@@ -98,7 +98,7 @@
             </li>
           </ul>
         </div> 
-        <% unless @user %><a href="/auth/facebook" id="fb" class="homeBtn btn"><%= tag("i", class: "icon-facebook-1"%>Login with Facebook</a><% end %>
+        <% unless @user %><a href="/auth/facebook" id="fb" class="homeBtn btn"><i class="icon-facebook-1">Login with Facebook</i></a><% end %>
       </div>
     </div>
   </section>
