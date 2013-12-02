@@ -1,3 +1,4 @@
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
   <header id="displayHeader" class="navbar-fixed-top" role="banner">
     <div class="container">
       <nav class="navbar navbar-default scrollMenu" role="navigation">
@@ -34,10 +35,10 @@
               <div class="col-sm-4"> <img src="/assets/plant_growing_from_coins.jpg" alt="services" class="img-responsive"> </div>
               <div class="col-sm-4">
                 <h2>The Problem</h2>
+                <p>How do you find Kickstarter projects? Most likely, if you've backed a project, you heard about it from a friend or a trusted online source. It's probably the only project you've backed, and it was probably one of the largest projects on the site. When your information about projects is limited to what bubbles up through some other channel, it can be difficult to find things you're interested in.</p>
 
-                <p>Three years after Kickstarter launched, we backed our first project: the Double Fine Adventure. At the time, this was the largest project that had ever been on the site. Since then, we've only backed a couple of other projects. Kickstarter is a concept we believe in, and we love directly supporting quality content made by independent creators. Why aren't we using it more?</p>
 
-                <p>Part of the reason is because we only hear about promising Kickstarter projects through some other source that will sometimes refer us to something on the site. We wanted a better way to find projects, so we built Kickammender.
+                <p>We think Kickstarter is a great resource and a great idea, so we wanted to build something that would provide users with targeted suggestions for projects they might be interested in backing.        
                 </p>
 
               </div>
@@ -45,9 +46,8 @@
               <div class="col-sm-4">
                 <h2>Our Solution</h2>
                 <p></p>
-                <p>Kickammender is a demonstration of a better way to find projects on Kickstarter. The heart of our process is the <em>k</em>-means clustering algorithm. We've built that into a dynamic web application using Ruby on Rails. Our application delivers unique recommendations to a user based on their Facebook likes. Additionally, we've built a simple user feedback system and user profile that allows users to tailor our recommendations, save projects they're interested in, and follow Kickstarter users that they like.</p>
-
-                <p>Thanks for taking a look at Kickammender. We hope you find it useful. Read on for a detailed explanation of our methodology, or get in touch with us via Twitter: @jnoconor, @mpolycar. </p>
+                <p>Kickammender is a demonstration of a better way to find projects on Kickstarter. The heart of our process is the <em>k</em>-means clustering algorithm, which we've built into a dynamic web application using Ruby on Rails. We've also added a simple feedback system and user profile that allows users to tailor their recommendations, save projects they're interested in, and follow Kickstarter users that they like.</p>
+                <p>Thanks for taking a look at Kickammender. We hope you find it useful or interesting. Read on for a detailed explanation of our methodology, or get in touch with us via Twitter: @jnoconor, @mpolycar. </p>
               </div>
             </div>
           </div>
@@ -72,30 +72,24 @@
 
             <div class="row">
               <div class="col-sm-4">
-                <h2>[k means analogy - 1 column, 1 or 2 paragraphs]</h2>
-                <p>Lets forget for a moment that computers and the web exists. Say you are at a fundraising event where 50,000 projects are looking for backers and there are 200,000 people that are looking for projects to back. Currently, the situation is extremely chaotic. It is similar to being in a football stadium with 50,000 people that have projects and are looking for your funding. The editors choice panel on kickstarter is like having a few lucky people being broadcast on the jumbotron in the stadium. The new projects panel is like hanging out by the entrance and seeing the flood new projects coming in. Its a mess.</p>
-                <p>What the Kickammender recommendation engine does is transform the stadium into a skyscraper. As you enter the lobby of the building, a receptionist analyses your interests and tells you to go to room 17 on the 62nd floor.</p>
+                <h2>An Analogy</h2>
+                <p>Imagine you are at the 50-yard line in a football stadium with 50,000 people. Each person in the stands has a few Kickstarter projects that they would recommend to you. You're not sure where to start, and from the center of the stadium, you can't make out very many details. You could look up at the jumbotron, where they are playing interviews with a few people talking about the projects they like, but you'll still miss out on the other 99%. You could also go into the stands and start hunting on your own, but unless you are lucky, this will be very slow going and still isn't much better than picking someone at random.</p>
+                <p>With <em>k</em>-means clustering, we transform the noisy football stadium in an orderly skyscraper. Each floor of the skyscraper represents a cohesive group that contains the people who are most similar to each other. In the lobby of the building, a robot receptionist can analyze your interests and tell you which floor fits you best. So now, instead of talking to a disorganized sample from the group of 50,000, you can talk to people who are most similar to you and find out what projects they recommend. This is essentially how our system works.</p>
 
 
              </div>
               <div class="col-sm-4">
-                <h2>[technical details - concepts]</h2>
+                <h2>Technical Concepts</h2>
                 <%= image_tag "kmeans2.gif", class: "kmeans-gif", style: "width: 100%" %>
-                <p> In this room is a round table with prolific kickstarter backers. All of these people have similar interests and personalities to you. The people that love theater, find comics mildly interesting, and hate technology will probably be placed at the same table. The receptionist was very good at placing people with similar interests at the same table. Some tables might have 50 people and others might only have 10 people.</p>
-                <p>At the dining table, people talk about the projects that they have backed and the user takes note of the projects that have been mentioned often that are still looking for funding. These are true recommendations. They are based off of actual backers and not what the people proposing the project say. More importantly, the backers that we are listening to are the users that have shown to have similar interests to the us.</p>
+                <p>This diagram illustrates the process in two dimensions. We have a selection of points on a grid, and we want to divide it into four clusters. Four starting points (seen above highlighted in green) are selected. These are the initial centers of each cluster. For every other data point, we calculate the distance to each of the centers and assign that point to the center that is closest to it. Once all the points have been assigned to a center, the centers are recalculated. Each center will move to the center of the points that are assigned to it. This is one iteration. The process then repeats, where each point will be reassigned to the center that is closest and the centers will be moved, until a specified number of iterations have taken place or the centers converge to a stable point.</p>
 
               </div>
 
               <div class="col-sm-4">
-                <h2>[technical details - math]</h2>
-                <p>Now imagine we get a chance to talk to everyone at our table and we find that we have the most similar interests to a specific user. We take note of that person so that we can keep in touch in the future. When they find any new projects that they would like to back they let us know since we will probably also find that project interesting as well.</p>
-                <p>After a busy day of networking and a full stomack we take the elevator back down to the lobby, we thank the receptionist for choosing such an amazing room for you and go home.</p>
-                <p>Now imagine an engine that does all of this with a single mouse click. Welcome to the beauty of Kickammender.</p> 
- 
-                <br>
-                <center>
+                <h2>Ruby Implementation</h2>
+                <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
 
-              </center>
+                <p> code and stuff</p>
               </div>
             </div>
           </div>
@@ -114,16 +108,15 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <h1>Ruby Implementation</h1>
+                <h1>Our Domain Model</h1>
                 <h2 class="subTitle">[this cries out for a diagram] What we built</h2>
               </div>
             </div>
 
             <div class="row">
               <div class="col-sm-4">
-                <center>
-
-                </center>
+                <h2>summary</h2>
+                <p>We build profiles of our site's users based on their facebook likes
               </div>
 
               <div class="col-sm-4">
@@ -201,4 +194,5 @@
             </div>
           </div>
         </section>
+      </div>
 
