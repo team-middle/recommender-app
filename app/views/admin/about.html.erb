@@ -95,16 +95,8 @@
           </div>
         </div>
 
-        <div id="wordCloudSlice" data-stellar-background-ratio="0.5">
-          <div class="maskParent">
-            <div class="paralaxMask"></div>
-            <div class="paralaxText">
-              <%= image_tag "facebook-like-click.jpg", size: "150x150", style: "border-radius: 15px" %>
-            </div>
-          </div>
-        </div>
 
-        <section class="slice" id="about">
+        <section class="slice">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
@@ -115,29 +107,52 @@
 
             <div class="row">
               <div class="col-sm-4">
-                <h2>summary</h2>
-                <p>We build profiles of our site's users based on their facebook likes
+                <h2>How we classify Kickstarter users</h2>
+                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. Projects on Kickstarter are divided into 13 main categories, so for each each user, we generated a 13-dimensional profile that approximates their interest in each of the main categories based on which projects they've backed. Then we used the <em>k</em>-means algorithm to generate 65 clusters of similar users. 
+
+                <p>[statistical-type chart?]
+                  In our most recent clustering, we evaluated 9923 users who had backed more than 4 projects. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed.
+                </p>
               </div>
 
               <div class="col-sm-4">
-                <h2>Classifying by Kickstarter Projects Backed</h2>
-                <p>The first question you may ask is how we classify a persons interests. We look at the categories of all of the projects the person has backed and give them scores based on that. For example if Alex backed 6 Art projects, another 3 projects that had to do with Theater, 2 Comics, 2 Design and 1 Film then we normalize these scores and give him a 100 in Art, 50 Theater, 33 in Comics and Design and 17 in Film. </p>
+                <h2>[sweet diagram]</h2>
+                <p>ks_user
+                  projects they've backed
+                  scores
+                  center
+                  info
+                </p>
+                <p>
+                  center
+                  scores
+                  ks_users
+                </p>
               </div>
 
               <div class="col-sm-4">
-                <h2>Classifying by Facebook Likes</h2>
-                <img src="/assets/youlikethis.jpg" alt="facebook like">
-                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
+                <h2>How we classify users of our site</h2>
+                <p>Users of Kickammender sign in with Facebook. From the Facebook Graph API, we grab the user's likes. Each like on Facebook falls into one of roughly 150 categories. Just like we did for each Kickstarter user, we generate a 13-dimensional profile for our user, this time mapping the categories of their Facebook likes to project categories on Kickstarter.</p> 
+                <p>They are then assigned to the center that is closest to them by Euclidean distance, just as all of the other points in the dataset. The cluster with that center is now the user's cluster. In this cluster are all of the Kickstarter users that are most similar to the user of our site, and it is the projects that these users have backed that we use to generate our recommendations.
               </div>
             </div>
           </div>
         </section>
+        <div id="wordCloudSlice" data-stellar-background-ratio="0.5">
+          <div class="maskParent">
+            <div class="paralaxMask"></div>
+            <div class="paralaxText">
+              <%= image_tag "facebook-like-click.jpg", size: "150x150", style: "border-radius: 15px" %>
+                <img src="/assets/youlikethis.jpg" alt="facebook like">
+            </div>
+          </div>
+        </div>
         <section class="slice noPaddingBottom color4">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <h1>[putting it together - recommendations for a user]</h1>
-                <h2 class="subTitle"></h2>
+                <h1>The end result</h1>
+                <h2 class="subTitle">How we generate recommendations</h2>
               </div>
             </div>
 
@@ -167,12 +182,12 @@
             </div>
           </div>
         </section>
-        <section class="slice" id="about">
+        <section class="slice">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
                 <h1>Getting Feedback from Users</h1>
-                <h2 class="subTitle">Having the user train our engine to suit their personality</h2>
+                <h2 class="subTitle">Having the user train our engine to suit their tastes</h2>
               </div>
             </div>
 
