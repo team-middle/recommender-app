@@ -5,7 +5,7 @@
 <h3>Why a Recommendation Engine is needed</h3>
 
 <p>We forsee the number of crowdfunded projects and the community backing them to dramatically increase in the next couple of years. What we see now is only the baby steps of a shift to a world that is a more connected community, where if you have an interesting and innovative idea and the skills to make it happen, then you can find the resources to build it. 
-The problem with this explosive growth in the field is that it will become increasingly difficult to find the projects that interest you. Say there are a million projects that are currently active. How do you find the one you find the most intrigueing to you?</p>
+The problem with this explosive growth in the field is that it will become increasingly difficult to find the projects that interest you. Say there are a million projects that are currently active. How do you find the one you find the most intriguing to you?</p>
 
 
 Stadium Analogy
@@ -58,3 +58,55 @@ We went onto kickstarter and scraped data from 5,000 users that had backed numer
 <h3>Getting User Feedback</h3>
 <p>We want to make these recommendations very personal to the user. As time goes by and the user uses the site more and more, we want our engine to adapt to the users needs. For each recommendation we give, we look at if the user liked it or not. When a user liked a project that is in the food category, we change his score to represent this. It would be the similar to if he liked a food on facebook. The next time he logs onto the site, he may be closer to another cluster that is more Food friendly. 
 </p>
+
+
+require 'bundler/capistrano' # for bundler support
+set :application, 'recommender-app'
+set :user, 'deploy' # Whatever the User You Make on Your Server
+set :branch, "deployment"
+set :repository, "git@github.com:team-middle/recommender-app.git"
+
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+
+set :deploy_to, "/home/#{ user }/#{ application }"
+set :use_sudo, false
+set :scm, :git
+
+default_run_options[:pty] = true
+# set :format, :pretty
+set :server_ip, '162.243.246.245' # This should be your server IP
+role :web, "#{server_ip}"
+role :app, "#{server_ip}"
+role :db, "#{server_ip}", :primary => true
+
+# set :log_level, :debug
+# set :pty, true
+
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+# set :keep_releases, 5
+
+# namespace :deploy do
+#
+#  desc 'Restart application'
+#  task :restart do
+#    on roles(:app), in: :sequence, wait: 5 do
+#      # Your restart mechanism here, for example:
+#      # execute :touch, release_path.join('tmp/restart.txt')
+#    end
+#  end
+#
+#  after :restart, :clear_cache do
+#    on roles(:web), in: :groups, limit: 3, wait: 10 do
+#      # Here we can do anything such as:
+#      # within release_path do
+#      #   execute :rake, 'cache:clear'
+#      # end
+#    end
+#  end
+#
+#  after :finishing, 'deploy:cleanup'
+#
+#end

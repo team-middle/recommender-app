@@ -1,0 +1,1 @@
+$(function(){window.prettyPrint&&prettyPrint()}(window.jQuery)),jQuery(document).ready(function(o){"frontpage"===o("body").data("page")&&o(window).scroll(function(){var n=o(window).scrollTop(),t=o("#top-nav").find(".download");n>=420?t.addClass("download-on"):420>n&&t.removeClass("download-on")}),o("#myTab a").click(function(n){n.preventDefault(),o(this).tab("show")})});

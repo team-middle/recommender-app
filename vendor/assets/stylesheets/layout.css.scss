@@ -494,7 +494,7 @@ p.project-description {
 @media(min-width:1200px){}
 
 /*** END MEDIA QUERIES ***/
-#flexHome h1{font}
+/* flexHome h1{font} */
 
 /* END TYPOGRAPHY
 ================================================== */
@@ -714,7 +714,7 @@ body#fullScreen #mainHeader{display:none;}
 #mapWrapper{ height:350px; }
 
 #homeFullScreen {
-	background-image: url('big-city.jpg');
+	background-image: image-url('big-city.jpg');
 	height:100%;
 	display:table;
 }
@@ -869,7 +869,6 @@ margin-bottom:-44px;
 		margin-top:88px;
 		}
 	.flexslider .slides > li {height:200px;}
-}
 }
 
 /*** END MEDIA QUERIES ***/

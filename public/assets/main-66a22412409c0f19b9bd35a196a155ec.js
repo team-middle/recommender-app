@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#selector").children().hover(function(){$(this).siblings().stop().fadeTo(500,.25)},function(){$(this).siblings().stop().fadeTo(500,1)})});

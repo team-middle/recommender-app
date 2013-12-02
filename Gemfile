@@ -67,4 +67,5 @@ group :test, :development do
   gem "guard", ">=2.1.0"
   gem "guard-rspec"
   gem "pry"
+  gem "rvm-capistrano"
 end

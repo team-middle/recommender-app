@@ -2,7 +2,7 @@ case Rails.env
 when 'development', 'test'
   url_for_callback = 'http://localhost:3000/users/create'
 when 'production'
-  raise 'Configure Facebook Oauth'
+  url_for_callback = 'http://162.243.246.245/users/create'
 end
 
-FacebookOAuth = Koala::Facebook::OAuth.new('1479578555600942', 'fc183993624d812466f13a571bf3df0c', url_for_callback)
+FacebookOAuth = Koala::Facebook::OAuth.new('320530461418360', 'd555fdb9767c092d4d1179ba8924a0fa', url_for_callback)
