@@ -45,7 +45,6 @@
     <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png">
   </head>
 <body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen">
-<body>
 
 <!-- Primary Page Layout 
 ================================================== -->
@@ -65,7 +64,7 @@
             <li><% if @user %><a href="/recommendations">Your Recs</a> </li>
             <li><a href="/users/<%= @user.id %>#favorites">Your Profile</a> </li>
             <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
-            <li><a href="/about">How This Works</a> </li>
+            <li><a href="/about#about">How This Works</a> </li>
           </ul>
         </div>
 
@@ -121,7 +120,7 @@
         </div>
         <div class="col-xs-4" align="center">
             <h3>Curious about how this works?</h3>
-            <a class="btn" href="/about">Find out</a>
+            <a class="btn" href="/about#about">Find out</a>
         </div>
 
         <div class="col-xs-4 pull-right">

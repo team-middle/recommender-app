@@ -2,6 +2,10 @@ class AdminController < ApplicationController
   def index
   end
 
+  def about
+    set_user_from_session
+  end
+
   def reset
 
     Center.destroy_all
@@ -27,6 +31,11 @@ class AdminController < ApplicationController
     @sample_user = KsUser.find(20)
     
   end
+
+  private
+    def set_user_from_session
+      @user = User.find_by(:username => session[:username])
+    end
 
 
 end

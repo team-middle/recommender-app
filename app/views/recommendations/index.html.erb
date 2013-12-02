@@ -91,10 +91,11 @@
       <div class="col-sm-6">
         <center>
           <p>
-            <a href="<%= @most_similar.url %>"><img src="<%= @most_similar_image_url%>" class="img-responsive similar-image"></a>
+            <a href="http://www.kickstarter.com<%= @most_similar.url %>"><img src="<%= @most_similar_image_url%>" class="img-responsive similar-image"></a>
           </p>
         <h2><%= link_to @most_similar.name, "http://www.kickstarter.com" + @most_similar.url %></h2>
         <p><%= @most_similar.description if !@most_similar.description.empty?%> </p>
+
         <p><% if !@most_similar.location.empty? %>From <%= @most_similar.location %><% end %></p>
         <p><% if !@most_similar.date_joined.empty? %>Joined on <%= @most_similar.date_joined %><% end %></p>
         </center>
@@ -105,6 +106,7 @@
           <% if !@most_similar.bio.empty? %>
           <h2>About</h2>
           <p><%= @most_similar.bio %>
+
           <% end %>
           <h2>Here's some projects they've backed in the past:</h2>
           <h3></h3>

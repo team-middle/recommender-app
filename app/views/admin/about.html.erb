@@ -1,31 +1,53 @@
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
+  <header id="displayHeader" class="navbar-fixed-top" role="banner">
+    <div class="container">
+      <nav class="navbar navbar-default scrollMenu" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="#homeFullScreen">Kickammender.</a> 
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
+          <ul class="nav navbar-nav pull-right">
+            <li class="active"><a href="/">Home</a> </li>
+            <li><a href="/recommendations">Your Recs</a> </li>
+            <li><%= link_to "Your Profile", user_path(@user) %> </li>
+            <li><a id="logout" href="/sessions/logout">Logout</a> </li>
+            <li><a href="/about#about">How This Works</a> </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+<p id="notice"><%= notice %></p>
   <div id="paralaxSlice1" data-stellar-background-ratio="0.5"></div>
 <!-- about us -->
         <section class="slice" id="about">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <h1>About us</h1>
-                <h2 class="subTitle">Ashley is a versatile one page website template</h2>
+                <h1>How this works</h1>
+                <h2 class="subTitle">Kickammender uses machine learning to make intelligent recommendations</h2>
               </div>
             </div>
 
             <div class="row">
               <div class="col-sm-4"> <%= image_tag "plant_growing_from_coins.jpg", class: "img-responsive" %></div>
               <div class="col-sm-4">
-                <h2>Build your website, now!</h2>
+                <h2>The Problem</h2>
+                <p>How do you find Kickstarter projects? Most likely, if you've backed a project, you heard about it from a friend or a trusted online source. It's probably the only project you've backed, and it was probably one of the largest projects on the site. When your information about projects is limited to what bubbles up through some other channel, it can be difficult to find things you're interested in.</p>
 
-                <p>This did not seem to encourage the witness at all: he kept shifting  from one foot to the other, looking uneasily at the Queen, and in  his confusion he bit a large piece out of his teacup instead of the  bread-and-butter.
+
+                <p>We think Kickstarter is a great resource and a great idea, so we wanted to build something that would provide users with targeted suggestions for projects they might be interested in backing.        
                 </p>
 
-                <p>Just at this moment Alice felt a very curious sensation, which puzzled  her a good deal until she made out what it was: she was beginning to  grow larger again, and she thought at first she would get up and leave  the court; but on second thoughts she decided to remain where she was as  long as there was room for her.
-                </p>
               </div>
 
               <div class="col-sm-4">
-                <h2>Ashley website template</h2>
-                <p> The Hatter's remark seemed to have no sort of meaning in it, and yet it was certainly English. 'I don't quite understand you,' she said, as politely as she could. 'The Dormouse is asleep again,' said the Hatter, and he poured a little hot tea upon its nose. </p>
-                <h3>I don't quite understand you</h3>
-                <p> The Dormouse shook its head impatiently, and said, without opening its eyes, 'Of course, of course; just what I was going to remark myself.' 'Have you guessed the riddle yet?' the Hatter said, turning to Alice again. </p>
+                <h2>Our Solution</h2>
+                <p></p>
+                <p>Kickammender is a demonstration of a better way to find projects on Kickstarter. The heart of our process is the <em>k</em>-means clustering algorithm, which we've built into a dynamic web application using Ruby on Rails. We've also added a simple feedback system and user profile that allows users to tailor their recommendations, save projects they're interested in, and follow Kickstarter users that they like.</p>
+                <p>Thanks for taking a look at Kickammender. We hope you find it useful or interesting. Read on for a detailed explanation of our methodology, or get in touch with us via Twitter: @jnoconor, @mpolycar. </p>
               </div>
             </div>
           </div>
@@ -35,8 +57,7 @@
             <div class="paralaxMask"></div>
             <div class="paralaxText">
               <i class="icon-star iconBig"></i>
-              <blockquote class="mt15">O this learning, what a thing it is! 
-                <br/><small>SHAKESPEARE</small></blockquote>
+
             </div>
           </div>
         </div>
@@ -44,138 +65,176 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <h1>How this works</h1>
-                <h2 class="subTitle">An analogy to the inner workings of the Recommendation Engine</h2>
+                <h1>K Means Clustering</h1>
+                <h2 class="subTitle">The inner workings of our recommendation engine</h2>
               </div>
             </div>
 
             <div class="row">
               <div class="col-sm-4">
-                <h2>A Computerless World</h2>
-                <p>Lets forget for a moment that computers and the web exists. Say you are at a fundraising event where 50,000 projects are looking for backers and there are 200,000 people that are looking for projects to back. Currently, the situation is extremely chaotic. It is similar to being in a football stadium with 50,000 people that have projects and are looking for your funding. The editors choice panel on kickstarter is like having a few lucky people being broadcast on the jumbotron in the stadium. The new projects panel is like hanging out by the entrance and seeing the flood new projects coming in. Its a mess.</p>
-                <p>What the Kickammender recommendation engine does is transform the stadium into a skyscraper. As you enter the lobby of the building, a receptionist analyses your interests and tells you to go to room 17 on the 62nd floor.</p>
+                <h2>An Analogy</h2>
+                <p>Imagine you are at the 50-yard line in a football stadium with 50,000 people. Each person in the stands has a few Kickstarter projects that they would recommend to you. You're not sure where to start, and from the center of the stadium, you can't make out very many details. You could look up at the jumbotron, where they are playing interviews with a few people talking about the projects they like, but you'll still miss out on the other 99%. You could also go into the stands and start hunting on your own, but unless you are lucky, this will be very slow going and still isn't much better than picking someone at random.</p>
+                <p>With <em>k</em>-means clustering, we transform the noisy football stadium in an orderly skyscraper. Each floor of the skyscraper represents a cohesive group that contains the people who are most similar to each other. In the lobby of the building, a robot receptionist can analyze your interests and tell you which floor fits you best. So now, instead of talking to a disorganized sample from the group of 50,000, you can talk to people who are most similar to you and find out what projects they recommend. This is essentially how our system works.</p>
 
 
              </div>
               <div class="col-sm-4">
-                <p> In this room is a round table with prolific kickstarter backers. All of these people have similar interests and personalities to you. The people that love theater, find comics mildly interesting, and hate technology will probably be placed at the same table. The receptionist was very good at placing people with similar interests at the same table. Some tables might have 50 people and others might only have 10 people.</p>
-                <p>At the dining table, people talk about the projects that they have backed and the user takes note of the projects that have been mentioned often that are still looking for funding. These are true recommendations. They are based off of actual backers and not what the people proposing the project say. More importantly, the backers that we are listening to are the users that have shown to have similar interests to the us.</p>
+                <h2>Technical Concepts</h2>
+                <%= image_tag "kmeans2.gif", class: "kmeans-gif", style: "width: 100%" %>
+                <p>This diagram illustrates the process in two dimensions. We have a selection of points on a grid, and we want to divide it into four clusters. Four starting points (seen above highlighted in green) are selected. These are the initial centers of each cluster. For every other data point, we calculate the distance to each of the centers and assign that point to the center that is closest to it. Once all the points have been assigned to a center, the centers are recalculated. Each center will move to the center of the points that are assigned to it. This is one iteration. The process then repeats, where each point will be reassigned to the center that is closest and the centers will be moved, until a specified number of iterations have taken place or the centers converge to a stable point.</p>
 
               </div>
 
               <div class="col-sm-4">
-                <p>Now imagine we get a chance to talk to everyone at our table and we find that we have the most similar interests to a specific user. We take note of that person so that we can keep in touch in the future. When they find any new projects that they would like to back they let us know since we will probably also find that project interesting as well.</p>
-                <p>After a busy day of networking and a full stomack we take the elevator back down to the lobby, we thank the receptionist for choosing such an amazing room for you and go home.</p>
-                <p>Now imagine an engine that does all of this with a single mouse click. Welcome to the beauty of Kickammender.</p> 
- 
-                <br>
-                <center>
-                <p><a class="btn" href="/auth/facebook"><i class="icon-facebook-1"></i>Get started</a></p>
-              </center>
+                <h2>Ruby Implementation</h2>
+                [add modal zoom]
+                <p><%= image_tag "cluster_method.jpg", width: "100%", style: "border-radius:10px;" %></p>
+                <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
+
               </div>
             </div>
           </div>
         </div>
 
+
+        <section class="slice">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1>Our Domain Model</h1>
+                <h2 class="subTitle">[this cries out for a diagram] What we built</h2>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+
+                <h2>How we classify Kickstarter users</h2>
+                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. Projects on Kickstarter are divided into 13 main categories, so for each each user, we generated a 13-dimensional profile that approximates their interest in each of the main categories based on which projects they've backed. Then we used the <em>k</em>-means algorithm to generate 65 clusters of similar users. 
+
+                <p>[statistical-type chart?]
+                  In our most recent clustering, we evaluated 9923 users who had backed more than 4 projects. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed.
+                </p>
+              </div>
+
+              <div class="col-sm-4">
+                <h2>[sweet diagram]</h2>
+                <p>ks_user
+                  projects they've backed
+                  scores
+                  center
+                  info
+                </p>
+                <p>
+                  center
+                  scores
+                  ks_users
+                </p>
+              </div>
+
+              <div class="col-sm-4">
+                <h2>How we classify users of our site</h2>
+                <p>Users of Kickammender sign in with Facebook. From the Facebook Graph API, we grab the user's likes. Each like on Facebook falls into one of roughly 150 categories. Just like we did for each Kickstarter user, we generate a 13-dimensional profile for our user, this time mapping the categories of their Facebook likes to project categories on Kickstarter.</p> 
+                <p>They are then assigned to the center that is closest to them by Euclidean distance, just as all of the other points in the dataset. The cluster with that center is now the user's cluster. In this cluster are all of the Kickstarter users that are most similar to the user of our site, and it is the projects that these users have backed that we use to generate our recommendations.
+              </div>
+            </div>
+          </div>
+        </section>
         <div id="wordCloudSlice" data-stellar-background-ratio="0.5">
           <div class="maskParent">
             <div class="paralaxMask"></div>
             <div class="paralaxText">
-              <img class="similar-image" src="/assets/Facebook-Like-Button.jpg" alt="Facebook like button" width="10%">
+              <%= image_tag "facebook-like-click.jpg", size: "150x150", style: "border-radius: 15px" %>
             </div>
           </div>
         </div>
-
-        <section class="slice" id="about">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12">
-                <h1>Categorizing Users</h1>
-                <h2 class="subTitle">How to figure out a persons interests</h2>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-4">
-                <center>
-                  <%= image_tag "facebook-like-click.jpg", class: "no-border-rounded-image img-responsive", alt: "clicking a facebook like", width: "75%" %>
-                </center>
-              </div>
-
-              <div class="col-sm-4">
-                <h2>Classifying by Kickstarter Projects Backed</h2>
-                <p>The first question you may ask is how we classify a persons interests. We look at the categories of all of the projects the person has backed and give them scores based on that. For example if Alex backed 6 Art projects, another 3 projects that had to do with Theater, 2 Comics, 2 Design and 1 Film then we normalize these scores and give him a 100 in Art, 50 Theater, 33 in Comics and Design and 17 in Film. </p>
-              </div>
-
-              <div class="col-sm-4">
-                <h2>Classifying by Facebook Likes</h2>
-                <img src="/assets/youlikethis.jpg" alt="facebook like">
-                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
-              </div>
-            </div>
-          </div>
-        </section>
         <section class="slice noPaddingBottom color4">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <h1>Grouping Together Like-Minded Individuals</h1>
-                <h2 class="subTitle">How the K Means Clustering Algorithm Works</h2>
+                <h1>The end result</h1>
+                <h2 class="subTitle">How we generate recommendations</h2>
               </div>
             </div>
 
             <div class="row">
               <div class="col-sm-4">
-                <h2>K Means Clustering</h2>
-                <p>The next step is to group people with similar interests into groups or clusters. We do this by using a Machine Learning algorithm called K Means Clustering. This takes in data points and the number of groups we want and it outputs centers of the groups and the member of each group.</p> 
-                <p>We specify the number of clusters we want and the algorithm will separate the points or in this case the users into different clusters. This visual shows how 2 dimensional datapoints are separated into 4 clusters. This shows how the algorithm works in 2 dimensions. You can imagine the axiis being how much a person likes art and the other being Technology. Kickstarter however has 13 categories. We wrote the algorithm to work in 13 dimensions. Harder to visualize but same kind of principle.</p>
+                <h2>Finding the active projects</h2>
+                <p>Pulling out recommendations from here is pretty simple. First we look at all of the projects that users in the cluster have backed, and filter them to include only the ones that are still active (the ones you can still donate to). Then we count how many people in the cluster have backed each project and then rank them. This way we get a sense of which projects are representative of the cluster, and the most popular.
+<pre class="pre-scrollable prettyprint">@ranked_active_projects = Hash.new(0)
+ks_users_in_cluster.each do |user|
+  actives = user.ks_projects.where(:active => true)
+  actives.each do |project|
+    @ranked_active_projects[project] += 1
+  end
+end
+</pre>      
+                These are our first recommendations the the user. Better projects are going to tend to have more backers so we make an assumption that these might be slightly more appealing on average. </p> 
              </div>
               <div class="col-sm-4">
-                <%= image_tag "kmeans2.gif", width: "100%", class: "kmeans-gif" %>
-                <p> In this room is a round table with prolific kickstarter backers. All of these people have similar interests and personalities to you. The people that love theater, find comics mildly interesting, and hate technology will probably be placed at the same table. The receptionist was very good at placing people with similar interests at the same table. Some tables might have 50 people and others might only have 10 people.</p>
-                <p>At the dining table, people talk about the projects that they have backed and the user takes note of the projects that have been mentioned often that are still looking for funding. These are true recommendations. They are based off of actual backers and not what the people proposing the project say. More importantly, the backers that we are listening to are the users that have shown to have similar interests to the us.</p>
+
+                <h2>Recommendations</h2>
+                <p>We pull out the top two and offer them to the user. We also add a random pick, which may come from. This is in part to allow the to escape their cluster if they've been classified poorly, and also to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. </p>
 
               </div>
 
               <div class="col-sm-4">
-                <h2>K-Means++</h2>
-                <p>One of the things we notice from this gif is that the clusters that are created are different depending on what seed values we start with. We implemented some additional logic which is called K-Means++ which was proposed in 2007 as a way to choose seed points that will let the K-Means algorithm choose better clusters.</p> 
+                <h2>A similar user</h2>
+In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.
 
-                <p>We went onto kickstarter and scraped data from 5,000 users that had backed numerous projects. We saw which projects they had backed and the categories of these projects. With this information we had 5,000 data points. A rule of thumb in data science is that a good number of clusters, K = sqrt(n/2). This is from [http://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set#cite_note-1](wikipedia). This evaluates to 50 clusters. To make an intelligent selection about the 50 seeds we need, we run the K-Means++ algorithm. The machine learning algorithm is then run and we obtain 50 groups that contain kickstarter users with similar interests. When we get a new user to our app, we look at their facebook likes and map these likes to the 13 broad kickstarter categories. We then calculate the distance of the users score to each of the cluster centers. We select the nearest cluster to the user and assign that user to that group. To give a user a recommendation, we look at the active projects that other people in the users cluster have backed. We rank these in order of how many people in the certain cluster have backed it and provide it to the user. </p>
+                <p><pre class="prettyprint">
+@most_similar = ks_users_in_cluster.min_by do |user|
+  Kmeans.distance(@user.scores, user.scores)
+end
+</pre></p>
+                <div class="col-sm-8">
+                <h2>[a diagram that spans two columns]</h2>
+                <p> </p> 
+                </div>
 
                 <br>
                 <center>
-                <p><a class="btn" href="/auth/facebook"><i class="icon-facebook-1"></i>Get started</a></p>
               </center>
               </div>
             </div>
           </div>
         </section>
-        <section class="slice" id="about">
+        <section class="slice">
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
                 <h1>Getting Feedback from Users</h1>
-                <h2 class="subTitle">Having the user train our engine to suit their exact personality</h2>
+                <h2 class="subTitle">Having the user train our engine to suit their tastes</h2>
               </div>
             </div>
 
             <div class="row">
               <div class="col-sm-4">
+                <h2>Limitations</h2>
+                <p>We picked Facebook likes to classify a user mostly because it is convenient &mdash; you just have to sign in with a single click and the rest is taken care of. So far, Facebook likes have proven to be a reasonable approximation, but there are better ways and we recognize the limitations of this method. So we wanted to build a system that allowed us to improve our recommendations with user feedback. 
+
+                <p>We've allowed users rate their recommendations wtih a thumbs up or a thumbs down. We record this feedback in our database and dynamically adjust their score with each click. The next time they ask for recommendations, their scores may be different enough that they are assigned to a new cluster. If not, they will still receive a new set of recommendations from the same cluster, as projects that a user has already rated are excluded. This new cluster will hopefully have a selection of projects that are more appealing to the user.</p>
                 <center>
                 </center>
               </div>
 
               <div class="col-sm-4">
-              <p>We want to make these recommendations very personal to the user. As time goes by and the user uses the site more and more, we want our engine to adapt to the users needs. For each recommendation we give, we look at if the user liked it or not. When a user liked a project that is in the food category, we change his score to represent this. It would be the similar to if he liked a food on facebook. The next time he logs onto the site, he may be closer to another cluster that is more Food friendly. 
+                <h2>The user's profile</h2>
+              <p>Since we are recording both positive and negative feedback, we built an interface for users to take a look through the projects they have liked. This means that they can browse through some recommendations, rate them up or down, and then come back later to see what they've liked. If you're looking for a Kickstarter project to back, this can really help a lot. 
               </p>
+              <p>Since we also provide a Kickstarter user who we calculated to be most similar, we allow our users to follow them. We thought that maybe if you find someone who has backed a lot of projects that you find interesting, you could keep track of them and know when they've backed something new. The feature as currently implemented is mostly a demonstration rather than a functional tool. </p>
               </div>
 
               <div class="col-sm-4">
                 <h2>Classifying by Facebook Likes</h2>
-                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
+                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p>
+                <p>We had a lot of fun building this. Let us know what you think.</p><p class="pull-right"><%= link_to "Joe", "http://www.twitter.com/jnoconor"%> and <%= link_to "Michael", "http://www.twitter.com/mpolycar" %></p>
+                </div>
+                <div class="col-sm-4 pull-right"> 
+                <i class="icon-star iconBig pull-right"></i>
               </div>
             </div>
           </div>
         </section>
+      </div>
 
