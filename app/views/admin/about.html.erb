@@ -88,6 +88,8 @@
 
               <div class="col-sm-4">
                 <h2>Ruby Implementation</h2>
+                [add modal zoom]
+                <p><%= image_tag "cluster_method.jpg", width: "100%", style: "border-radius:10px;" %></p>
                 <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
                 <pre class="prettyprint code-scrollable-block">
 def cluster(k,points,max_iters)
@@ -182,21 +184,35 @@ end # end of cluster method
             <div class="row">
               <div class="col-sm-4">
                 <h2>Finding the active projects</h2>
-                <p>stuff</p> 
-                <p>more stuff</p>
+                <p>Pulling out recommendations from here is pretty simple. First we look at all of the projects that users in the cluster have backed, and filter them to include only the ones that are still active (the ones you can still donate to). Then we count how many people in the cluster have backed each project and then rank them. This way we get a sense of which projects are representative of the cluster, and the most popular.
+<pre class="pre-scrollable prettyprint">@ranked_active_projects = Hash.new(0)
+ks_users_in_cluster.each do |user|
+  actives = user.ks_projects.where(:active => true)
+  actives.each do |project|
+    @ranked_active_projects[project] += 1
+  end
+end
+</pre>      
+                These are our first recommendations the the user. Better projects are going to tend to have more backers so we make an assumption that these might be slightly more appealing on average. </p> 
              </div>
               <div class="col-sm-4">
                 <h2>Recommendations</h2>
-                <p>st</p>
-                <p>uff</p>
-
+                <p>We pull out the top two and offer them to the user. We also add a random pick, which may come from. This is in part to allow the to escape their cluster if they've been classified poorly, and also to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. </p>
               </div>
 
               <div class="col-sm-4">
                 <h2>A similar user</h2>
-                <p>similar</p> 
+In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.
 
-                <p>user</p>
+                <p><pre class="prettyprint">
+@most_similar = ks_users_in_cluster.min_by do |user|
+  Kmeans.distance(@user.scores, user.scores)
+end
+</pre></p>
+                <div class="col-sm-8">
+                <h2>[a diagram that spans two columns]</h2>
+                <p> </p> 
+                </div>
 
                 <br>
                 <center>
@@ -216,18 +232,28 @@ end # end of cluster method
 
             <div class="row">
               <div class="col-sm-4">
+                <h2>Limitations</h2>
+                <p>We picked Facebook likes to classify a user mostly because it is convenient &mdash; you just have to sign in with a single click and the rest is taken care of. So far, Facebook likes have proven to be a reasonable approximation, but there are better ways and we recognize the limitations of this method. So we wanted to build a system that allowed us to improve our recommendations with user feedback. 
+
+                <p>We've allowed users rate their recommendations wtih a thumbs up or a thumbs down. We record this feedback in our database and dynamically adjust their score with each click. The next time they ask for recommendations, their scores may be different enough that they are assigned to a new cluster. If not, they will still receive a new set of recommendations from the same cluster, as projects that a user has already rated are excluded. This new cluster will hopefully have a selection of projects that are more appealing to the user.</p>
                 <center>
                 </center>
               </div>
 
               <div class="col-sm-4">
-              <p>We want to make these recommendations very personal to the user. As time goes by and the user uses the site more and more, we want our engine to adapt to the users needs. For each recommendation we give, we look at if the user liked it or not. When a user liked a project that is in the food category, we change his score to represent this. It would be the similar to if he liked a food on facebook. The next time he logs onto the site, he may be closer to another cluster that is more Food friendly. 
+                <h2>The user's profile</h2>
+              <p>Since we are recording both positive and negative feedback, we built an interface for users to take a look through the projects they have liked. This means that they can browse through some recommendations, rate them up or down, and then come back later to see what they've liked. If you're looking for a Kickstarter project to back, this can really help a lot. 
               </p>
+              <p>Since we also provide a Kickstarter user who we calculated to be most similar, we allow our users to follow them. We thought that maybe if you find someone who has backed a lot of projects that you find interesting, you could keep track of them and know when they've backed something new. The feature as currently implemented is mostly a demonstration rather than a functional tool. </p>
               </div>
 
               <div class="col-sm-4">
                 <h2>Classifying by Facebook Likes</h2>
-                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p> 
+                <p>What happens when we have a new user that hasnt backed any kickstarter projects? We look at his facebook likes and map the facebook likes categories to the kickstarter categories. Say Albert hasn't backed any kickstarter projects but he has liked 6 Artists pages on facebook, 3 theaters, 2 comic books, 2 design pages and 1 movie then he would be given the same score as Alex.</p>
+                <p>We had a lot of fun building this. Let us know what you think.</p><p class="pull-right"><%= link_to "Joe", "http://www.twitter.com/jnoconor"%> and <%= link_to "Michael", "http://www.twitter.com/mpolycar" %></p>
+                </div>
+                <div class="col-sm-4 pull-right"> 
+                <i class="icon-star iconBig pull-right"></i>
               </div>
             </div>
           </div>
