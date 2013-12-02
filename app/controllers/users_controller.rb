@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :set_user_from_session, only: [:adjust_score, :follow, :show, :delete_saved]
+  before_action :set_user_from_session, only: [:adjust_score, :follow, :show]
 
   def adjust_score
     set_user_from_session
@@ -15,19 +15,18 @@ class UsersController < ApplicationController
     @user.assign_center
     message = { message: 'first-column' }
     render :json => message
-  end
-
-  def delete_saved
-    rec = @user.recommendations.find(params[:rec_id])
-    rec.update(:useful => nil)
-
-    render :json => "success"
+    # redirect_to recommendations_path
   end
   
   def follow
     @user.user_follows.find_or_create_by(:ks_user_id => params[:most_similar_id])    
     redirect_to user_path(@user)
   end
+
+  def delete_saved
+    
+  end
+
 
   def create
     api = Koala::Facebook::API.new(session[:access_token])

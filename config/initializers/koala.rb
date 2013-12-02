@@ -6,3 +6,4 @@ when 'production'
 end
 
 FacebookOAuth = Koala::Facebook::OAuth.new('320530461418360', 'd555fdb9767c092d4d1179ba8924a0fa', url_for_callback)
+
