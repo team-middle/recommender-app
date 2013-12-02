@@ -89,7 +89,7 @@
                 <h2>Ruby Implementation</h2>
                 <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
 
-                <p> code and stuff</p>
+                <p><%= image_tag "cluster_method.jpg", width: "100%" %></p>
               </div>
             </div>
           </div>
@@ -143,7 +143,6 @@
             <div class="paralaxMask"></div>
             <div class="paralaxText">
               <%= image_tag "facebook-like-click.jpg", size: "150x150", style: "border-radius: 15px" %>
-                <img src="/assets/youlikethis.jpg" alt="facebook like">
             </div>
           </div>
         </div>
@@ -158,22 +157,22 @@
 
             <div class="row">
               <div class="col-sm-4">
-                <h2>K Means Clustering</h2>
-                <p>The next step is to group people with similar interests into groups or clusters. We do this by using a Machine Learning algorithm called K Means Clustering. This takes in data points and the number of groups we want and it outputs centers of the groups and the member of each group.</p> 
-                <p>We specify the number of clusters we want and the algorithm will separate the points or in this case the users into different clusters. This visual shows how 2 dimensional datapoints are separated into 4 clusters. This shows how the algorithm works in 2 dimensions. You can imagine the axiis being how much a person likes art and the other being Technology. Kickstarter however has 13 categories. We wrote the algorithm to work in 13 dimensions. Harder to visualize but same kind of principle.</p>
+                <h2>Finding the active projects</h2>
+                <p>stuff</p> 
+                <p>more stuff</p>
              </div>
               <div class="col-sm-4">
-                <img class="kmeans-gif" src="/assets/kmeans2.gif" width="100%" alt="K Means Clustering gif" loop=infinite>
-                <p> In this room is a round table with prolific kickstarter backers. All of these people have similar interests and personalities to you. The people that love theater, find comics mildly interesting, and hate technology will probably be placed at the same table. The receptionist was very good at placing people with similar interests at the same table. Some tables might have 50 people and others might only have 10 people.</p>
-                <p>At the dining table, people talk about the projects that they have backed and the user takes note of the projects that have been mentioned often that are still looking for funding. These are true recommendations. They are based off of actual backers and not what the people proposing the project say. More importantly, the backers that we are listening to are the users that have shown to have similar interests to the us.</p>
+                <h2>Recommendations</h2>
+                <p>st</p>
+                <p>uff</p>
 
               </div>
 
               <div class="col-sm-4">
-                <h2>K-Means++</h2>
-                <p>One of the things we notice from this gif is that the clusters that are created are different depending on what seed values we start with. We implemented some additional logic which is called K-Means++ which was proposed in 2007 as a way to choose seed points that will let the K-Means algorithm choose better clusters.</p> 
+                <h2>A similar user</h2>
+                <p>similar</p> 
 
-                <p>We went onto kickstarter and scraped data from 5,000 users that had backed numerous projects. We saw which projects they had backed and the categories of these projects. With this information we had 5,000 data points. A rule of thumb in data science is that a good number of clusters, K = sqrt(n/2). This is from [http://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set#cite_note-1](wikipedia). This evaluates to 50 clusters. To make an intelligent selection about the 50 seeds we need, we run the K-Means++ algorithm. The machine learning algorithm is then run and we obtain 50 groups that contain kickstarter users with similar interests. When we get a new user to our app, we look at their facebook likes and map these likes to the 13 broad kickstarter categories. We then calculate the distance of the users score to each of the cluster centers. We select the nearest cluster to the user and assign that user to that group. To give a user a recommendation, we look at the active projects that other people in the users cluster have backed. We rank these in order of how many people in the certain cluster have backed it and provide it to the user. </p>
+                <p>user</p>
 
                 <br>
                 <center>
