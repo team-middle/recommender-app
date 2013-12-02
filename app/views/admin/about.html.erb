@@ -185,7 +185,7 @@ end # end of cluster method
               <div class="col-sm-4">
                 <h2>Finding the active projects</h2>
                 <p>Pulling out recommendations from here is pretty simple. First we look at all of the projects that users in the cluster have backed, and filter them to include only the ones that are still active (the ones you can still donate to). Then we count how many people in the cluster have backed each project and then rank them. This way we get a sense of which projects are representative of the cluster, and the most popular.
-<pre class="pre-scrollable prettyprint">@ranked_active_projects = Hash.new(0)
+<pre class="pre-scrollable prettyprint code-scrollable-block">@ranked_active_projects = Hash.new(0)
 ks_users_in_cluster.each do |user|
   actives = user.ks_projects.where(:active => true)
   actives.each do |project|
@@ -204,7 +204,7 @@ end
                 <h2>A similar user</h2>
 In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.
 
-                <p><pre class="prettyprint">
+                <p><pre class="prettyprint code-scrollable-block">
 @most_similar = ks_users_in_cluster.min_by do |user|
   Kmeans.distance(@user.scores, user.scores)
 end
