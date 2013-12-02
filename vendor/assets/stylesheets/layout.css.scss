@@ -114,8 +114,16 @@ h2.rec-title {
 	min-height: 50px;
 }
 
+
 .gen-more {
 	margin-bottom: 50px;
+}
+
+pre.code-scrollable-block {
+  white-space: pre;
+  overflow-x: auto;
+  word-wrap: normal;
+
 }
 
 .container .jumbotron{border-radius: 0;}

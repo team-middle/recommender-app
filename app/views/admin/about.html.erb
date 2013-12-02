@@ -1,3 +1,4 @@
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=ruby&skin=desert"></script>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
   <header id="displayHeader" class="navbar-fixed-top" role="banner">
     <div class="container">
@@ -90,7 +91,31 @@
                 [add modal zoom]
                 <p><%= image_tag "cluster_method.jpg", width: "100%", style: "border-radius:10px;" %></p>
                 <p>The process can be easily scaled to an arbitrary number of dimensions and an arbitrary number of groups. In our case, we have 13 dimensions along which we classify users and about 65 distinct groups. </p>
-
+                <pre class="prettyprint code-scrollable-block">
+def cluster(k,points,max_iters)
+  seeds = kmplusplus(k,points)
+  self.assignments = {}
+  seeds.each do |seed|
+    self.assignments[seed] = []
+  end
+  points.each do |point|
+    closest_seed = seeds.min_by do |seed|
+      distance(seed, point)
+    end
+    self.assignments[closest_seed] << point
+  end
+  self.centers = assignments.keys
+  iter = 0
+  begin 
+    old_centers = self.centers.dup
+    self.centers = calculate_new_centers(k)
+    self.centers != old_centers ? changed = true : changed = false
+    reassign_groups(centers)
+    iter += 1
+  end  while iter <= max_iters && changed
+  self.assignments
+end # end of cluster method 
+                 </pre>
               </div>
             </div>
           </div>
@@ -152,7 +177,7 @@
               <div class="col-sm-4">
                 <h2>Finding the active projects</h2>
                 <p>Pulling out recommendations from here is pretty simple. First we look at all of the projects that users in the cluster have backed, and filter them to include only the ones that are still active (the ones you can still donate to). Then we count how many people in the cluster have backed each project and then rank them. This way we get a sense of which projects are representative of the cluster, and the most popular.
-<pre class="pre-scrollable prettyprint">@ranked_active_projects = Hash.new(0)
+<pre class="pre-scrollable prettyprint code-scrollable-block">@ranked_active_projects = Hash.new(0)
 ks_users_in_cluster.each do |user|
   actives = user.ks_projects.where(:active => true)
   actives.each do |project|
@@ -173,7 +198,7 @@ end
                 <h2>A similar user</h2>
 In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.
 
-                <p><pre class="prettyprint">
+                <p><pre class="prettyprint code-scrollable-block">
 @most_similar = ks_users_in_cluster.min_by do |user|
   Kmeans.distance(@user.scores, user.scores)
 end
