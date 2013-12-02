@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131201013044) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "centers", force: true do |t|
     t.integer "art_score",         default: 0
     t.integer "comics_score",      default: 0
@@ -37,8 +34,8 @@ ActiveRecord::Schema.define(version: 20131201013044) do
     t.integer "ks_project_id"
   end
 
-  add_index "ks_project_backers", ["ks_project_id"], name: "index_ks_project_backers_on_ks_project_id", using: :btree
-  add_index "ks_project_backers", ["ks_user_id"], name: "index_ks_project_backers_on_ks_user_id", using: :btree
+  add_index "ks_project_backers", ["ks_project_id"], name: "index_ks_project_backers_on_ks_project_id"
+  add_index "ks_project_backers", ["ks_user_id"], name: "index_ks_project_backers_on_ks_user_id"
 
   create_table "ks_projects", force: true do |t|
     t.string  "url"
@@ -54,7 +51,7 @@ ActiveRecord::Schema.define(version: 20131201013044) do
     t.integer "updates_count"
     t.integer "comments_count"
     t.boolean "scraped"
-    t.text    "description"
+    t.string  "description"
     t.string  "end_date"
     t.string  "image_url"
     t.boolean "active"
@@ -81,7 +78,7 @@ ActiveRecord::Schema.define(version: 20131201013044) do
     t.string  "image_url"
     t.string  "name"
     t.string  "joined"
-    t.text    "description"
+    t.string  "description"
     t.string  "location"
     t.text    "bio"
   end
@@ -94,8 +91,8 @@ ActiveRecord::Schema.define(version: 20131201013044) do
     t.boolean  "useful"
   end
 
-  add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id", using: :btree
-  add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
+  add_index "recommendations", ["ks_project_id"], name: "index_recommendations_on_ks_project_id"
+  add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id"
 
   create_table "user_follows", force: true do |t|
     t.integer  "user_id"

@@ -43,7 +43,7 @@ set :server_ip, '162.243.246.245' # This should be your server IP
 role :web, "#{server_ip}"
 role :app, "#{server_ip}"
 role :db, "#{server_ip}", :primary => true
-
+load 'deploy/assets'
 # set :log_level, :debug
 # set :pty, true
 desc "tail log files"
