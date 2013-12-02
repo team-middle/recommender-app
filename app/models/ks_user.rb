@@ -139,6 +139,17 @@ class KsUser < ActiveRecord::Base
           user.ks_project_backers.find_or_create_by(:ks_project => ks_project)
           puts "scraped #{ks_project.url}"
         end
+
+        user.image_url = user_page.xpath("//meta[@property='og:image']/@content").text
+        user.name = user_page.xpath("//meta[@property='kickstarter:name']/@content").text
+        user.joined = user_page.xpath("//meta[@property='kickstarter:joined']/@content").text
+        user.description = user_page.xpath("//meta[@property='og:description']/@content").text
+        user.location = user_page.css("span.location").text
+
+        bio_url = "http://www.kickstarter.com/profiles/" + user.url.split("/").last + "/bio"
+        bio_page = Nokogiri::HTML(open(bio_url))
+        
+        user.bio = bio_page.css("div#profile-bio-full p").text
         user.update(:scraped => true)
         user.save
         puts "    finished scraping #{user.url}, #{user.id}"
@@ -157,6 +168,11 @@ class KsUser < ActiveRecord::Base
       user.joined = user_page.xpath("//meta[@property='kickstarter:joined']/@content").text
       user.description = user_page.xpath("//meta[@property='og:description']/@content").text
       user.location = user_page.css("span.location").text
+
+      bio_url = "http://www.kickstarter.com/profiles/" + user.url.split("/").last + "/bio"
+      bio_page = Nokogiri::HTML(open(bio_url))
+      user.bio = bio_page.css("div#profile-bio-full p").text
+
       user.save
     end
   end
