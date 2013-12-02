@@ -183,6 +183,9 @@ self.center = distances.sort_by {|center, distance| distance}.first[0]</pre>
             </div>
 
             <div class="row">
+
+
+
               <div class="col-sm-4">
                 <h2>Finding the active projects</h2>
                 <p>Pulling out recommendations from here is pretty simple. First we look at all of the projects that users in the cluster have backed, and filter them to include only the ones that are still active (the ones you can still donate to). Then we count how many people in the cluster have backed each project and then rank them. This way we get a sense of which projects are representative of the cluster, and the most popular.
@@ -196,32 +199,34 @@ end
 </pre>      
                 These are our first recommendations the the user. Better projects are going to tend to have more backers so we make an assumption that these might be slightly more appealing on average. </p> 
              </div>
-              <div class="col-sm-4">
 
-                <h2>Recommendations</h2>
-                <p>We pull out the top two and offer them to the user. We also add a random pick, which may be any active project in the database. This is in part to allow the user to escape their cluster if they've been classified poorly, and in part to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. A random pick provides some mitigation.</p>
+             <div id="outer right" class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-6">
 
-              </div>
+                      <h2>Recommendations</h2>
+                      <p>We pull out the top two and offer them to the user. We also add a random pick, which may be any active project in the database. This is in part to allow the user to escape their cluster if they've been classified poorly, and in part to let them keep looking for projects even after they have seen all of the active projects in their cluster. There is some randomness in the algorithm, so in some cases a user may be in a very small cluster with a very small number of active projects. A random pick provides some mitigation.</p>
 
-              <div class="col-sm-4">
-                <h2>A similar user</h2>
-In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.
+                    </div>
+                    <div class="col-sm-6 pull-right">
+                      <h2>A similar user</h2>
+                     <p> In addition to our recommendations, we identify the person in their cluster who we have gauged to be most similar to them, again by Euclidean distance.</p>
 
                 <p><pre class="prettyprint code-scrollable-block">
 @most_similar = ks_users_in_cluster.min_by do |user|
   Kmeans.distance(@user.scores, user.scores)
 end
 </pre></p>
-                <div class="col-sm-8">
-                <h2>[a diagram that spans two columns]</h2>
-                <p> </p> 
+            </div> <!-- end 2/3 row -->
+            <div class="row">
+                      <div class="col-md-11 pull-right" style="padding-top:30px">
+                      <%= image_tag "user_recommendations_diagrams.jpg", width: "100%", style: "border-radius: 25px" %>
+                      <p> </p> 
+                      </div>
+                    </div>
+                    </div>
+                  </div>
                 </div>
-
-                <br>
-                <center>
-              </center>
-              </div>
-            </div>
           </div>
         </section>
         <section class="slice">
