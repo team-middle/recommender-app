@@ -174,7 +174,7 @@
 
       $.ajax({
         type: "POST",
-        url: $form.attr("action") + "?&authenticity_token=" + auth_token,
+        url: $form.attr("action") + "?&authenticity_token=" + encodeURIComponent(auth_token),
         data: {feedback: feedback, url: url},
         dataType: "script",
         complete: function(returnData){
