@@ -102,37 +102,28 @@
             <div class="row">
               <div class="col-xs-12">
                 <h1>Our Domain Model</h1>
-                <h2 class="subTitle">[this cries out for a diagram] What we built</h2>
+                <h2 class="subTitle">What we built</h2>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col-sm-12">
+                <center><%= image_tag "user_score_diagram.jpg" %></center>
 
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-6">
                 <h2>How we classify Kickstarter users</h2>
-                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. Projects on Kickstarter are divided into 13 main categories, so for each each user, we generated a 13-dimensional profile that approximates their interest in each of the main categories based on which projects they've backed. Then we used the <em>k</em>-means algorithm to generate 65 clusters of similar users. 
+                <p>We collected data on tens of thousands of Kickstarter users and Kickstarter projects. With all of the associations, we have a database of more than one million records. Each project on Kickstarter belongs to one of 13 main categories, which we use to classify the users in our database. For each each user, we generated a 13-dimensional profile that approximates their interest in each of the main categories based on which projects they've backed. These are the backers scores' in the diagram above. Then we used the <em>k</em>-means algorithm to generate clusters of similar users. 
 
-                <p>[statistical-type chart?]
-                  In our most recent clustering, we evaluated 9923 users who had backed more than 4 projects. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed.
+                <p>In our most recent clustering, we evaluated 9923 users who had each backed more than 4 projects and divided them into 65 clusters. The largest cluster had 932 users, with an average of ~23 recent projects backed, while the smallest had only 4, with an average of more than 30 recent projects backed. The cluster that a user belongs to is represented by the 
                 </p>
+
               </div>
 
-              <div class="col-sm-4">
-                <h2>[sweet diagram]</h2>
-                <p>ks_user
-                  projects they've backed
-                  scores
-                  center
-                  info
-                </p>
-                <p>
-                  center
-                  scores
-                  ks_users
-                </p>
-              </div>
-
-              <div class="col-sm-4">
+              <div class="col-sm-6">
                 <h2>How we classify users of our site</h2>
                 <p>Users of Kickammender sign in with Facebook. From the Facebook Graph API, we grab the user's likes. Each like on Facebook falls into one of roughly 150 categories. Just like we did for each Kickstarter user, we generate a 13-dimensional profile for our user, this time mapping the categories of their Facebook likes to project categories on Kickstarter.</p> 
                 <p>They are then assigned to the center that is closest to them by Euclidean distance, just as all of the other points in the dataset. The cluster with that center is now the user's cluster. In this cluster are all of the Kickstarter users that are most similar to the user of our site, and it is the projects that these users have backed that we use to generate our recommendations.
