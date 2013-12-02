@@ -1,10 +1,17 @@
 @font-face {
   font-family: 'custom-icons';
-  src: url('custom-icons.eot?94416284');
+ /* src: url('custom-icons.eot?94416284');
   src: url('custom-icons.eot?94416284#iefix') format('embedded-opentype'),
        url('custom-icons.woff?94416284') format('woff'),
        url('custom-icons.ttf?94416284') format('truetype'),
        url('custom-icons.svg?94416284#custom-icons') format('svg');
+*/
+src: url('custom-icons.eot');
+  src: url('custom-icons.eot') format('embedded-opentype'),
+       url('custom-icons.woff') format('woff'),
+       url('custom-icons.ttf') format('truetype'),
+       url('custom-icons.svg') format('svg');
+
   font-weight: normal;
   font-style: normal;
 }
