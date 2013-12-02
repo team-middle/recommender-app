@@ -8,7 +8,7 @@ class Recommendation < ActiveRecord::Base
       rec.ks_project.parent_category.split.first.downcase
       rescue
         "failed with project id: #{rec.ks_project.id}"
-        nil
+        ""
       end
     end.uniq
   end
