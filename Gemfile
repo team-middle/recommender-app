@@ -36,7 +36,7 @@ end
 #                             :github => 'anjlab/bootstrap-rails'
 
 gem 'rails_12factor'
-#gem 'pg'
+gem 'pg'
 gem 'omniauth-facebook'
 gem 'koala', '~> 1.3'
 
