@@ -20,7 +20,7 @@
 
               <div class="portfolio-items isotopeWrapper clearfix imgHover">
                 <% @liked_recs.each do |rec| %>
-                <article class="col-sm-4 isotopeItem profile-recommendation <%= rec.ks_project.parent_category.downcase %>">
+                <article class="col-sm-4 isotopeItem profile-recommendation <%= rec.ks_project.parent_category.downcase if rec.ks_project.parent_category %>">
                   <section class="imgWrapper">
                     <a href="http://www.kickstarter.com<%=rec.ks_project.url %>"> <img alt="" src="<%= rec.ks_project.image_url %>" class="img-responsive">
                   </section>
