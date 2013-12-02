@@ -1,7 +1,7 @@
 <!-- Preloader -->
 <div id="preloader">
   <div id="status">
-    <img src="assets/loader.gif" alt=""/><h1 class="noSubtitle">Generating your personal results...</h1>
+    <%= image_tag "loader.gif" %><h1 class="noSubtitle">Generating your personal results...</h1>
   </div>
 </div>
 <!-- Preloader -->
@@ -19,7 +19,7 @@
         <% @active_recs.take(2).each_with_index do |rec, i| %>
         <div class="col-md-4 col-sm-6 column-<%=i%>">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>" target="_blank"><img src="<%= rec.ks_project.image_url %>" class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>" target="_blank"><%= image_tag "#{rec.ks_project.image_url}", class: "img-responsive rec-image" %></a>
             </section>
             <h2 class="rec-title"><%= link_to rec.ks_project.title, "http://www.kickstarter.com" + rec.ks_project.url, target: '_blank' %></h2>
 <!-- descriptions --> 
