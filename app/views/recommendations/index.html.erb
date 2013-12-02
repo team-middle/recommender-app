@@ -156,6 +156,7 @@
       var $form = $(this).parent();
       var $inputs = $form.find('input');
       var auth_token = $form.find('input[name="authenticity_token"]').val();
+      var encoded_token = encodeURIComponent(auth_token);
       var url = $form.find('input[name="url"]').val();
       var feedback = $(this).attr('for').split("_")[1];
 
@@ -174,7 +175,7 @@
 
       $.ajax({
         type: "POST",
-        url: $form.attr("action") + "?&authenticity_token=" + encodeURIComponent(auth_token),
+        url: $form.attr("action") + "?&authenticity_token=" + encoded_token,
         data: {feedback: feedback, url: url},
         dataType: "script",
         complete: function(returnData){
