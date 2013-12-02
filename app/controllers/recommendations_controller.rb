@@ -30,7 +30,8 @@ before_action :set_user_from_session, :only => [:index, :create]
     end
 
     @ranked_active_projects.keys.each do |project|
-      Recommendation.find_or_create_by(:user => @user, :ks_project => project)
+      rec_project = KsProject.where(:url => project.url).min_by { |p| p.id } # a defensive hack to ensure that the scraped project is the one that's recommended, and not an unscraped duplicate
+      Recommendation.find_or_create_by(:user => @user, :ks_project => rec_project)
     end
 
     @array = @ranked_active_projects.sort_by { |k,v| v }.reverse
