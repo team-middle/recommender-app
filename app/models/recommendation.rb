@@ -4,7 +4,11 @@ class Recommendation < ActiveRecord::Base
 
   def self.display_categories(rec_array)
     rec_array.collect do |rec|
+      begin
       rec.ks_project.parent_category.split.first.downcase
+      rescue
+        "failed with project id: #{rec.ks_project.id}"
+      end
     end.uniq
   end
 
