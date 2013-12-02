@@ -10,7 +10,7 @@
 #role :db,  "your slave db-server here"
 #
 # if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+#after "deploy:restart", "deploy:cleanup"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -43,6 +43,7 @@ set :server_ip, '162.243.246.245' # This should be your server IP
 role :web, "#{server_ip}"
 role :app, "#{server_ip}"
 role :db, "#{server_ip}", :primary => true
+after "deploy:restart", "deploy:cleanup"
 load 'deploy/assets'
 # set :log_level, :debug
 # set :pty, true
