@@ -22,5 +22,4 @@ class Center < ActiveRecord::Base
     end
   end
 
-
 end

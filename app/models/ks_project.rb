@@ -65,6 +65,14 @@ class KsProject < ActiveRecord::Base
     end
   end
 
+  def self.scrape_video(projects)
+    projects.each do |project|
+      project_backers_page = Nokogiri::HTML(open("http://www.kickstarter.com/#{project.url}/backers"))
+      project.video_url = project_backers_page.xpath("//meta[@property='twitter:player:stream']/@content").text
+      project.save
+    end
+  end
+
   def self.scrape(projects)
     projects.each do |project|
       if project.scraped
@@ -110,5 +118,33 @@ class KsProject < ActiveRecord::Base
       KsProject.where(:url => project.url).size > 1
     end
   end
+
+  def self.clean_duplicates(dups)
+    # find all of the ks_project_ids for a given url
+    # collect all of the users that have backed it in total
+    # check each user to see if a ks_project_backer relation has been created for the original project
+    # if not, create the record
+    # if so, move on
+    
+    dups.each do |duplicate|
+      group_of_same = KsProject.where(:url => duplicate.url)
+      orig = group_of_same.min_by { |p| p.id }
+
+      backers = group_of_same.collect do |clone|
+        clone.ks_users
+      end.flatten.uniq
+
+      backers.each do |user|
+        orig.ks_users.find_or_create_by(:url => user.url)
+      end
+      orig.save
+
+      group_of_same.reject! { |p| p.id == orig.id }
+      group_of_same.each do |clone|
+        clone.destroy
+      end
+    end
+  end
+
 
 end
