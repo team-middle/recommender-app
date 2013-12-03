@@ -15,7 +15,7 @@ class KsProject < ActiveRecord::Base
 
     end_time > Time.now
     rescue
-      puts "error"
+      puts "#{self.id}: #{self.end_date}"
     end
   end
 
