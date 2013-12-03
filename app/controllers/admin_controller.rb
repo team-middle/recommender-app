@@ -4,6 +4,7 @@ class AdminController < ApplicationController
 
   def about
     set_user_from_session
+    render :layout => false
   end
 
   def reset

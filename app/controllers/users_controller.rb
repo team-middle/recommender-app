@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def adjust_score
     set_user_from_session
-    rated_project = KsProject.find_by(:url => params[:url])
+    rated_project = KsProject.where(:url => params[:url]).min_by {|p| p.id }
     recommendation = Recommendation.find_or_create_by(:user => @user, :ks_project => rated_project)
     recommendation.update(:useful => params[:feedback])
 
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @followed_users = follows.collect do |follow|
       follow.ks_user
     end
-
+    render :layout => false
   end
 
 

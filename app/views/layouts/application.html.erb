@@ -59,12 +59,23 @@
           <a class="navbar-brand" href="/">Kickammender.</a> 
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
+                        <!-- AddThis Button BEGIN -->
+              <div class="addthis_toolbox addthis_default_style addthis_32x32_style pull-right" addthis:url="http://www.kickammender.com" style="display:inline-block">
+              <ul class="socialNetwork">
+              <li><a class="addthis_button_facebook tips" data-original-title="share this on Facebook"></a></li>
+              <li><a class="addthis_button_twitter tips" data-original-title="share this on Twitter"></a></li>
+              <li><a class="addthis_button_hackernews tips" data-original-title="share this on Hacker News"></a></li>
+              <li><a class="addthis_button_reddit tips" data-original-title="share this on Reddit"></a></li>
+
+              </div>
+              <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+              <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529a94c531794907"></script>
+              <!-- AddThis Button END -->
           <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="/">Home</a> </li>
-            <li><% if @user %><a href="/recommendations">Your Recs</a> </li>
-            <li><a href="/users/<%= @user.id %>#favorites">Your Profile</a> </li>
+            <li><% if @user %><a href="/recommendations">Get More Recs</a> </li>
+            <li><a href="/users/<%= @user.id %>#favorites">Your Favorites</a> </li>
             <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
-            <li><a href="/about#about">How This Works</a> </li>
+            <li><a href="/about">How This Works</a> </li>
           </ul>
         </div>
 
@@ -97,7 +108,11 @@
             </li>
           </ul>
         </div> 
-        <% unless @user %><a href="#start" class="homeBtn btn"><i class="icon-down">Get Started</i></a><% end %>
+        <% unless @user %><a href="#start" class="homeBtn btn"><i class="icon-down">Get Started</i></a>
+        <% else %>
+        <a href="/users/<%= @user.id %>#favorites" class="homeBtn btn"><i class="icon-star"></i>Go to your recs</a><br><br>
+        <a href="/sessions/logout" class="homeBtn btn #logout"><i class="icon-facebook-1"></i>Logout</a>
+        <% end %>
       </div>
     </div>
   </section>
@@ -112,13 +127,14 @@
   <section id="mainFooter">
     <div class="container" id="footer">
       <div class="row">
-        <div class="col-xs-4 pull-left">
+        <div class="col-xs-5 pull-left">
           <div class="footerWidget pull-left">
 
             <h3>  Made with <%= image_tag "brain-xxl.png", size: "20x20"%> by <a href="http://www.twitter.com/jnoconor">@jnoconor</a> and <a href="http://www.twitter.com/mpolycar">@mpolycar</a> in NYC.</h3>
+            <h3 class="tips" data-original-title="If you're from Kickstarter, we're sorry we've been scraping your site, though we bet your servers enjoyed the exercise. :-)">Not affiliated with Kickstarter in any way, just fans.</h3>
           </div>
         </div>
-        <div class="col-xs-4" align="center">
+        <div class="col-xs-3" align="center">
             <h3>Curious about how this works?</h3>
             <a class="btn" href="/about#about">Find out</a>
         </div>

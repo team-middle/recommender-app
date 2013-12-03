@@ -1,4 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>The Kickammender -- An Intelligent Recommendation Engine for Kickstarter</title>
+    <meta name="description" content="Kickammender is an intelligent recommendation engine for potential Kickstarter backers.">
+    <meta name="author" content="jnoconor and mpolycar">
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS
+    ================================================== -->
+    <!-- Bootstrap  -->
+    <%= stylesheet_link_tag "bootstrap.min" %>
+    <!-- web font  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet" type="text/css">
+    <!-- plugin css  -->
+    <%= stylesheet_link_tag "js-plugin/animation-framework/animate" %>
+    <%= stylesheet_link_tag "js-plugin/isotope/css/style" %>
+    <%= stylesheet_link_tag "flexslider" %>
 
+    <!-- icon fonts -->
+    <%= stylesheet_link_tag "custom-icons" %>
+    <%= stylesheet_link_tag "custom-icons-ie7" %>
+    <!-- Custom css -->
+    <%= stylesheet_link_tag "layout" %>
+    <%= stylesheet_link_tag "green" %>
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+    <%= javascript_include_tag "modernizr-2.6.1.min" %>
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon-144x144.png">
+  </head>
+<body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen">
+
+<!-- globalWrapper -->
+<div id="globalWrapper" class="localscroll">
+<!-- header -->
+  <header id="displayHeader" class="navbar-fixed-top" role="banner">
+    <div class="container">
+      <nav class="navbar navbar-default scrollMenu" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="/">Kickammender.</a> 
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="scrollTarget">
+                        <!-- AddThis Button BEGIN -->
+              <div class="addthis_toolbox addthis_default_style addthis_32x32_style pull-right" addthis:url="http://www.kickammender.com" style="display:inline-block">
+              <ul class="socialNetwork">
+              <li><a class="addthis_button_facebook tips" data-original-title="share this on Facebook"></a></li>
+              <li><a class="addthis_button_twitter tips" data-original-title="share this on Twitter"></a></li>
+              <li><a class="addthis_button_hackernews tips" data-original-title="share this on Hacker News"></a></li>
+              <li><a class="addthis_button_reddit tips" data-original-title="share this on Reddit"></a></li>
+
+              </div>
+              <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+              <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529a94c531794907"></script>
+              <!-- AddThis Button END -->
+          <ul class="nav navbar-nav pull-right">
+            <li><% if @user %><a href="/recommendations">Get More Recs</a> </li>
+            <li><a href="/users/<%= @user.id %>#favorites">Your Favorites</a> </li>
+            <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
+            <li><a href="/about">How This Works</a> </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+<!-- header -->
 <!-- empty div; need to have id 'paralaxSlice1' in the doc to make parallax work --> 
 
 
@@ -88,6 +170,8 @@
 <% end %>
 
 
+
+
 <script type="text/javascript">
 
   $(document).ready(function(){
@@ -115,3 +199,69 @@
 
   });
 </script>
+
+<!-- ========== footer ============= -->
+<footer class="color4">
+  <section id="mainFooter">
+    <div class="container" id="footer">
+      <div class="row">
+        <div class="col-xs-4 pull-left">
+          <div class="footerWidget pull-left">
+
+            <h3>  Made with <%= image_tag "brain-xxl.png", size: "20x20"%> by <a href="http://www.twitter.com/jnoconor">@jnoconor</a> and <a href="http://www.twitter.com/mpolycar">@mpolycar</a> in NYC.</h3>
+          </div>
+        </div>
+        <div class="col-xs-4" align="center">
+            <h3>Curious about how this works?</h3>
+            <a class="btn" href="/about#about">Find out</a>
+        </div>
+
+        <div class="col-xs-4 pull-right">
+          <div class="footerWidget">
+
+            <h3>Think it's cool?</h3>
+            <!-- AddThis Button BEGIN -->
+              <div class="addthis_toolbox addthis_default_style addthis_32x32_style" addthis:url="http://www.kickammender.com">
+              <ul class="socialNetwork">
+              <li><a class="addthis_button_facebook tips" data-original-title="share this on Facebook"></a></li>
+              <li><a class="addthis_button_twitter tips" data-original-title="share this on Twitter"></a></li>
+              <li><a class="addthis_button_hackernews tips" data-original-title="share this on Hacker News"></a></li>
+              <li><a class="addthis_button_reddit tips" data-original-title="share this on Reddit"></a></li>
+
+              </div>
+              <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+              <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529a94c531794907"></script>
+              <!-- AddThis Button END -->         
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </section>
+</footer>
+
+<!-- End footer -->
+
+<!-- ========= javascripts ============= -->
+    <%= javascript_include_tag "js-plugin/respond/respond.min" %>
+    <%= javascript_include_tag "js-plugin/jquery/1.8.3/jquery.min" %>
+    <%= javascript_include_tag "js-plugin/jquery-ui/jquery-ui-1.8.23.custom.min" %>
+
+    <!-- third party plugins  -->
+    <%= javascript_include_tag "bootstrap.min" %>
+    <%= javascript_include_tag "jquery.flexslider-min" %>
+    <%= javascript_include_tag "js-plugin/isotope/jquery.isotope.min" %>
+    <%= javascript_include_tag "js-plugin/parallax/js/jquery.scrollTo-1.4.3.1-min" %>
+    <%= javascript_include_tag "js-plugin/parallax/js/jquery.localscroll-1.2.7-min" %>
+    <%= javascript_include_tag "js-plugin/parallax/js/jquery.stellar.min" %>
+
+    <!-- <script type="text/javascript" src="assets/js-plugin/smoothscroll/SmoothScroll.js"></script> -->
+
+    <!-- Custom  -->
+    <%= javascript_include_tag "custom" %>
+
+  </body>
+</html>

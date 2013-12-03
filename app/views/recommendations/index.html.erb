@@ -19,13 +19,12 @@
         <% @active_recs.take(2).each_with_index do |rec, i| %>
         <div class="col-md-4 col-sm-6 column-<%=i%>">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= rec.ks_project.url %>" target="_blank"><%= image_tag "#{rec.ks_project.image_url}", class: "img-responsive rec-image"%></a>
+            <section class="imgWrapper "><a href="#" data-toggle="modal" data-target="#video-modal-<%=rec.ks_project.id%>"><%= image_tag "#{rec.ks_project.image_url}", class: "img-responsive rec-image"%></a>
             </section>
             <h2 class="rec-title"><%= link_to rec.ks_project.title, "http://www.kickstarter.com" + rec.ks_project.url, target: '_blank' %></h2>
 <!-- descriptions --> 
             <div class="description">
             <p class="project-description">"<%= rec.ks_project.description %>"</p>
-            <% if !rec.ks_project.video_url.nil? %><a href="#" data-toggle="modal" data-target="#video-modal-<%=rec.ks_project.id%>">(video)</a><% end %>
             </div>
   <! -- ratings -->
             <div class="ratings" align="center">
@@ -63,13 +62,12 @@
 <!-- a random pick --> 
         <div class="col-md-4 col-sm-6 column-3">
           <article class="boxFeature-2">
-            <section class="imgWrapper "><a href="http://www.kickstarter.com<%= @random.url %>" target="_blank"><img src="<%= @random.image_url %>"class="img-responsive rec-image"></a>
+            <section class="imgWrapper "><a href="#" data-toggle="modal" data-target="#video-modal-<%=@random.id%>"><img src="<%= @random.image_url %>"class="img-responsive rec-image"></a>
             </section>
 
             <h2 class="rec-title"><%= link_to @random.title, "http://www.kickstarter.com" + @random.url, target: '_blank' %></h2>
             <div class="description">
             <p class="project-description">"<%= @random.description %>"</p>
-            <% if !@random.video_url.nil? %><a href="#" data-toggle="modal" data-target="#video-modal-<%=@random.id%>">(video)</a><% end %>
             </div>
             <div class="ratings" align="center">
             <%= form_tag adjust_score_path, id: "form-3", class: "rate" do %>
@@ -151,7 +149,7 @@
           <p></p>
           <ul>
             <% @most_similar.ks_projects.take(6).each do |project| %>
-            <li><%= link_to project.title, project.url %></li>
+            <li><%= link_to project.title, "http://www.kickstarter.com" + project.url, target: "_blank" %></li>
             <% end %>
           </ul>
       </div>
