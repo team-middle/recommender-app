@@ -38,7 +38,7 @@ test:
 
 production:
   adapter: postgresql
-  database: kickammender_database_production
+  database: kickammender_database_production_v2
   pool: 5
   timeout: 500
 
