@@ -111,7 +111,7 @@
         <% unless @user %><a href="#start" class="homeBtn btn"><i class="icon-down">Get Started</i></a>
         <% else %>
         <a href="/users/<%= @user.id %>#favorites" class="homeBtn btn"><i class="icon-star"></i>Go to your recs</a><br><br>
-        <a href="/sessions/logout" class="homeBtn btn #logout"><i class="icon-facebook-1"></i>Logout</a>
+        <a href="/sessions/logout" class="homeBtn btn" id="logout"><i class="icon-facebook-1"></i>Logout</a>
         <% end %>
       </div>
     </div>
@@ -136,7 +136,7 @@
         </div>
         <div class="col-xs-3" align="center">
             <h3>Curious about how this works?</h3>
-            <a class="btn" href="/about#about">Find out</a>
+            <a class="btn" href="/about">Find out</a>
         </div>
 
         <div class="col-xs-4 pull-right">
