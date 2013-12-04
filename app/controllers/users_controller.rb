@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     # will get a POST to adjust_score action
     # params will have the project category and the like/dislike
-    # the user's score for that column will be adjusted by 10, up to a maximum of 100 and minimum of 0
+    # the user's score for that column will be adjusted by 20, up to a maximum of 100 and minimum of 0
     @user.adjust_score(rated_project.parent_category.split.first.downcase, params[:feedback])
     @user.assign_center
     message = { message: 'first-column' }

@@ -31,12 +31,12 @@ before_action :set_user_from_session, :only => [:index, :create]
 
     @ranked_active_projects.keys.each do |project|
       rec_project = KsProject.where(:url => project.url).min_by { |p| p.id } # a defensive hack to ensure that the scraped project is the one that's recommended, and not an unscraped duplicate
-      Recommendation.find_or_create_by(:user => @user, :ks_project => rec_project)
+      rec = Recommendation.find_or_create_by(:user => @user, :ks_project => rec_project)
+      rec.update(:strength => @ranked_active_projects[project])
     end
 
-    @array = @ranked_active_projects.sort_by { |k,v| v }.reverse
-
     @active_recs = Recommendation.where(:user => @user, :useful => nil)
+    @ordered_active_recs = @active_recs.sort_by { |r| r.strength }.reverse
 
     @random = KsProject.random_active
 

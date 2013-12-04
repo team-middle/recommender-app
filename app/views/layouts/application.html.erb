@@ -110,7 +110,7 @@
         </div> 
         <% unless @user %><a href="#start" class="homeBtn btn"><i class="icon-down">Get Started</i></a>
         <% else %>
-        <a href="/users/<%= @user.id %>#favorites" class="homeBtn btn"><i class="icon-star"></i>Go to your recs</a><br><br>
+        <a href="/recommendations" class="homeBtn btn"><i class="icon-star"></i>Go to your recs</a><br><br>
         <a href="/sessions/logout" class="homeBtn btn" id="logout"><i class="icon-facebook-1"></i>Logout</a>
         <% end %>
       </div>

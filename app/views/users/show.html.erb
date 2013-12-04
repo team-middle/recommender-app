@@ -156,7 +156,7 @@
                     <p>
                       <%= user.description %><br>
                       <% if user.bio %>
-                      <%= user.bio %>
+                      <%= user.bio if user.bio.length < 100%>
                       <% end %>
                     </p>
                   </section>

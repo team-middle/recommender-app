@@ -6,7 +6,7 @@
 </div>
 <!-- Preloader -->
 <!-- recommendations -->
-  <% if @active_recs %><!-- hidden section until recommendations are generated -->
+  <% if @ordered_active_recs %><!-- hidden section until recommendations are generated -->
   <section id="recommendations" class="slice color4 recommendations">
     <div class="container">
       <div class="row">
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="row active-recs">
-        <% @active_recs.take(2).each_with_index do |rec, i| %>
+        <% @ordered_active_recs.take(2).each_with_index do |rec, i| %>
         <div class="col-md-4 col-sm-6 column-<%=i%>">
           <article class="boxFeature-2">
             <section class="imgWrapper "><a href="#" data-toggle="modal" data-target="#video-modal-<%=rec.ks_project.id%>"><%= image_tag "#{rec.ks_project.image_url}", class: "img-responsive rec-image"%></a>
