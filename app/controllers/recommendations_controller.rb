@@ -38,7 +38,7 @@ before_action :set_user_from_session, :only => [:index, :create]
     end
 
     @active_recs = Recommendation.where(:user => @user, :useful => nil)
-    @ordered_active_recs = @active_recs.sort_by { |r| r.strength }.reverse
+    @ordered_active_recs = @active_recs.sort_by { |r| r.strength if r.strength }.reverse
 
     @random = KsProject.random_active
     # TODO: implement with AJAX
