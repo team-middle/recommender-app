@@ -32,14 +32,15 @@ before_action :set_user_from_session, :only => [:index, :create]
     @ranked_active_projects.keys.each do |project|
       rec_project = KsProject.where(:url => project.url).min_by { |p| p.id } # a defensive hack to ensure that the scraped project is the one that's recommended, and not an unscraped duplicate
       rec = Recommendation.find_or_create_by(:user => @user, :ks_project => rec_project)
-      rec.update(:strength => @ranked_active_projects[project])
+      if @ranked_active_projects[project]
+        rec.update(:strength => @ranked_active_projects[project])
+      end
     end
 
     @active_recs = Recommendation.where(:user => @user, :useful => nil)
     @ordered_active_recs = @active_recs.sort_by { |r| r.strength }.reverse
 
     @random = KsProject.random_active
-
     # TODO: implement with AJAX
     render :index
   end

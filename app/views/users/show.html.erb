@@ -71,7 +71,7 @@
               <!-- AddThis Button END -->
           <ul class="nav navbar-nav pull-right">
             <li><% if @user %><a href="/recommendations">Get More Recs</a> </li>
-            <li><a href="/users/<%= @user.id %>#favorites">Your Favorites</a> </li>
+            <li><a href="/users/<%= @user.id %>">Your Favorites</a> </li>
             <li><a id="logout" href="/sessions/logout">Logout</a> <% end %></li>
             <li><a href="/about">How This Works</a> </li>
           </ul>

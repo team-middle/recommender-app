@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h1>Recommendations for you</h1>
-          <h2 class="subTitle">Here's a few projects we think you might be interested in backing</h2>
+          <h2 align="center" class="subTitle">Based on how you compare to other Kickstarter users, we think you might be interested in these</h2>
         </div>
       </div>
       <div class="row active-recs">
@@ -130,7 +130,7 @@
             <a href="http://www.kickstarter.com<%= @most_similar.url %>"><img src="<%= @most_similar_image_url%>" class="img-responsive similar-image"></a>
           </p>
         <h2><%= link_to @most_similar.name, "http://www.kickstarter.com" + @most_similar.url %></h2>
-        <p><%= @most_similar.description if !@most_similar.description.empty?%> </p>
+        <p><%= truncate(@most_similar.description, length: 40) %> </p>
 
         <p><% if !@most_similar.location.empty? %>From <%= @most_similar.location %><% end %></p>
         <p><% if !@most_similar.date_joined.empty? %>Joined on <%= @most_similar.date_joined %><% end %></p>
@@ -210,7 +210,7 @@
       $form.parents('.col-md-4').fadeOut('slow', function(){
         $(this).remove();
         var rec_count = $('.col-md-4').size();
-        var url = $('a:contains("Your Profile")').attr('href');
+        var url = $('#profile-link').attr('href');
 
         if(rec_count == 0){
           var gen = "<center><a href='/recommendations' class='gen-more btn'>Generate some more recommendations</a></center>";
